@@ -16,4 +16,3 @@ Scenario: E001 - Como administrador de la plataforma, quiero crear un usuario pa
   And I wait for 10 seconds
   Then I should see landing page for first time
   And I wait for 5 seconds
-  And I send a signal to user 2 containing "User created"
