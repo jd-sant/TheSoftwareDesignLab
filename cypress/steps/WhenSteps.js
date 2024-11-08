@@ -9,6 +9,10 @@ class WhenSteps {
     whenCreateAndPublishPostSpecial(){
         postPage.CreateAndPublishPostSpecial();
     }
+
+    whenCreateAndPublishPostWithImages(){
+        postPage.CreateAndPublishPostWithImages();
+    }
 }
 
 export const whenSteps = new WhenSteps();

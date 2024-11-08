@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 const delay = Cypress.env('delay') || 300;
 const postTitleInput = 'textarea[data-test-editor-title-input]';
 const postContentInput = '[data-secondary-instance="false"] > .koenig-lexical > [data-kg="editor"] > .kg-prose > p';
+const postContentImageInput = '[data-secondary-instance="false"] > :nth-child(1) > :nth-child(1) > [contenteditable="true"][data-koenig-dnd-container="true"] > p[data-koenig-dnd-droppable="true"]';
 const publishPostButton = '.gh-editor-header > .gh-editor-publish-buttons > .darkgrey > span';
 const confirmPublishButton = '.gh-publish-cta > .gh-btn > span';
 const finalPublishButton = '#ember61 > span';
@@ -10,6 +11,11 @@ const closeModalButton = '[data-test-button="close-publish-flow"]';
 const dropdownPostFilter = '.gh-contentfilter-type > .ember-view > svg';
 const optionPublishedPost = '.ember-power-select-option[data-option-index="2"]';
 const classPublisdPostTitle = '.gh-content-entry-title';
+const imagePostFeatureClass = '.gh-editor-feature-image-unsplash'
+const imageUnplashClass = '.gh-unsplash-photo-container > .gh-unsplash-photo-overlay > .gh-unsplash-photo-footer > .gh-unsplash-button';
+const imageUnplashContentClass = '[data-kg-unsplash-insert-button="true"]';
+const postAddCard = 'button[aria-label="Add a card"]';
+const postUnplashCard = 'button[data-kg-card-menu-item="Unsplash"]'
 
 class PostPage {
 
@@ -18,12 +24,17 @@ class PostPage {
     postTitleSpecial = faker.string.sample();
     postContentSpecial = faker.string.hexadecimal() + faker.string.symbol() + faker.string.sample();
 
-    CreateAndPublishPost(postTitle_ = this.postTitle, postContent_ = this.postContent) {
-        cy.get(postTitleInput).clear();
-        cy.get(postTitleInput).type(postTitle_);
-        cy.get(postContentInput).clear()
-        cy.get(postContentInput).type(postContent_);
+    AddUnplashImage(class_ = imageUnplashClass){
         cy.wait(delay);
+        cy.get(class_).then(($el) => {
+            const randomIndex = Math.floor(Math.random() * $el.length);
+            const randomImage = $el[randomIndex];
+            cy.wrap(randomImage).click({force: true});
+            cy.wait(delay);
+        });
+    }
+
+    PublishPost(){
         cy.get(publishPostButton).click()
         cy.wait(2000)
         cy.get(confirmPublishButton).click();
@@ -32,6 +43,31 @@ class PostPage {
         cy.get(modalClass).should('be.visible');
         cy.get(closeModalButton).click();
         cy.wait(delay);
+    }
+
+    ClearAndTypePost(postTitle_ = this.postTitle, postContent_ = this.postContent) {
+        cy.get(postTitleInput).clear();
+        cy.get(postTitleInput).type(postTitle_);
+        cy.get(postContentInput).clear()
+        cy.get(postContentInput).type(postContent_);
+        cy.wait(delay);
+    }
+
+    ClearAndTypePostWithImages(postTitle_ = this.postTitle, postContent_ = this.postContent) {
+        cy.get(postTitleInput).clear();
+        cy.get(postTitleInput).type(postTitle_);
+        cy.get(postContentInput).clear()
+        cy.get(postAddCard).click();
+        cy.get(postUnplashCard).click();
+        this.AddUnplashImage(imageUnplashContentClass);
+        cy.get(postContentImageInput).clear();
+        cy.get(postContentImageInput).type(postContent_);
+        cy.wait(delay);
+    }
+
+    CreateAndPublishPost(postTitle_ = this.postTitle, postContent_ = this.postContent) {
+        this.ClearAndTypePost(postTitle_, postContent_);
+        this.PublishPost();
     }
     
     CreateAndPublishPostSpecial(){
@@ -49,6 +85,14 @@ class PostPage {
     SeeSpecialPostPublished() {
         this.SeePostPublished(this.postTitleSpecial);
     };
+
+    CreateAndPublishPostWithImages(postTitle_ = this.postTitle, postContent_ = this.postContent){
+        cy.get(imagePostFeatureClass).click();
+        cy.wait(delay);
+        this.AddUnplashImage();
+        this.ClearAndTypePostWithImages(postTitle_, postContent_);
+        this.PublishPost();
+    }
 }
 
 export const postPage = new PostPage();
