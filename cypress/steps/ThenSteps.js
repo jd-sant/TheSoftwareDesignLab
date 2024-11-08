@@ -9,6 +9,10 @@ class ThenSteps {
     thenSeeSpecialPostPublished(){
         postPage.SeeSpecialPostPublished();
     }
+
+    thenSeeMultilanguagePostPublished(){
+        postPage.SeeMultilanguagePostPublished();
+    }
 }
 
 export const thenSteps = new ThenSteps();

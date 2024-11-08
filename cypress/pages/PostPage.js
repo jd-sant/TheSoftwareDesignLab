@@ -1,4 +1,9 @@
 import { faker } from '@faker-js/faker';
+import { fakerHY as fakerArmenian } from '@faker-js/faker';
+import { fakerRU as fakerRussian } from '@faker-js/faker';
+import { fakerZH_CN as fakerChinese } from '@faker-js/faker';
+import { fakerJA as fakerJapanese } from '@faker-js/faker';
+import { fakerAR as fakerArabic } from '@faker-js/faker';
 const delay = Cypress.env('delay') || 300;
 const postTitleInput = 'textarea[data-test-editor-title-input]';
 const postContentInput = '[data-secondary-instance="false"] > .koenig-lexical > [data-kg="editor"] > .kg-prose > p';
@@ -23,6 +28,8 @@ class PostPage {
     postContent = faker.lorem.paragraphs(4,'\n');
     postTitleSpecial = faker.string.sample();
     postContentSpecial = faker.string.hexadecimal() + faker.string.symbol() + faker.string.sample();
+    postTitleMultilanguage = fakerArmenian.lorem.words(3) + fakerRussian.lorem.words(3) + fakerChinese.lorem.words(3) + fakerJapanese.lorem.words(3) + fakerArabic.lorem.words(3);
+    postContentMultilanguage = fakerArmenian.lorem.paragraphs(4,'\n') + fakerRussian.lorem.paragraphs(4,'\n') + fakerChinese.lorem.paragraphs(4,'\n') + fakerJapanese.lorem.paragraphs(4,'\n') + fakerArabic.lorem.paragraphs(4,'\n');
 
     AddUnplashImage(class_ = imageUnplashClass){
         cy.wait(delay);
@@ -86,12 +93,20 @@ class PostPage {
         this.SeePostPublished(this.postTitleSpecial);
     };
 
+    SeeMultilanguagePostPublished() {
+        this.SeePostPublished(this.postTitleMultilanguage);
+    }
+
     CreateAndPublishPostWithImages(postTitle_ = this.postTitle, postContent_ = this.postContent){
         cy.get(imagePostFeatureClass).click();
         cy.wait(delay);
         this.AddUnplashImage();
         this.ClearAndTypePostWithImages(postTitle_, postContent_);
         this.PublishPost();
+    }
+
+    CreateAndPublishPostWithMultipleLanguages(){
+        this.CreateAndPublishPost(this.postTitleMultilanguage, this.postContentMultilanguage);
     }
 }
 

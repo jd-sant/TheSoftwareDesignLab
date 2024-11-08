@@ -13,6 +13,10 @@ class WhenSteps {
     whenCreateAndPublishPostWithImages(){
         postPage.CreateAndPublishPostWithImages();
     }
+
+    whenCreateAndPublishPostWithMultipleLanguages(){
+        postPage.CreateAndPublishPostWithMultipleLanguages();
+    }
 }
 
 export const whenSteps = new WhenSteps();
