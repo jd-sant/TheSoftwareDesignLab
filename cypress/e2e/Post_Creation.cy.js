@@ -12,21 +12,21 @@ describe('Post Creation', () => {
         givenSteps.givenNavigateToPostPage(); 
     });
 
-    it.skip('PA004-C - Create a normal post', () => {
+    it('PA004-C - Create a normal post', () => {
         // When the user creates and publishes the post
         whenSteps.whenCreateAndPublishPost(); 
         // Then the user should be the post published
         thenSteps.thenSeePostPublished();
     });
 
-    it.skip('PA005-C - Create a post with special characters', () => {
+    it('PA005-C - Create a post with special characters', () => {
         // When the user creates and publishes the post with special characters
         whenSteps.whenCreateAndPublishPostSpecial(); 
         // Then the user should be the post published
         thenSteps.thenSeeSpecialPostPublished();
     });
     
-    it.skip('PA006-C - Create a post with Unplash images', () => {
+    it('PA006-C - Create a post with Unplash images', () => {
         // When the user creates and publishes the post with images from Unplash
         whenSteps.whenCreateAndPublishPostWithImages(); 
         // Then the user should be the post published
