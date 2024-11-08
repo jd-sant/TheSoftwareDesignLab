@@ -132,3 +132,6 @@ dist
 # Kraken
 .kraken
 reports
+
+# Cypress 
+results_*

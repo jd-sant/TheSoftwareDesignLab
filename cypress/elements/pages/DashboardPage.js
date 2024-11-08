@@ -7,6 +7,11 @@ class DashboardPage {
         cy.wait(delay);
     };
 
+    thenGoToNewPostPage() {
+        cy.get('#ember20').click();
+        cy.wait(delay);
+    };
+
 }
 
 export const dashboardPage = new DashboardPage();
