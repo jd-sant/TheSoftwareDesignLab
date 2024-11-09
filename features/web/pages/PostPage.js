@@ -1,6 +1,6 @@
 const { faker } = require('@faker-js/faker');
 const assert = require('assert');
-const delay = 7000;
+const delay = 2000;
 const postTitleInput = 'textarea[data-test-editor-title-input]';
 const postContentInput = '[data-secondary-instance="false"] > .koenig-lexical > [data-kg="editor"] > .kg-prose > p';
 const postContentImageInput = '[data-secondary-instance="false"] > :nth-child(1) > :nth-child(1) > [contenteditable="true"][data-koenig-dnd-container="true"] > p[data-koenig-dnd-droppable="true"]';
@@ -20,23 +20,23 @@ const postUnplashCard = 'button[data-kg-card-menu-item="Unsplash"]';
 
 class PostPage {
 
-    postTitle = faker.lorem.words(3);
+    postTitle = faker.book.title();
     postContent = faker.lorem.paragraphs(4,'\n');
 
     async ClearAndTypePost(context,postTitle_ = this.postTitle, postContent_ = this.postContent) {
-        await context.driver.$(postTitleInput).clearValue();
+        await context.driver.$(postTitleInput).click();
         await context.driver.$(postTitleInput).setValue(postTitle_);
-        await context.driver.$(postContentInput).clearValue();
+        await context.driver.$(postContentInput).click();
         await context.driver.$(postContentInput).setValue(postContent_);
         await context.driver.pause(delay);
     }
 
     async PublishPost(context){
         await context.driver.$(publishPostButton).click();
-        await context.driver.pause(2000);
+        await context.driver.pause(delay);
         await context.driver.$(confirmPublishButton).click();
         await context.driver.$(finalPublishButton).click();
-        await context.driver.pause(delay);
+        await context.driver.pause(3000);
         await context.driver.$(closeModalButton).click();
         await context.driver.pause(delay);
     }
@@ -51,8 +51,7 @@ class PostPage {
         await context.driver.$(optionPublishedPost).click();
         await context.driver.pause(delay);
         const postTitle = await context.driver.$(classPublisdPostTitle).getText();
-        assert.equal(postTitle, postTitle_);
-        await context.driver.pause(delay);
+        return await assert.equal(postTitle,postTitle_);
     }
 
 }

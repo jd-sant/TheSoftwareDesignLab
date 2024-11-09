@@ -6,3 +6,4 @@ Scenario: PA004-K - Create a normal post
     And the user has logged in Ghost with email "<EMAIL>" and pass "<PASSWORD>"
     And the user has navigated to post page
     When the user creates and publishes the post
+    Then the user should see the post published
