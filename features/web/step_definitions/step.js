@@ -1,30 +1,25 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
-const assert = require('assert')
-const { registerPage } = require('../pages/RegisterPage');
-const { dashboardPage } = require('../pages/DashboardPage');
+const loginPage = require('../pages/LoginPage');
+const postPage = require('../pages/PostPage');
+const dashboardPage  = require('../pages/DashboardPage');
 
-// When Conditions
-When('I enter site title {kraken-string}', async function (title) {
-    return registerPage.whenUserFillSiteName(this, title);
+// Given Steps
+Given('the user has navigated to the Ghost site {kraken-string}', function (page) {
+  loginPage.NavigateToTheSite(this,page);
 });
 
-When('I enter full name {kraken-string}', async function (name) {
-    return registerPage.whenUserFillUserName(this, name);
+Given('the user has logged in Ghost with email {kraken-string} and pass {kraken-string}', function (email, pass) {
+  return loginPage.UserIsLogin(this,email,pass);
 });
 
-When('I enter email {kraken-string}', async function (email) {
-    return registerPage.whenUserFillEmail(this, email);
+Given('the user has navigated to post page', function () {
+  return dashboardPage.NavigateToPostPage(this);
 });
 
-When('I enter password {kraken-string}', async function (password) {
-    return registerPage.whenUserFillPassword(this, password);
+// When Steps
+
+When('the user creates and publishes the post {string}', function (type) {
+  return postPage.CreateAndPublishPost(this,type);
 });
 
-When('I click on submit button', async function () {
-    return registerPage.whenUserClickRegister(this);
-});
-
-// Then Conditions
-Then('I should see landing page for first time', async function () {
-    return dashboardPage.thenSeeDashboardOnboarding(this);
-});
+// Then Steps

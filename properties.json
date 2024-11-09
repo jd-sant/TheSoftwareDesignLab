@@ -2,5 +2,7 @@
     "SITE_TITLE": "Kraken Testing",
     "FULL_NAME": "The Kraken",
     "EMAIL": "release-the-kraken@uniandes.edu.co",
-    "PASSWORD": "Kraken1234"
+    "PASSWORD": "Kraken1234",
+    "LOGIN_PAGE": "http://localhost:3001/ghost/#/signin",
+    "POST_PAGE": "http://localhost:3001/ghost/#/editor/post"
 }
