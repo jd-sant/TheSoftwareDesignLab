@@ -9,9 +9,11 @@ Given('the user has navigated to post page', function () {
 
 
 // When Steps
-
-When('the user creates and publishes the post {string}', function (type) {
-  return postPage.CreateAndPublishPost(this,type);
+When('the user creates and publishes the post', function () {
+  return postPage.CreateAndPublishPost(this);
 });
 
 // Then Steps
+Then('the user should see the post published', function () {
+  return postPage.SeePostPublished(this);
+});

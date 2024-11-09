@@ -29,7 +29,7 @@ describe('Post Creation', () => {
     it('PA006-C - Create a post with Unplash images', () => {
         // When the user creates and publishes the post with images from Unplash
         whenSteps.whenCreateAndPublishPostWithImages(); 
-        // Then the user should be the post published
+        // Then the user should see the post published
         thenSteps.thenSeePostPublished();
     });
 
