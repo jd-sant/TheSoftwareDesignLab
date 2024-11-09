@@ -1,5 +1,5 @@
 const delay = 2000;
-const idNavigateNewPost = '#ember20';
+const idNavigateNewPost = '.ember-view.gh-secondary-action.gh-nav-new-post';
 
 class DashboardPage {
 
