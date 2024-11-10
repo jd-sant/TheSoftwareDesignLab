@@ -24,7 +24,7 @@ class PostPage {
     postTitleSpecial = faker.string.sample();
     postContentSpecial = faker.string.hexadecimal() + faker.string.symbol() + faker.string.sample();
     postTitleMultilanguage = fakerHY.lorem.words(3) + fakerRU.lorem.words(3) + fakerZH_CN.lorem.words(3) + fakerJA.lorem.words(3) + fakerAR.lorem.words(3);
-    postContentMultilanguage = fakerHY.lorem.paragraphs(4,'\n') + fakerRU.lorem.paragraphs(4,'\n') + fakerZH_CN.lorem.paragraphs(4,'\n') + fakerJA.lorem.paragraphs(4,'\n') + fakerAR.lorem.paragraphs(4,'\n');
+    postContentMultilanguage = fakerHY.lorem.paragraphs(2,'\n') + fakerRU.lorem.paragraphs(2,'\n') + fakerZH_CN.lorem.paragraphs(2,'\n') + fakerJA.lorem.paragraphs(2,'\n') + fakerAR.lorem.paragraphs(2,'\n');
 
 
     async ClearAndTypePost(context,postTitle_ = this.postTitle, postContent_ = this.postContent) {
