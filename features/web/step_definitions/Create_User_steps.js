@@ -11,6 +11,10 @@ When('the user has logged in Ghost with email {kraken-string} and bad pass {stri
     return loginPage.BadLogin(this,email,pass);
 });
 
+When('the user has logged in Ghost with wrong email {string} and pass {kraken-string}', function (email,pass) {
+    return loginPage.BadLogin(this,email,pass);
+});
+
 // Then Steps
 Then('the user should see the dashboard', function () {
     return dashboardPage.SeeDashboard(this);
@@ -18,4 +22,8 @@ Then('the user should see the dashboard', function () {
 
 Then('the user should see a message error', function () {
     return loginPage.SeeLoginError(this);
+});
+
+Then('the user should see an email message error', function () {
+    return loginPage.SeeLoginEmailError(this);
 });

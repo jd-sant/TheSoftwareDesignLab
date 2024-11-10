@@ -33,6 +33,11 @@ class LoginPage {
         return await assert.equal(errorMessage.trim(),'Your password is incorrect.');
     }
 
+    async SeeLoginEmailError(context) {
+        const errorMessage = await context.driver.$(loginErrorMessage).getText();
+        return await assert.equal(errorMessage.trim(),'There is no user with that email address.');
+    }
+
     async CreateUser(context,SITE_TITLE,FULL_NAME,EMAIL,PASSWORD) {
         await context.driver.$(siteTittle).setValue(SITE_TITLE);
         await context.driver.$(userName).setValue(FULL_NAME);
