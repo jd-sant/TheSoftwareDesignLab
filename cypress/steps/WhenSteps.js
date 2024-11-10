@@ -1,6 +1,7 @@
 import { loginPage } from "../pages/LoginPage";
 import { postPage } from "../pages/PostPage";
 import { memberPage } from "../pages/MemberPage";
+import { tagPage } from "../pages/TagPage";
 
 class WhenSteps {
 
@@ -18,6 +19,10 @@ class WhenSteps {
 
     whenCreateAndPublishPostWithMultipleLanguages(){
         postPage.CreateAndPublishPostWithMultipleLanguages();
+    }
+
+    whenCreateTag(){
+        tagPage.CreateTag();
     }
 
     whenCreateAndSaveMember(){
