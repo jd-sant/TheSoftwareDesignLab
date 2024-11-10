@@ -10,14 +10,15 @@ const memberLabelInput = 'input[class="ember-power-select-trigger-multiple-input
 const memberNoteInput = 'textarea[data-test-input="member-note"]';
 const searchMemberInput = 'input[data-test-input="members-search"]';
 const classCreatedMemberName = '.ma0.pa0.gh-members-list-name';
-const memberEmailInputResponse = 'p.response';
+const memberEmailInputResponse = '.gh-cp-member-email-name > :nth-child(2) > p.response';
 const retrySaveMemberButton = 'span[data-test-task-button-state="failure"]';
 const optionsMember = 'button[data-test-button="member-actions"] > :nth-child(1)';
 const deleteMemberButton = 'button[data-test-button="delete-member"]';
-const deleteMemberModalButton = 'span[data-test-task-button-state="idle"]';
+const deleteMemberModalButton = 'div[data-test-modal="delete-member"] > :nth-child(4) > :nth-child(2) > span[data-test-task-button-state="idle"]';
+const bodyTag = 'div[data-test-no-matching-members] > h4';
 
 
-class PostPage {
+class MemberPage {
 
     memberName = faker.person.fullName();
     memberEmail = faker.internet.email();
@@ -43,8 +44,8 @@ class PostPage {
         await context.driver.$(memberEmailInput).setValue(memberEmail_);
         await context.driver.$(memberLabelInput).click();
         await context.driver.$(memberLabelInput).setValue(memberLabel_);
-        await context.driver.$(memberLabelInput).setValue('{enter}');
-        await context.driver.$(memberLabelInput).setValue('{esc}');
+        await context.driver.$(memberLabelInput).setValue('\uE007');
+        await context.driver.$(memberLabelInput).setValue('\uE00C');
         await context.driver.$(memberNoteInput).click();
         await context.driver.$(memberNoteInput).setValue(memberNote_);
         await context.driver.pause(delay);
@@ -63,75 +64,101 @@ class PostPage {
 
     async SeeMemberCreated(context, memberName_ = this.memberName) {
         await context.driver.$(memberSection).click();
-        await context.driver.pause(delay);
-        await context.driver.$(searchMemberInput).clear();
+        await context.driver.pause(delay);        
         await context.driver.$(searchMemberInput).setValue(memberName_);// type                
         const memberName = await context.driver.$(classCreatedMemberName).getText();        
         await context.driver.pause(delay);
         return await assert.equal(memberName,memberName_);
     }
+
+// ************************************************************
+    async CreateMemberInvalidEmail(context) {
+        await this.NavigateToCreateMemberPage(context);
+        await this.ClearAndTypeMember(context, this.memberName, this.memberInvalidEmail, this.memberLabel, this.memberNote);
+        await this.SaveMember(context);
+    }
+
+    async SeeFormError(context) {
+        const isVisible = await (await context.driver.$(retrySaveMemberButton)).isDisplayed();
+        const errorMessage = await context.driver.$(memberEmailInputResponse).getText();
+        await assert.equal(isVisible,true);
+        return await assert.equal(errorMessage,'Invalid Email.');
+    }
+
+// ************************************************************
+    async CreateMemberExistingEmail(context) {        
+        await this.CreateAndSaveMember(context);
+        await context.driver.pause(delay);        
+        await context.driver.$(memberSection).click();
+        await context.driver.pause(delay);        
+        await this.CreateAndSaveMember(context, faker.person.fullName(), this.memberEmail, faker.lorem.words(1), faker.lorem.words(3));
+        await this.SaveMember(context);
+    }
+
+    async SeeExistingEmailError(context) {
+        const isVisible = await (await context.driver.$(retrySaveMemberButton)).isDisplayed();
+        const errorMessage = await context.driver.$(memberEmailInputResponse).getText();
+        await assert.equal(isVisible,true);
+        return await assert.equal(errorMessage,'Member already exists. Attempting to add member with existing email address');
+    }
+
+// ************************************************************
+    async ClearAndTypeEditMember(context, memberName_ = this.editedMemberName, memberLabel_ = this.editedMemberLabel, memberNote_ = this.editedMemberNote) {
+        await context.driver.$(memberNameInput).click();
+        await context.driver.$(memberNameInput).setValue(memberName_)        
+        await context.driver.$(memberLabelInput).click();
+        await context.driver.$(memberLabelInput).setValue(memberLabel_);
+        await context.driver.$(memberLabelInput).setValue('\uE007');
+        await context.driver.$(memberLabelInput).setValue('\uE00C');
+        await context.driver.$(memberNoteInput).click();
+        await context.driver.$(memberNoteInput).setValue(memberNote_);
+        await context.driver.pause(delay);
+    }
+
+    async EditAndSaveMember(context) {
+        await context.driver.$(classCreatedMemberName).click();
+        await this.ClearAndTypeEditMember(context);
+        await this.SaveMember(context);
+        await context.driver.pause(delay);
+    }
+
+    async SeeMemberEdited(context, memberName_ = this.editedMemberName) {
+        await context.driver.$(memberSection).click();
+        await context.driver.pause(delay);
+        await context.driver.$(searchMemberInput).setValue(memberName_)         
+        const memberName = await context.driver.$(classCreatedMemberName).getText();    
+        await context.driver.pause(delay);
+        return await assert.equal(memberName,memberName_);       
+    }
+
 // ************************************************************
 
+    async DeleteMember(context, memberName_ = this.memberName) {
+        await this.CreateAndSaveMember(context);
+        await context.driver.pause(delay); 
+        await context.driver.$(memberSection).click();
+        await context.driver.pause(delay);        
 
-    async SeePostPublished(context, postTitle_ = this.postTitle) {
-        await context.driver.$(dropdownPostFilter).click();
-        await context.driver.$(optionPublishedPost).click();
+        await context.driver.$(searchMemberInput).click();
+        await context.driver.$(searchMemberInput).setValue(memberName_)  
         await context.driver.pause(delay);
-        const postTitle = await context.driver.$(classPublisdPostTitle).getText();
-        return await assert.equal(postTitle,postTitle_);
+        await context.driver.$(classCreatedMemberName).click();
+        await context.driver.pause(delay);
+        await context.driver.$(optionsMember).click();
+        await context.driver.$(deleteMemberButton).click();
+        await context.driver.pause(delay);
+        await context.driver.$(deleteMemberModalButton).click();        
+        await context.driver.pause(delay);        
     }
 
-    async CreateAndPublishPostSpecial(context) {
-        await this.ClearAndTypePost(context,this.postTitleSpecial,this.postContentSpecial);
-        await this.PublishPost(context);
-    }
-
-    async SeeSpecialPostPublished(context) {
-        await context.driver.$(dropdownPostFilter).click();
-        await context.driver.$(optionPublishedPost).click();
+    async NotSeeMemberDeleted(context, memberName_ = this.memberName) {
+        await context.driver.$(searchMemberInput).click();
+        await context.driver.$(searchMemberInput).setValue(memberName_)  
         await context.driver.pause(delay);
-        const postTitle = await context.driver.$(classPublisdPostTitle).getText();
-        return await assert.equal(postTitle,this.postTitleSpecial);
-    }
-
-    async ClearAndTypePostWithImages(context, postTitle_ = this.postTitle, postContent_ = this.postContent) {
-        await context.driver.$(postTitleInput).click();
-        await context.driver.$(postTitleInput).setValue(postTitle_);
-        await context.driver.pause(delay);
-        await context.driver.$(postContentImageInput).click();
-        await context.driver.$(postAddCard).click();
-        await context.driver.$(postUnplashCard).click();
-        await this.AddUnplashImage(context,imageUnplashContentClass);
-        await context.driver.$(postContentImageInput).click();
-        await context.driver.$(postContentImageInput).setValue(postContent_);
-        await context.driver.pause(delay);
-    }
-
-    async AddUnplashImage(context, class_ = imageUnplashClass) {
-        await context.driver.$(class_).click();
-        await context.driver.pause(delay);
-    }
-
-    async CreateAndPublishPostWithImages(context) {
-        await context.driver.$(imagePostFeatureClass).click();
-        await context.driver.pause(delay);
-        await this.AddUnplashImage(context);
-        await this.ClearAndTypePostWithImages(context);
-        await this.PublishPost(context);
-    }
-
-    async CreateAndPublishPostWithMultipleLanguages(context) {
-        await this.ClearAndTypePost(context,this.postTitleMultilanguage,this.postContentMultilanguage);
-        await this.PublishPost(context);
-    }
-
-    async SeeMultilanguagePostPublished(context) {
-        await context.driver.$(dropdownPostFilter).click();
-        await context.driver.$(optionPublishedPost).click();
-        await context.driver.pause(delay);
-        const postTitle = await context.driver.$(classPublisdPostTitle).getText();
-        return await assert.equal(postTitle,this.postTitleMultilanguage);
+        
+        const isVisible = await (await context.driver.$(bodyTag)).isDisplayed();
+        return await assert.equal(isVisible,true);
     }
 }
 
-module.exports = new PostPage();
+module.exports = new MemberPage();

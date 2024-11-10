@@ -10,11 +10,12 @@ const memberLabelInput = 'input[class="ember-power-select-trigger-multiple-input
 const memberNoteInput = 'textarea[data-test-input="member-note"]';
 const searchMemberInput = 'input[data-test-input="members-search"]';
 const classCreatedMemberName = '.ma0.pa0.gh-members-list-name';
-const memberEmailInputResponse = 'p.response';
+const memberEmailInputResponse = '.gh-cp-member-email-name > :nth-child(2) > p.response';
 const retrySaveMemberButton = 'span[data-test-task-button-state="failure"]';
 const optionsMember = 'button[data-test-button="member-actions"] > :nth-child(1)';
 const deleteMemberButton = 'button[data-test-button="delete-member"]';
-const deleteMemberModalButton = 'span[data-test-task-button-state="idle"]';
+const deleteMemberModalButton = 'div[data-test-modal="delete-member"] > :nth-child(4) > :nth-child(2) > span[data-test-task-button-state="idle"]';
+const bodyTag = 'div[data-test-no-matching-members] > h4';
 
 class MemberPage {
 
@@ -68,7 +69,6 @@ class MemberPage {
         cy.get(searchMemberInput).clear();
         cy.get(searchMemberInput).type(memberName_);
         cy.get(classCreatedMemberName).first().should('to.contain', memberName_);
-        cy.wait(delay);
     }
 
     CreateMemberInvalidEmail() {
@@ -80,18 +80,17 @@ class MemberPage {
     SeeFormError() {
         cy.get(retrySaveMemberButton).should('be.visible');
         cy.get(memberEmailInputResponse).should('to.contain', 'Invalid Email.')
-        cy.wait(delay);
     }
 
     CreateMemberExistingEmail() {
-        cy.wait(delay);
-        this.CreateAndSaveMember(faker.person.fullName(), this.memberEmail, faker.lorem.words(1), faker.lorem.words(3));
+        this.NavigateToCreateMemberPage();
+        this.ClearAndTypeMember(faker.person.fullName(), this.memberEmail, faker.lorem.words(1), faker.lorem.words(3));
+        this.SaveMember();
     }
 
     SeeExistingEmailError() {
         cy.get(retrySaveMemberButton).should('be.visible');
         cy.get(memberEmailInputResponse).should('to.contain', 'Member already exists. Attempting to add member with existing email address')
-        cy.wait(delay);
     }
 
     ClearAndTypeEditMember(memberName_ = this.editedMemberName, memberLabel_ = this.editedMemberLabel, memberNote_ = this.editedMemberNote) {
@@ -125,23 +124,21 @@ class MemberPage {
     DeleteMember(memberName_ = this.editedMemberName) {
         cy.get(searchMemberInput).clear();
         cy.get(searchMemberInput).type(memberName_);        
+        cy.wait(delay);
         cy.get(classCreatedMemberName).first().click();
         cy.wait(delay);
         cy.get(optionsMember).first().click();
         cy.get(deleteMemberButton).first().click();
         cy.wait(delay);
         cy.get(deleteMemberModalButton).last().click();
-        
-        cy.get('body').should('not.contain', memberName_);
         cy.wait(delay);
-
-
-
-
     }
 
-    NotSeeMemberDeleted() {
-
+    NotSeeMemberDeleted(memberName_ = this.editedMemberName) {
+        cy.get(searchMemberInput).clear();
+        cy.get(searchMemberInput).type(memberName_);        
+        cy.wait(delay);
+        cy.get(bodyTag).should('be.visible');
     }
 
 }
