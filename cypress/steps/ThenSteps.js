@@ -68,6 +68,9 @@ class ThenSteps {
         loginPage.SeeLoginError();
     }
 
+    thenSeeLoginEmailError(){
+        loginPage.SeeLoginEmailError();
+    }
     thenSeePagePublished(){
         pagePage.SeePagePublished();
     }

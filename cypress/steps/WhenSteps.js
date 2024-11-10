@@ -66,6 +66,10 @@ class WhenSteps {
         loginPage.BadLogin();
     }
 
+    whenBadEmailLogin(){
+        loginPage.BadEmailLogin();
+    }
+    
     whenCreateAndPublishPage(){
         pagePage.CreateAndPublishPage();
     }
