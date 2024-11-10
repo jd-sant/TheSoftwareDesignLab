@@ -1,3 +1,4 @@
+import { loginPage } from "../pages/LoginPage";
 import { postPage } from "../pages/PostPage";
 import { memberPage } from "../pages/MemberPage";
 
@@ -21,6 +22,14 @@ class WhenSteps {
 
     whenCreateAndSaveMember(){
         memberPage.CreateAndSaveMember();
+    }
+    
+    whenCreateUser(){
+        loginPage.CreateUser();
+    }
+
+    whenBadLogin(){
+        loginPage.BadLogin();
     }
 }
 
