@@ -1,5 +1,6 @@
 import { dashboardPage } from "../pages/DashboardPage";
 import { postPage } from "../pages/PostPage";
+import { memberPage } from "../pages/MemberPage";
 import { loginPage } from "../pages/LoginPage";
 
 class ThenSteps {
@@ -16,6 +17,10 @@ class ThenSteps {
         postPage.SeeMultilanguagePostPublished();
     }
 
+    thenSeeMemberCreated(){
+        memberPage.SeeMemberCreated();
+    }
+    
     thenSeeDashboard(){
         dashboardPage.SeeDashboard();
     }
