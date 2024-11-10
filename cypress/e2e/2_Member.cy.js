@@ -13,9 +13,9 @@ describe('Member Creation', () => {
     });
 
     it('PA008-C - Create a member', () => {
-        // When the user creates and save a member
+        // When the user creates and saves a member
         whenSteps.whenCreateAndSaveMember();
-        // Then the user should see the member created
+        // Then the user should see the created member
         thenSteps.thenSeeMemberCreated();
     });
 
