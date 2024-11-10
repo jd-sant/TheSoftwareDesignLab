@@ -4,6 +4,9 @@ const idNavigateNewPost = '.ember-view.gh-secondary-action.gh-nav-new-post';
 const idNavigateTags = 'a[data-test-nav="tags"]';
 const dashboardHeading = '.gh-onboarding-header h2';
 const idNavigateMember = 'a[data-test-nav="members"]';
+const idNavigateNewPage = '#ember28';
+const idNavigateCreatePage = 'a[data-test-new-page-button]';
+
 class DashboardPage {
 
     async NavigateToPostPage(context) {
@@ -14,6 +17,13 @@ class DashboardPage {
     async NavigateToTagPage(context) {
         await context.driver.pause(delay);
         await context.driver.$(idNavigateTags).click();
+        await context.driver.pause(delay);
+    };
+
+    async NavigateToPagePage(context) {
+        await context.driver.$(idNavigateNewPage).click();
+        await context.driver.pause(delay);
+        await context.driver.$(idNavigateCreatePage).click();
         await context.driver.pause(delay);
     };
 
