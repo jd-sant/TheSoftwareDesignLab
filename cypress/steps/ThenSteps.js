@@ -25,6 +25,18 @@ class ThenSteps {
     thenSeeMemberCreated(){
         memberPage.SeeMemberCreated();
     }
+
+    thenSeeMemberEdited(){
+        memberPage.SeeMemberCreated();
+    }
+
+    thenSeeFormError(){
+        memberPage.SeeFormError();
+    }
+
+    thenSeeExistingEmailError(){
+        memberPage.SeeExistingEmailError();
+    }
     
     thenSeeDashboard(){
         dashboardPage.SeeDashboard();
