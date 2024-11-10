@@ -12,28 +12,28 @@ describe('Tags tests', () => {
         givenSteps.givenNavigateToTagPage(); 
     });
 
-    it('PA010-C - Create a tag', () => {
+    it('PA015-C - Create a tag', () => {
         // When the user creates a Tag
         whenSteps.whenCreateTag(); 
         // Then the user should see the tag created
         thenSteps.thenSeeTagCreated();
     });
 
-    it('PA011-C - Create a tag with all fields left blank', () => {
+    it('PA016-C - Create a tag with all fields left blank', () => {
         // When the user creates a Tag with all fields blank
         whenSteps.whenCreateTagWithAllFieldsBlank(); 
         // Then the user should see that the tag was not created
         thenSteps.thenSeeTags();
     });
 
-    it('PA012-C - Edit a tag with all fields filled', () => {
+    it('PA017-C - Edit a tag with all fields filled', () => {
         // When the user edits the tag with all fields filled
         whenSteps.whenCreateAndEditTag(); 
         // Then the user should see that the tag edited
         thenSteps.thenSeeTagEdit();
     });
 
-    it('PA013-C - Edit a tag with all fields filled and cancel edit', () => {
+    it('PA018-C - Edit a tag with all fields filled and cancel edit', () => {
         // When the user edits the tag with all fields filled and cancels the edit
         whenSteps.whenCreateEditAndCancelTag(); 
         // Then the user should see that the tag remains unchanged
