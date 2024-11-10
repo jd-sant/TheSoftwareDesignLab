@@ -4,7 +4,7 @@ const idNavigateNewPost = '.ember-view.gh-secondary-action.gh-nav-new-post';
 const idNavigateTags = 'a[data-test-nav="tags"]';
 const dashboardHeading = '.gh-onboarding-header h2';
 const idNavigateMember = 'a[data-test-nav="members"]';
-const idNavigateNewPage = '#ember28';
+const idNavigateNewPage = 'a[data-test-nav="pages"]';
 const idNavigateCreatePage = 'a[data-test-new-page-button]';
 
 class DashboardPage {

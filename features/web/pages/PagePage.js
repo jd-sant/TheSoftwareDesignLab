@@ -1,4 +1,5 @@
 const { faker } = require('@faker-js/faker');
+const assert = require('assert');
 const delay = 2000;
 const pageTitleInput = 'textarea[data-test-editor-title-input]';
 const pageContentInput = '[data-secondary-instance="false"] > .koenig-lexical    > [data-kg="editor"] > .kg-prose > p';
@@ -11,7 +12,7 @@ const dropdownPageFilter = '.gh-contentfilter-type > .ember-view > svg';
 const optionPublishedPage = '.ember-power-select-option[data-option-index="2"]';
 const classPublisdPageTitle = '.gh-content-entry-title';
 const optionPublishedFeaturePage = '.ember-power-select-option[data-option-index="4"]';
-const titlePublishErrorMessage = 'span[data-test-task-button-state="failure"]';
+const titlePublishErrorMessage = '.gh-alert-content';
 const titleValidationError = 'p[data-test-confirm-error]';
 const pageSideMenuButton = 'button[data-test-psm-trigger=""]';
 const pageFeatureButton = 'label[data-ember-action]';
@@ -27,17 +28,15 @@ class PagePage {
 
     async ClearAndTypePage(context, pageTitle_ = this.pageTitle, pageContent_ = this.pageContent) {
         await context.driver.$(pageTitleInput).click();
-        await context.driver.$(pageTitleInput).setvalue(pageTitle_);
+        await context.driver.$(pageTitleInput).setValue(pageTitle_);
         await context.driver.$(pageContentInput).click();
-        await context.driver.$(pageContentInput).setvalue(pageContent_);
+        await context.driver.$(pageContentInput).setValue(pageContent_);
         await context.driver.pause(delay);
     }
     
     async ClickPublishPage(context){
         await context.driver.$(publishPageButton).click();
         await context.driver.pause(delay);
-        await context.driver.$(confirmPublishButton).click();
-        await context.driver.$(finalPublishButton).click();
     }
 
     async PublishPage(context){
@@ -52,14 +51,13 @@ class PagePage {
 
 
 
-    async CreateAndPublishPage(context) {
-        await this.ClearAndTypePage(context);
+    async CreateAndPublishPage(context, pageTitle_ = this.pageTitle, pageContent_ = this.pageContent) {
+        await this.ClearAndTypePage(context, pageTitle_, pageContent_);
         await this.PublishPage(context);
     }
 
     async CreateAndPublishPageSpecial(context){
         await this.CreateAndPublishPage(context, this.pageTitleSpecial, this.pageContentSpecial);
-        await this.PublishPage(context);
     }
 
     async SeePagePublished(context, pageTitle_ = this.pageTitle) {
@@ -80,16 +78,17 @@ class PagePage {
 
     async ClearAndTypePageInvalid(context, pageTitle_ = this.pageTitle, pageContent_ = this.pageContent, pageTitle__ = this.pageTitleInvalid) {
         await context.driver.$(pageTitleInput).click();
-        await context.driver.$(pageTitleInput).setvalue(pageTitle_);
+        await context.driver.$(pageTitleInput).setValue(pageTitle_);
+        await context.driver.pause(delay);
         await context.driver.$(pageContentInput).click();
-        await context.driver.$(pageContentInput).setvalue(pageContent_);
+        await context.driver.$(pageContentInput).setValue(pageContent_);
         await context.driver.pause(delay);
         await context.driver.$(pageTitleInput).click();
-        await context.driver.$(pageTitleInput).ckick(pageTitle__);
+        await context.driver.$(pageTitleInput).setValue(pageTitle__);
     }
 
     async CreatePageInvalidTitle(context){
-        await this.ClearAndTypePageInvalid(context, this.pageTitleInvalid, this.pageContentInvalid);
+        await this.ClearAndTypePageInvalid(context, this.pageTitle, this.pageContentInvalid, this.pageTitleInvalid);
         await this.ClickPublishPage(context);
     }
 
