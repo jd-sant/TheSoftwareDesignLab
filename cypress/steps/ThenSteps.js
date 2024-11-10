@@ -37,6 +37,14 @@ class ThenSteps {
     thenSeeExistingEmailError(){
         memberPage.SeeExistingEmailError();
     }
+
+    thenSeeMemberEdited(){
+        memberPage.SeeMemberEdited();
+    }
+
+    thenNotSeeMemberDeleted(){
+        memberPage.NotSeeMemberDeleted();
+    }
     
     thenSeeDashboard(){
         dashboardPage.SeeDashboard();

@@ -35,7 +35,15 @@ class WhenSteps {
 
     whenCreateMemberExistingEmail(){
         memberPage.CreateMemberExistingEmail();
-    }    
+    }   
+    
+    whenEditAndSaveMember(){
+        memberPage.EditAndSaveMember();
+    }
+
+    whenDeleteMember(){
+        memberPage.DeleteMember();
+    }
 
     whenCreateUser(){
         loginPage.CreateUser();

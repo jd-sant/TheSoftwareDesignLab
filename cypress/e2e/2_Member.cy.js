@@ -33,4 +33,18 @@ describe('Member Creation', () => {
         thenSteps.thenSeeExistingEmailError();
     });
 
+    it('PA013-C - Edit a member', () => {
+        // When the user edits and save a member
+        whenSteps.whenEditAndSaveMember();
+        // Then the user should see the member edited
+        thenSteps.thenSeeMemberEdited();
+    });
+
+    it('PA014-C - Delete a member', () => {
+        // When the user deletes a member
+        whenSteps.whenDeleteMember();
+        // Then the user shouldn't see the member deleted
+        thenSteps.thenNotSeeMemberDeleted();
+    });
+
 });

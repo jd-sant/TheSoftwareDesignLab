@@ -12,6 +12,9 @@ const searchMemberInput = 'input[data-test-input="members-search"]';
 const classCreatedMemberName = '.ma0.pa0.gh-members-list-name';
 const memberEmailInputResponse = 'p.response';
 const retrySaveMemberButton = 'span[data-test-task-button-state="failure"]';
+const optionsMember = 'button[data-test-button="member-actions"] > :nth-child(1)';
+const deleteMemberButton = 'button[data-test-button="delete-member"]';
+const deleteMemberModalButton = 'span[data-test-task-button-state="idle"]';
 
 class MemberPage {
 
@@ -20,6 +23,13 @@ class MemberPage {
     memberInvalidEmail = faker.lorem.words(1);
     memberLabel = faker.lorem.words(1);
     memberNote = faker.lorem.words(3);
+
+    editedMemberName = faker.person.fullName();
+    editedMemberInvalidEmail = faker.lorem.words(1);
+    editedMemberLabel = faker.lorem.words(1);
+    editedMemberNote = faker.lorem.words(3);
+
+
 
     NavigateToCreateMemberPage() {
         cy.wait(delay);
@@ -84,7 +94,55 @@ class MemberPage {
         cy.wait(delay);
     }
 
+    ClearAndTypeEditMember(memberName_ = this.editedMemberName, memberLabel_ = this.editedMemberLabel, memberNote_ = this.editedMemberNote) {
+        cy.get(memberNameInput).clear();
+        cy.get(memberNameInput).type(memberName_);
+        cy.get(memberLabelInput).clear();
+        cy.get(memberLabelInput).type(memberLabel_);
+        cy.get(memberLabelInput).type('{enter}');
+        cy.get(memberLabelInput).type('{esc}');
+        cy.get(memberNoteInput).clear();
+        cy.get(memberNoteInput).type(memberNote_);
+        cy.wait(delay);
+    }
 
+    EditAndSaveMember() {
+        cy.get(classCreatedMemberName).first().click();
+        this.ClearAndTypeEditMember();
+        this.SaveMember();
+
+    }
+
+    SeeMemberEdited(memberName_ = this.editedMemberName) {
+        cy.get(memberSection).click();
+        cy.wait(delay);
+        cy.get(searchMemberInput).clear();
+        cy.get(searchMemberInput).type(memberName_);
+        cy.get(classCreatedMemberName).first().should('to.contain', memberName_);
+        cy.wait(delay);
+    }
+
+    DeleteMember(memberName_ = this.editedMemberName) {
+        cy.get(searchMemberInput).clear();
+        cy.get(searchMemberInput).type(memberName_);        
+        cy.get(classCreatedMemberName).first().click();
+        cy.wait(delay);
+        cy.get(optionsMember).first().click();
+        cy.get(deleteMemberButton).first().click();
+        cy.wait(delay);
+        cy.get(deleteMemberModalButton).last().click();
+        
+        cy.get('body').should('not.contain', memberName_);
+        cy.wait(delay);
+
+
+
+
+    }
+
+    NotSeeMemberDeleted() {
+
+    }
 
 }
 
