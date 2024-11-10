@@ -9,8 +9,8 @@ const postTitleInput = 'textarea[data-test-editor-title-input]';
 const postContentInput = '[data-secondary-instance="false"] > .koenig-lexical > [data-kg="editor"] > .kg-prose > p';
 const postContentImageInput = '[data-secondary-instance="false"] > :nth-child(1) > :nth-child(1) > [contenteditable="true"][data-koenig-dnd-container="true"] > p[data-koenig-dnd-droppable="true"]';
 const publishPostButton = '.gh-editor-header > .gh-editor-publish-buttons > .darkgrey > span';
-const confirmPublishButton = '.gh-publish-cta > .gh-btn > span';
-const finalPublishButton = '#ember61 > span';
+const confirmPublishButton = '[data-test-button="continue"]';
+const finalPublishButton = '[data-test-button="confirm-publish"]';
 const modalClass = '.modal-content';
 const closeModalButton = '[data-test-button="close-publish-flow"]';
 const dropdownPostFilter = '.gh-contentfilter-type > .ember-view > svg';
@@ -20,7 +20,7 @@ const imagePostFeatureClass = '.gh-editor-feature-image-unsplash'
 const imageUnplashClass = '.gh-unsplash-photo-container > .gh-unsplash-photo-overlay > .gh-unsplash-photo-footer > .gh-unsplash-button';
 const imageUnplashContentClass = '[data-kg-unsplash-insert-button="true"]';
 const postAddCard = 'button[aria-label="Add a card"]';
-const postUnplashCard = 'button[data-kg-card-menu-item="Unsplash"]'
+const postUnplashCard = 'button[data-kg-card-menu-item="Unsplash"]';
 
 class PostPage {
 
