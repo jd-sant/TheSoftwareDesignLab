@@ -13,7 +13,15 @@ When('the user creates and publishes the post', function () {
   return postPage.CreateAndPublishPost(this);
 });
 
+When('the user creates and publishes the post with special characters', function () {
+  return postPage.CreateAndPublishPostSpecial(this);
+});
+
 // Then Steps
 Then('the user should see the post published', function () {
   return postPage.SeePostPublished(this);
+});
+
+Then('the user should see the post with special characters published', function () {
+  return postPage.SeeSpecialPostPublished(this);
 });

@@ -1,4 +1,4 @@
-const { faker } = require('@faker-js/faker');
+const { faker, fakerAR, fakerRU, fakerZH_CN, fakerJA, fakerHY } = require('@faker-js/faker');
 const assert = require('assert');
 const delay = 2000;
 const postTitleInput = 'textarea[data-test-editor-title-input]';
@@ -22,6 +22,11 @@ class PostPage {
 
     postTitle = faker.book.title();
     postContent = faker.lorem.paragraphs(4,'\n');
+    postTitleSpecial = faker.string.sample();
+    postContentSpecial = faker.string.hexadecimal() + faker.string.symbol() + faker.string.sample();
+    postTitleMultilanguage = fakerAR.lorem.words(3) + fakerRU.lorem.words(3) + fakerZH_CN.lorem.words(3) + fakerJA.lorem.words(3) + fakerHY.lorem.words(3);
+    postContentMultilanguage = fakerAR.lorem.paragraphs(4,'\n') + fakerRU.lorem.paragraphs(4,'\n') + fakerZH_CN.lorem.paragraphs(4,'\n') + fakerJA.lorem.paragraphs(4,'\n') + fakerHY.lorem.paragraphs(4,'\n');
+
 
     async ClearAndTypePost(context,postTitle_ = this.postTitle, postContent_ = this.postContent) {
         await context.driver.$(postTitleInput).click();
@@ -52,6 +57,19 @@ class PostPage {
         await context.driver.pause(delay);
         const postTitle = await context.driver.$(classPublisdPostTitle).getText();
         return await assert.equal(postTitle,postTitle_);
+    }
+
+    async CreateAndPublishPostSpecial(context) {
+        await this.ClearAndTypePost(context,this.postTitleSpecial,this.postContentSpecial);
+        await this.PublishPost(context);
+    }
+
+    async SeeSpecialPostPublished(context) {
+        await context.driver.$(dropdownPostFilter).click();
+        await context.driver.$(optionPublishedPost).click();
+        await context.driver.pause(delay);
+        const postTitle = await context.driver.$(classPublisdPostTitle).getText();
+        return await assert.equal(postTitle,this.postTitleSpecial);
     }
 
 }
