@@ -1,4 +1,5 @@
 import { postPage } from "../pages/PostPage";
+import { memberPage } from "../pages/MemberPage";
 
 class ThenSteps {
 
@@ -12,6 +13,10 @@ class ThenSteps {
 
     thenSeeMultilanguagePostPublished(){
         postPage.SeeMultilanguagePostPublished();
+    }
+
+    thenSeeMemberCreated(){
+        memberPage.SeeMemberCreated();
     }
 }
 

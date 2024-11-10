@@ -14,6 +14,10 @@ class GivenSteps {
     givenNavigateToPostPage(){
         dashboardPage.NavigateToPostPage();
     }
+
+    givenNavigateToMemberPage(){
+        dashboardPage.NavigateToMemberPage();
+    }
     
 }
 
