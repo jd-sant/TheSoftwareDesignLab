@@ -12,21 +12,21 @@ describe('Member Creation', () => {
         givenSteps.givenNavigateToMemberPage();
     });
 
-    it('PA010-C - Create a member', () => {
+    it('PA008-C - Create a member', () => {
         // When the user creates and save a member
         whenSteps.whenCreateAndSaveMember();
         // Then the user should see the member created
         thenSteps.thenSeeMemberCreated();
     });
 
-    it('PA011-C - Create a member with an invalid email', () => {
+    it('PA009-C - Create a member with an invalid email', () => {
         // When the user creates and try to save a member with a invalid email
         whenSteps.whenCreateMemberInvalidEmail();
         // Then the user should see an error on the input email
         thenSteps.thenSeeFormError();
     });
 
-    it('PA012-C - Create a member with an existing email', () => {
+    it('PA010-C - Create a member with an existing email', () => {
         // When the user creates and save a member with an existing email
         whenSteps.whenCreateMemberExistingEmail();
         // Then the user should see an error on the input email
