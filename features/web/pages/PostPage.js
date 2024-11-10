@@ -72,6 +72,31 @@ class PostPage {
         return await assert.equal(postTitle,this.postTitleSpecial);
     }
 
+    async ClearAndTypePostWithImages(context, postTitle_ = this.postTitle, postContent_ = this.postContent) {
+        await context.driver.$(postTitleInput).click();
+        await context.driver.$(postTitleInput).setValue(postTitle_);
+        await context.driver.pause(delay);
+        await context.driver.$(postContentImageInput).click();
+        await context.driver.$(postAddCard).click();
+        await context.driver.$(postUnplashCard).click();
+        await this.AddUnplashImage(context,imageUnplashContentClass);
+        await context.driver.$(postContentImageInput).click();
+        await context.driver.$(postContentImageInput).setValue(postContent_);
+        await context.driver.pause(delay);
+    }
+
+    async AddUnplashImage(context, class_ = imageUnplashClass) {
+        await context.driver.$(class_).click();
+        await context.driver.pause(delay);
+    }
+
+    async CreateAndPublishPostWithImages(context) {
+        await context.driver.$(imagePostFeatureClass).click();
+        await context.driver.pause(delay);
+        await this.AddUnplashImage(context);
+        await this.ClearAndTypePostWithImages(context);
+        await this.PublishPost(context);
+    }
 }
 
 module.exports = new PostPage();

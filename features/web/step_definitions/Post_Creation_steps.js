@@ -17,6 +17,10 @@ When('the user creates and publishes the post with special characters', function
   return postPage.CreateAndPublishPostSpecial(this);
 });
 
+When('the user creates and publishes the post with unplash images', function () {
+  return postPage.CreateAndPublishPostWithImages(this);
+});
+
 // Then Steps
 Then('the user should see the post published', function () {
   return postPage.SeePostPublished(this);
