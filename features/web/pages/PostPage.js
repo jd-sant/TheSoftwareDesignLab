@@ -7,7 +7,6 @@ const postContentImageInput = '[data-secondary-instance="false"] > :nth-child(1)
 const publishPostButton = '.gh-editor-header > .gh-editor-publish-buttons > .darkgrey > span';
 const confirmPublishButton = '[data-test-button="continue"]';
 const finalPublishButton = '[data-test-button="confirm-publish"]';
-const modalClass = '.modal-content';
 const closeModalButton = 'button[data-test-button="close-publish-flow"]';
 const dropdownPostFilter = '.gh-contentfilter-type > .ember-view > svg';
 const optionPublishedPost = '.ember-power-select-option[data-option-index="2"]';
@@ -24,8 +23,8 @@ class PostPage {
     postContent = faker.lorem.paragraphs(4,'\n');
     postTitleSpecial = faker.string.sample();
     postContentSpecial = faker.string.hexadecimal() + faker.string.symbol() + faker.string.sample();
-    postTitleMultilanguage = fakerAR.lorem.words(3) + fakerRU.lorem.words(3) + fakerZH_CN.lorem.words(3) + fakerJA.lorem.words(3) + fakerHY.lorem.words(3);
-    postContentMultilanguage = fakerAR.lorem.paragraphs(4,'\n') + fakerRU.lorem.paragraphs(4,'\n') + fakerZH_CN.lorem.paragraphs(4,'\n') + fakerJA.lorem.paragraphs(4,'\n') + fakerHY.lorem.paragraphs(4,'\n');
+    postTitleMultilanguage = fakerHY.lorem.words(3) + fakerRU.lorem.words(3) + fakerZH_CN.lorem.words(3) + fakerJA.lorem.words(3) + fakerAR.lorem.words(3);
+    postContentMultilanguage = fakerHY.lorem.paragraphs(4,'\n') + fakerRU.lorem.paragraphs(4,'\n') + fakerZH_CN.lorem.paragraphs(4,'\n') + fakerJA.lorem.paragraphs(4,'\n') + fakerAR.lorem.paragraphs(4,'\n');
 
 
     async ClearAndTypePost(context,postTitle_ = this.postTitle, postContent_ = this.postContent) {
@@ -96,6 +95,19 @@ class PostPage {
         await this.AddUnplashImage(context);
         await this.ClearAndTypePostWithImages(context);
         await this.PublishPost(context);
+    }
+
+    async CreateAndPublishPostWithMultipleLanguages(context) {
+        await this.ClearAndTypePost(context,this.postTitleMultilanguage,this.postContentMultilanguage);
+        await this.PublishPost(context);
+    }
+
+    async SeeMultilanguagePostPublished(context) {
+        await context.driver.$(dropdownPostFilter).click();
+        await context.driver.$(optionPublishedPost).click();
+        await context.driver.pause(delay);
+        const postTitle = await context.driver.$(classPublisdPostTitle).getText();
+        return await assert.equal(postTitle,this.postTitleMultilanguage);
     }
 }
 
