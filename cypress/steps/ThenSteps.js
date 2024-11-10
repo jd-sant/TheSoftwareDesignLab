@@ -1,4 +1,6 @@
+import { dashboardPage } from "../pages/DashboardPage";
 import { postPage } from "../pages/PostPage";
+import { loginPage } from "../pages/LoginPage";
 
 class ThenSteps {
 
@@ -12,6 +14,14 @@ class ThenSteps {
 
     thenSeeMultilanguagePostPublished(){
         postPage.SeeMultilanguagePostPublished();
+    }
+
+    thenSeeDashboard(){
+        dashboardPage.SeeDashboard();
+    }
+
+    thenSeeLoginError(){
+        loginPage.SeeLoginError();
     }
 }
 
