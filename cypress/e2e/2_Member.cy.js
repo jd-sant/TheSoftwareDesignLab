@@ -13,23 +13,23 @@ describe('Member Creation', () => {
     });
 
     it('PA008-C - Create a member', () => {
-        // When the user creates and save a member
+        // When the user creates and saves a member
         whenSteps.whenCreateAndSaveMember();
-        // Then the user should see the member created
+        // Then the user should see the created member
         thenSteps.thenSeeMemberCreated();
     });
 
     it('PA009-C - Create a member with an invalid email', () => {
-        // When the user creates and try to save a member with a invalid email
+        // When the user creates and tries to save a member with a invalid email
         whenSteps.whenCreateMemberInvalidEmail();
         // Then the user should see an error on the input email
         thenSteps.thenSeeFormError();
     });
 
     it('PA010-C - Create a member with an existing email', () => {
-        // When the user creates and save a member with an existing email
+        // When the user creates and tries to save a member with an existing email
         whenSteps.whenCreateMemberExistingEmail();
-        // Then the user should see an error on the input email
+        // Then the user should see an existence error on the input email
         thenSteps.thenSeeExistingEmailError();
     });
 
@@ -43,7 +43,7 @@ describe('Member Creation', () => {
     it('PA012-C - Delete a member', () => {
         // When the user deletes a member
         whenSteps.whenDeleteMember();
-        // Then the user shouldn't see the member deleted
+        // Then the user should not see the member deleted
         thenSteps.thenNotSeeMemberDeleted();
     });
 
