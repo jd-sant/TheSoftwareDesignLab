@@ -11,6 +11,8 @@ const siteTittle = 'input[id="blog-title"]';
 const userName = 'input[id="name"]';
 const userEmail = 'input[id="email"]';
 const createUserButton = 'button[data-test-button="setup"]';
+const loginErrorButton = 'span[data-test-task-button-state="failure"]';
+const loginErrorMessage = 'p[data-test-flow-notification]';
 
 class LoginPage {
 
@@ -42,8 +44,8 @@ class LoginPage {
     }
 
     SeeLoginError(){
-        cy.get('span[data-test-task-button-state="failure"]').should('be.visible');
-        cy.get('p[data-test-flow-notification]').should('to.contain', 'Your password is incorrect.')
+        cy.get(loginErrorButton).should('be.visible');
+        cy.get(loginErrorMessage).should('to.contain', 'Your password is incorrect.')
         cy.wait(delay);
     }
 }

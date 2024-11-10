@@ -18,7 +18,7 @@ describe('Create User', () => {
     it('PA002-C - Bad password login with the new user', () => {
         // When the user tries to login with a bad password
         whenSteps.whenBadLogin();
-        // Then the user should be a message error
+        // Then the user should see a message error
         thenSteps.thenSeeLoginError();
     });
 });
