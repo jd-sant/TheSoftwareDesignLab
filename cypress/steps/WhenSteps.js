@@ -31,6 +31,10 @@ class WhenSteps {
     whenBadLogin(){
         loginPage.BadLogin();
     }
+
+    whenBadEmailLogin(){
+        loginPage.BadEmailLogin();
+    }
 }
 
 export const whenSteps = new WhenSteps();

@@ -28,6 +28,10 @@ class ThenSteps {
     thenSeeLoginError(){
         loginPage.SeeLoginError();
     }
+
+    thenSeeLoginEmailError(){
+        loginPage.SeeLoginEmailError();
+    }
 }
 
 export const thenSteps = new ThenSteps();

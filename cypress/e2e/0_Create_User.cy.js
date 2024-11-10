@@ -21,4 +21,11 @@ describe('Create User', () => {
         // Then the user should be a message error
         thenSteps.thenSeeLoginError();
     });
+
+    it('PA003-K - Bad email login with the new user', () => {
+        // When the user tries to login with a bad email
+        whenSteps.whenBadEmailLogin();
+        // Then the user should be a message error
+        thenSteps.thenSeeLoginEmailError();
+    });
 });
