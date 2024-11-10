@@ -3,6 +3,8 @@ import { postPage } from "../pages/PostPage";
 import { tagPage } from "../pages/TagPage";
 import { memberPage } from "../pages/MemberPage";
 import { loginPage } from "../pages/LoginPage";
+import {pagePage} from "../pages/PagePage";
+
 
 class ThenSteps {
 
@@ -45,6 +47,24 @@ class ThenSteps {
     thenSeeLoginError(){
         loginPage.SeeLoginError();
     }
+
+    thenSeePagePublished(){
+        pagePage.SeePagePublished();
+    }
+        
+    thenSeeSpecialPagePublished(){
+        pagePage.SeeSpecialPagePublished();
+    }
+        
+    thenLongTitlePublishError(){
+        pagePage.LongTitlePublishError();
+    }
+        
+    thenSeeFeaturePagePublished(){
+        pagePage.SeeFeaturePagePublished();
+    }
+
+
 }
 
 export const thenSteps = new ThenSteps();

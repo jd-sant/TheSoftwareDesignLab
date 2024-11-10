@@ -2,6 +2,7 @@ import { loginPage } from "../pages/LoginPage";
 import { postPage } from "../pages/PostPage";
 import { memberPage } from "../pages/MemberPage";
 import { tagPage } from "../pages/TagPage";
+import {pagePage} from "../pages/PagePage";
 
 class WhenSteps {
 
@@ -43,6 +44,22 @@ class WhenSteps {
 
     whenBadLogin(){
         loginPage.BadLogin();
+    }
+
+    whenCreateAndPublishPage(){
+        pagePage.CreateAndPublishPage();
+    }
+        
+    whenCreateAndPublishPageSpecial(){
+        pagePage.CreateAndPublishPageSpecial();
+    }
+        
+    whenCreatePageInvalidTitle(){
+        pagePage.CreatePageInvalidTitle();
+    }
+        
+    whenCreateAndPublishFeaturePage(){
+        pagePage.CreateAndPublishFeaturePage();
     }
 }
 
