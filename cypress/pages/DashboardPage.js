@@ -1,6 +1,7 @@
 const delay = Cypress.env('delay') || 300;
 const idNavigateNewPost = '.ember-view.gh-secondary-action.gh-nav-new-post';
 const idNavigateMember = 'a[data-test-nav="members"]';
+const dashboardHeading = '.gh-onboarding-header h2';
 
 class DashboardPage {
 
@@ -15,7 +16,7 @@ class DashboardPage {
     };
     
     SeeDashboard() {
-        cy.get('.gh-onboarding-header h2').should('have.text', 'Let’s get started!');
+        cy.get(dashboardHeading).should('have.text', 'Let’s get started!');
         cy.wait(delay);
     }
 

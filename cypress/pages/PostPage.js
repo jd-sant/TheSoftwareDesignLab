@@ -24,12 +24,12 @@ const postUnplashCard = 'button[data-kg-card-menu-item="Unsplash"]';
 
 class PostPage {
 
-    postTitle = faker.lorem.words(3);
+    postTitle = faker.book.title();
     postContent = faker.lorem.paragraphs(4,'\n');
     postTitleSpecial = faker.string.sample();
     postContentSpecial = faker.string.hexadecimal() + faker.string.symbol() + faker.string.sample();
     postTitleMultilanguage = fakerArmenian.lorem.words(3) + fakerRussian.lorem.words(3) + fakerChinese.lorem.words(3) + fakerJapanese.lorem.words(3) + fakerArabic.lorem.words(3);
-    postContentMultilanguage = fakerArmenian.lorem.paragraphs(4,'\n') + fakerRussian.lorem.paragraphs(4,'\n') + fakerChinese.lorem.paragraphs(4,'\n') + fakerJapanese.lorem.paragraphs(4,'\n') + fakerArabic.lorem.paragraphs(4,'\n');
+    postContentMultilanguage = fakerArmenian.lorem.paragraphs(2,'\n') + fakerRussian.lorem.paragraphs(2,'\n') + fakerChinese.lorem.paragraphs(2,'\n') + fakerJapanese.lorem.paragraphs(2,'\n') + fakerArabic.lorem.paragraphs(2,'\n');
 
     AddUnplashImage(class_ = imageUnplashClass){
         cy.wait(delay);
