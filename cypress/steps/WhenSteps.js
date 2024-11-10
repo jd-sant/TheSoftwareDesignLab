@@ -25,6 +25,18 @@ class WhenSteps {
         tagPage.CreateTag();
     }
 
+    whenCreateTagWithAllFieldsBlank(){
+        tagPage.CreateTagWitAllFieldsBlank();
+    }
+
+    whenCreateAndEditTag(){
+        tagPage.CreateTagAndEdit();
+    }
+
+    whenCreateEditAndCancelTag(){
+        tagPage.CreateTagEditAndCancel();
+    }
+
     whenCreateAndSaveMember(){
         memberPage.CreateAndSaveMember();
     }

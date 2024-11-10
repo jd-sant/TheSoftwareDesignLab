@@ -22,6 +22,18 @@ class ThenSteps {
         tagPage.SeeTagCreated();
     }
 
+    thenSeeTags(){
+        tagPage.seeTagsLeavePage();
+    }
+
+    thenSeeTagEdit(){
+        tagPage.SeeTagEdited();
+    }
+
+    thenSeeTagEditCancel(){
+        tagPage.seeTagsLeavePageCancel();
+    }
+
     thenSeeMemberCreated(){
         memberPage.SeeMemberCreated();
     }
