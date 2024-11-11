@@ -14,7 +14,7 @@ Diego Santamaria | jd.santamariab1@uniandes.edu.co
   <li>Obtener el código fuente de este repositorio: Click en Descargar como Zip y descomprima la carpeta en su máquina, o puede clonar el repositorio.</li>
   <li>Asegúrese de tener Node instalado en una versión estable >= 20 </li>
   <li>Instalar los módulos requeridos: Usando Node Package Manager, ejecuta el comando `npm install` en la carpeta raíz del repositorio, esto instalara cypress CLI, kraken-node, faker-js, wdio, cypress-file-upload</li>
-  <li>Verifique que su sistema operativo cuente con las herramientas de Android Debug Bridge (adb). Una guia que se puede usar para su instalación se encuentra en el siguiente [enlace]([https://www.npmjs.com/](https://www.xda-developers.com/install-adb-windows-macos-linux/)</li>
+  <li>Verifique que su sistema operativo cuente con las herramientas de Android Debug Bridge (adb). Una guia que se puede usar para su instalación se encuentra en el siguiente [enlace](https://www.xda-developers.com/install-adb-windows-macos-linux/)</li>
   <li>Tener Docker instalado en su máquina junto con docker compose. [Instalar Docker](https://docs.docker.com/engine/install/) [Instalar docker compose](https://docs.docker.com/compose/install/)</li>
 </ol>
 
