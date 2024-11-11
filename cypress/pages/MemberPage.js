@@ -25,12 +25,25 @@ class MemberPage {
     memberLabel = faker.lorem.words(1);
     memberNote = faker.lorem.words(3);
 
+    memberName2 = faker.person.fullName();
+    memberEmail2 = faker.internet.email();
+    memberLabel2 = faker.lorem.words(1);
+    memberNote2 = faker.lorem.words(3);
+
+    memberName3 = faker.person.fullName();
+    memberEmail3 = faker.internet.email();
+    memberLabel3 = faker.lorem.words(1);
+    memberNote3 = faker.lorem.words(3);
+
+    memberName4 = faker.person.fullName();
+    memberEmail4 = faker.internet.email();
+    memberLabel4 = faker.lorem.words(1);
+    memberNote4 = faker.lorem.words(3);
+
     editedMemberName = faker.person.fullName();
     editedMemberInvalidEmail = faker.lorem.words(1);
     editedMemberLabel = faker.lorem.words(1);
     editedMemberNote = faker.lorem.words(3);
-
-
 
     NavigateToCreateMemberPage() {
         cy.wait(delay);
@@ -71,6 +84,7 @@ class MemberPage {
         cy.get(classCreatedMemberName).first().should('to.contain', memberName_);
     }
 
+// ************************************************************
     CreateMemberInvalidEmail() {
         this.NavigateToCreateMemberPage();
         this.ClearAndTypeMember(this.memberName, this.memberInvalidEmail, this.memberLabel, this.memberNote);
@@ -82,9 +96,17 @@ class MemberPage {
         cy.get(memberEmailInputResponse).should('to.contain', 'Invalid Email.')
     }
 
-    CreateMemberExistingEmail() {
+// ************************************************************
+    CreateMemberExistingEmail() {  
         this.NavigateToCreateMemberPage();
-        this.ClearAndTypeMember(faker.person.fullName(), this.memberEmail, faker.lorem.words(1), faker.lorem.words(3));
+        this.ClearAndTypeMember(this.memberName2, this.memberEmail2, this.memberLabel2, this.memberNote2);
+        this.SaveMember();    
+        cy.wait(delay);  
+        cy.get(memberSection).click();
+        cy.wait(delay);
+
+        this.NavigateToCreateMemberPage();
+        this.ClearAndTypeMember(faker.person.fullName(), this.memberEmail2, faker.lorem.words(1), faker.lorem.words(3));
         this.SaveMember();
     }
 
@@ -93,6 +115,7 @@ class MemberPage {
         cy.get(memberEmailInputResponse).should('to.contain', 'Member already exists. Attempting to add member with existing email address')
     }
 
+// ************************************************************    
     ClearAndTypeEditMember(memberName_ = this.editedMemberName, memberLabel_ = this.editedMemberLabel, memberNote_ = this.editedMemberNote) {
         cy.get(memberNameInput).clear();
         cy.get(memberNameInput).type(memberName_);
@@ -106,6 +129,13 @@ class MemberPage {
     }
 
     EditAndSaveMember() {
+        this.NavigateToCreateMemberPage();
+        this.ClearAndTypeMember(this.memberName3, this.memberEmail3, this.memberLabel3, this.memberNote3);
+        this.SaveMember();   
+        cy.wait(delay);
+        cy.get(memberSection).click();
+        cy.wait(delay);
+
         cy.get(classCreatedMemberName).first().click();
         this.ClearAndTypeEditMember();
         this.SaveMember();
@@ -121,7 +151,16 @@ class MemberPage {
         cy.wait(delay);
     }
 
-    DeleteMember(memberName_ = this.editedMemberName) {
+// ************************************************************    
+    
+    DeleteMember(memberName_ = this.memberName4) {      
+        this.NavigateToCreateMemberPage();
+        this.ClearAndTypeMember(this.memberName4, this.memberEmail4, this.memberLabel4, this.memberNote4);
+        this.SaveMember()  
+        cy.wait(delay);
+        cy.get(memberSection).click();
+        cy.wait(delay);
+        
         cy.get(searchMemberInput).clear();
         cy.get(searchMemberInput).type(memberName_);        
         cy.wait(delay);
@@ -134,7 +173,7 @@ class MemberPage {
         cy.wait(delay);
     }
 
-    NotSeeMemberDeleted(memberName_ = this.editedMemberName) {
+    NotSeeMemberDeleted(memberName_ = this.memberName4) {
         cy.get(searchMemberInput).clear();
         cy.get(searchMemberInput).type(memberName_);        
         cy.wait(delay);

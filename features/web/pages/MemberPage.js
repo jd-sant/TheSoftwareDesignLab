@@ -116,6 +116,11 @@ class MemberPage {
     }
 
     async EditAndSaveMember(context) {
+        await this.CreateAndSaveMember(context);
+        await context.driver.pause(delay); 
+        await context.driver.$(memberSection).click();
+        await context.driver.pause(delay);        
+        
         await context.driver.$(classCreatedMemberName).click();
         await this.ClearAndTypeEditMember(context);
         await this.SaveMember(context);
