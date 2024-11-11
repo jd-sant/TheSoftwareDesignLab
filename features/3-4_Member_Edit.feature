@@ -1,9 +1,9 @@
-Feature: Post Creation
+Feature: Member Creation
 
 @user1 @web 
-Scenario: PA008-K - Create a member
+Scenario: PA015-K - Edit a member
     Given the user has navigated to the Ghost site "<LOGIN_PAGE>"
     And the user has logged in Ghost with email "<EMAIL>" and pass "<PASSWORD>"
     And the user has navigated to member page
-    When the user creates and saves a member
-    Then the user should see the created member
+    When the user edits and save a member
+    Then the user should see the member edited

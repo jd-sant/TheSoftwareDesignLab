@@ -1,7 +1,7 @@
 Feature: Member Creation
 
 @user1 @web 
-Scenario: PA010-K - Create a member with an existing email
+Scenario: PA014-K - Create a member with an existing email
     Given the user has navigated to the Ghost site "<LOGIN_PAGE>"
     And the user has logged in Ghost with email "<EMAIL>" and pass "<PASSWORD>"
     And the user has navigated to member page
