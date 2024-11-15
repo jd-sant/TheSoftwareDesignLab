@@ -3,7 +3,8 @@ import { postPage } from "../pages/PostPage";
 import { tagPage } from "../pages/TagPage";
 import { memberPage } from "../pages/MemberPage";
 import { loginPage } from "../pages/LoginPage";
-import {pagePage} from "../pages/PagePage";
+import { pagePage } from "../pages/PagePage";
+import { settingsPage } from "../pages/SettingsPage";
 
 
 class ThenSteps {
@@ -87,6 +88,9 @@ class ThenSteps {
         pagePage.SeeFeaturePagePublished();
     }
 
+    thenCanChangeSiteDescription(){
+        settingsPage.CanChangeSiteDescription();
+    }
 
 }
 

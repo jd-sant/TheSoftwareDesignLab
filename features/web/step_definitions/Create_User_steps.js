@@ -1,6 +1,7 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const loginPage = require('../pages/LoginPage');
 const dashboardPage  = require('../pages/DashboardPage');
+const settignsPage = require('../pages/SettingsPage');
 
 // When Steps
 When('the user fill and submit the form with site {kraken-string} name {kraken-string} email {kraken-string} pass {kraken-string}', function (SITE_TITLE,FULL_NAME,EMAIL,PASSWORD) {
@@ -26,4 +27,8 @@ Then('the user should see a message error', function () {
 
 Then('the user should see an email message error', function () {
     return loginPage.SeeLoginEmailError(this);
+});
+
+Then('the user should change site description', function () {
+    return settignsPage.CanChangeSiteDescription(this);
 });
