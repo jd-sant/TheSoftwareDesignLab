@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 const delay = Cypress.env('delay') || 300;
+import { screenshot } from './Screenshots';
 
 const newTagButton = '.ember-view.gh-btn.gh-btn-primary';
 const nameTag = '#tag-name';
@@ -20,11 +21,6 @@ const imageFilledTag = '.image-action';
  */
 class TagPage {
 
-    // Contador para los screenshots
-    screenshotCounter = 0;
-    currentTest = Cypress.currentTest?.title || 'unnamedTest'
-    datetime = new Date().toISOString().replace(/:/g,".");
-
     // Propiedades para los datos de un nuevo tag
     tagName = faker.word.adjective();
     tagColor = faker.color.rgb().substring(1);
@@ -38,30 +34,12 @@ class TagPage {
     tagImageEdit = '../fixtures/image2.png'
 
     /**
-      * Toma un screenshot con un nombre único y ordenado.
-      * @param {string} name - Nombre del screenshot.
-      */
-    takeScreenshot(name) {
-        const pathScreenShot = Cypress.currentTest.title
-        if (pathScreenShot != this.currentTest){
-            this.currentTest = Cypress.currentTest.title
-            this.screenshotCounter = 0
-            this.datetime = new Date().toISOString().replace(/:/g,".");
-        }
-        const formattedCounter = String(this.screenshotCounter).padStart(3, '0'); // Formatea el número con ceros iniciales
-        const screenshotName = `${formattedCounter}_${name}`;
-        cy.screenshot(`${this.datetime}-${pathScreenShot}/${screenshotName}`);
-        this.screenshotCounter++; // Incrementa el contador
-        
-    }
-
-    /**
      * Navega a la página de creación de un nuevo tag y hace clic en el botón para crear uno.
      */
     NavigateToCreateNewTag() {
-        this.takeScreenshot('BeforeNavigateToNewTag')
+        screenshot.takeScreenshot('BeforeNavigateToNewTag')
         cy.get(newTagButton).click();
-        this.takeScreenshot('AfterNavigateToNewTag')
+        screenshot.takeScreenshot('AfterNavigateToNewTag')
         cy.wait(delay);
     }
 
@@ -73,17 +51,17 @@ class TagPage {
      * @param {string} tagImage_ - Ruta de la imagen del tag.
      */
     ClearAndTypeTag(tagName_ = this.tagName, tagColor_ = this.tagColor, tagDescription_ = this.tagDescription, tagImage_ = this.tagImage) {
-        this.takeScreenshot('tagBeforeClearAndType')
+        screenshot.takeScreenshot('tagBeforeClearAndType')
         cy.get(nameTag).clear().type(tagName_);
-        this.takeScreenshot('fillNameTag')
+        screenshot.takeScreenshot('fillNameTag')
         cy.get(colorHexadecimalTag).clear().type(tagColor_);
-        this.takeScreenshot('fillColorTag')
+        screenshot.takeScreenshot('fillColorTag')
         cy.get(descriptionTag).clear().type(tagDescription_);
-        this.takeScreenshot('fillDescriptionTag')
+        screenshot.takeScreenshot('fillDescriptionTag')
         cy.get(imageTag).attachFile(tagImage_);
-        this.takeScreenshot('AttachFileTag')
+        screenshot.takeScreenshot('AttachFileTag')
         cy.wait(delay);
-        this.takeScreenshot('tagAfterClearAndType')
+        screenshot.takeScreenshot('tagAfterClearAndType')
     }
 
     /**
@@ -94,45 +72,45 @@ class TagPage {
      * @param {string} tagImage_ - Ruta de la imagen editada del tag.
      */
     ClearAndTypeTagEdit(tagName_ = this.tagNameEdit, tagColor_ = this.tagColorEdit, tagDescription_ = this.tagDescriptionEdit, tagImage_ = this.tagImageEdit) {
-        this.takeScreenshot('tagBeforeEdited')
+        screenshot.takeScreenshot('tagBeforeEdited')
         cy.get(nameTag).clear().type(tagName_);
-        this.takeScreenshot('fillNameTag')
+        screenshot.takeScreenshot('fillNameTag')
         cy.get(colorHexadecimalTag).clear().type(tagColor_);
-        this.takeScreenshot('fillColorTag')
+        screenshot.takeScreenshot('fillColorTag')
         cy.get(descriptionTag).clear().type(tagDescription_);
-        this.takeScreenshot('fillDescriptionTag')
+        screenshot.takeScreenshot('fillDescriptionTag')
         cy.get(imageFilledTag).click();
-        this.takeScreenshot('deleteImageTag')
+        screenshot.takeScreenshot('deleteImageTag')
         cy.get(imageTag).attachFile(tagImage_);
-        this.takeScreenshot('AttachFileTag')
+        screenshot.takeScreenshot('AttachFileTag')
         cy.wait(delay);
-        this.takeScreenshot('tagAfterEdited')
+        screenshot.takeScreenshot('tagAfterEdited')
     }
 
     /**
      * Limpia todos los campos del formulario de tag sin escribir nuevos datos.
      */
     ClearTag() {
-        this.takeScreenshot('tagBeforeClear');
+        screenshot.takeScreenshot('tagBeforeClear');
         cy.get(nameTag).clear();
-        this.takeScreenshot('clearNameTag');
+        screenshot.takeScreenshot('clearNameTag');
         cy.get(colorHexadecimalTag).clear();
-        this.takeScreenshot('clearColorTag');
+        screenshot.takeScreenshot('clearColorTag');
         cy.get(descriptionTag).clear();
-        this.takeScreenshot('clearDescriptionTag')
+        screenshot.takeScreenshot('clearDescriptionTag')
         cy.get(imageTag).invoke('val', null);
-        this.takeScreenshot('clearImageTag')
+        screenshot.takeScreenshot('clearImageTag')
         cy.wait(delay);
-        this.takeScreenshot('tagAfterClear');
+        screenshot.takeScreenshot('tagAfterClear');
     }
 
     /**
      * Guarda el tag actual haciendo click en el botón de guardado.
      */
     saveButtonTag() {
-        this.takeScreenshot('tagBeforeSaveButton')
+        screenshot.takeScreenshot('tagBeforeSaveButton')
         cy.get(saveButtonTag).click();
-        this.takeScreenshot('tagAfterSaveButton')
+        screenshot.takeScreenshot('tagAfterSaveButton')
         cy.wait(delay);
     }
 
@@ -179,12 +157,12 @@ class TagPage {
      * @param {string} tagName_ - Nombre del tag creado (opcional, por defecto usa el nombre actual de la propiedad).
      */
     SeeTagCreated(tagName_ = this.tagName) {
-        this.takeScreenshot('BeforeTagCreated')
+        screenshot.takeScreenshot('BeforeTagCreated')
         cy.get(backButtonTag).click();
-        this.takeScreenshot('ListTagCreated')
+        screenshot.takeScreenshot('ListTagCreated')
         cy.wait(delay);
         cy.get(tableTags).contains(listNameTag, tagName_).click();
-        this.takeScreenshot('AfterTagCreated')
+        screenshot.takeScreenshot('AfterTagCreated')
         cy.wait(delay);
     }
 
@@ -193,28 +171,28 @@ class TagPage {
      * @param {string} tagName_ - Nombre editado del tag (opcional, por defecto usa el nombre editado de la propiedad).
      */
     SeeTagEdited(tagName_ = this.tagNameEdit) {
-        this.takeScreenshot('BeforeTagEdited')
+        screenshot.takeScreenshot('BeforeTagEdited')
         cy.get(backButtonTag).click();
         cy.wait(delay);
-        this.takeScreenshot('ListTagedited')
+        screenshot.takeScreenshot('ListTagedited')
         cy.get(tableTags).contains(listNameTag, tagName_).click();
         cy.wait(delay);
-        this.takeScreenshot('TagEdited')
+        screenshot.takeScreenshot('TagEdited')
         cy.get(backButtonTag).click();
         cy.wait(delay);
-        this.takeScreenshot('AfterTagEdited')
+        screenshot.takeScreenshot('AfterTagEdited')
     }
 
     /**
      * Navega fuera de la página de tags y confirma el abandono.
      */
     seeTagsLeavePage() {
-        this.takeScreenshot('BeforeLeavePageTag')
+        screenshot.takeScreenshot('BeforeLeavePageTag')
         cy.get(backButtonTag).click();
-        this.takeScreenshot('ModalBeforeLeavePageTag')
+        screenshot.takeScreenshot('ModalBeforeLeavePageTag')
         cy.wait(delay);
         cy.get(leavePageButtonTag).click();
-        this.takeScreenshot('AfterLeavePageTag')
+        screenshot.takeScreenshot('AfterLeavePageTag')
         cy.wait(delay);
     }
 
@@ -224,11 +202,11 @@ class TagPage {
      * @param {string} tagName_ - Nombre del tag a buscar (por defecto usa `this.tagName`).
      */
     seeTagsLeavePageCancel(tagName_ = this.tagName) {
-        this.takeScreenshot('BeforeSeeTagsLeavePageCancel')
+        screenshot.takeScreenshot('BeforeSeeTagsLeavePageCancel')
         cy.get(tableTags).contains(listNameTag, tagName_).click();
-        this.takeScreenshot('AfterSeeTagsLeavePageCancel')
+        screenshot.takeScreenshot('AfterSeeTagsLeavePageCancel')
         cy.wait(delay);
     }
 }
 
-export const tagPage = new TagPage()
+export const tagPage = new TagPage();

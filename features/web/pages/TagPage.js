@@ -1,4 +1,6 @@
 const { faker } = require('@faker-js/faker');
+const screenshot = require('../pages/Screenshots');
+
 const delay = 2000;
 const newTagButton = '.ember-view.gh-btn.gh-btn-primary';
 const nameTag = '#tag-name';
@@ -34,7 +36,9 @@ class TagPage {
      * Navega a la página de creación de un nuevo tag y hace clic en el botón para crear uno.
      */
     async NavigateToCreateNewTag(context) {
+        await screenshot.takeScreenshot(context, 'BeforeNavigateToNewTag')
         await context.driver.$(newTagButton).click();
+        await screenshot.takeScreenshot(context, 'AfterNavigateToNewTag')
         await context.driver.pause(delay);
     }
 
@@ -46,22 +50,34 @@ class TagPage {
      * @param {string} tagImage_ - Ruta de la imagen del tag.
      */
     async ClearAndTypeTag(context, tagName_ = this.tagName, tagColor_ = this.tagColor, tagDescription_ = this.tagDescription, tagImage_ = this.tagImage) {
+        await screenshot.takeScreenshot(context, 'tagBeforeClearAndType');
         await context.driver.$(nameTag).setValue(tagName_);
+        await screenshot.takeScreenshot(context, 'fillNameTag');
         await context.driver.$(colorHexadecimalTag).setValue(tagColor_);
+        await screenshot.takeScreenshot(context, 'fillColorTag');
         await context.driver.$(descriptionTag).setValue(tagDescription_);
+        await screenshot.takeScreenshot(context, 'fillDescriptionTag');
         await context.driver.$(imageTag).setValue(tagImage_);
+        await screenshot.takeScreenshot(context, 'AttachFileTag');
         await context.driver.pause(delay);
+        await screenshot.takeScreenshot(context, 'tagAfterClearAndType');
     }
 
     /**
      * Limpia todos los campos del formulario de tag sin escribir nuevos datos.
      */
     async ClearTag(context) {
+        await screenshot.takeScreenshot(context, 'tagBeforeClear');
         await context.driver.$(nameTag).clearValue();
+        await screenshot.takeScreenshot(context, 'clearNameTag');
         await context.driver.$(colorHexadecimalTag).clearValue();
+        await screenshot.takeScreenshot(context, 'clearColorTag');
         await context.driver.$(descriptionTag).clearValue();
+        await screenshot.takeScreenshot(context, 'clearDescriptionTag');
         await context.driver.$(imageTag).clearValue();
+        await screenshot.takeScreenshot(context, 'clearImageTag');
         await context.driver.pause(delay);
+        await screenshot.takeScreenshot(context, 'tagAfterClear');
     }
 
     /**
@@ -72,22 +88,31 @@ class TagPage {
      * @param {string} tagImage_ - Ruta de la imagen editada del tag.
      */
     async ClearAndTypeTagEdit(context, tagName_ = this.tagNameEdit, tagColor_ = this.tagColorEdit, tagDescription_ = this.tagDescriptionEdit, tagImage_ = this.tagImageEdit) {
+        await screenshot.takeScreenshot(context, 'tagAfterClear');
         await context.driver.$(nameTag).clearValue();
         await context.driver.$(nameTag).setValue(tagName_);
+        await screenshot.takeScreenshot(context, 'fillNameTag');
         await context.driver.$(colorHexadecimalTag).clearValue()
         await context.driver.$(colorHexadecimalTag).setValue(tagColor_);
+        await screenshot.takeScreenshot(context, 'fillColorTag');
         await context.driver.$(descriptionTag).clearValue()
         await context.driver.$(descriptionTag).setValue(tagDescription_);
+        await screenshot.takeScreenshot(context, 'fillDescriptionTag');
         await context.driver.$(imageFilledTag).click();
+        await screenshot.takeScreenshot(context, 'deleteImageTag');
         await context.driver.$(imageTag).setValue(tagImage_);
+        await screenshot.takeScreenshot(context, 'AttachFileTag');
         await context.driver.pause(delay);
+        await screenshot.takeScreenshot(context, 'tagAfterEdited');
     }
 
     /**
      * Guarda el tag actual haciendo click en el botón de guardado.
      */
     async saveButtonTag(context) {
+        await screenshot.takeScreenshot(context, 'tagBeforeSaveButton');
         await context.driver.$(saveButtonTag).click();
+        await screenshot.takeScreenshot(context, 'tagAfterSaveButton');
         await context.driver.pause(delay);
     }
 
@@ -134,10 +159,13 @@ class TagPage {
      * @param {string} tagName_ - Nombre del tag creado (opcional, por defecto usa el nombre actual de la propiedad).
      */
     async SeeTagCreated(context, tagName_ = this.tagName) {
+        await screenshot.takeScreenshot(context, 'BeforeTagCreated');
         await context.driver.$(backButtonTag).click();
+        await screenshot.takeScreenshot(context, 'ListTagCreated');
         await context.driver.pause(delay);
         await context.driver.$(tableTags).$(`${listNameTag}*=${tagName_}`).click();
         await context.driver.$(nameTag).click();
+        await screenshot.takeScreenshot(context, 'AfterTagCreated');
         await context.driver.pause(delay);
     }
 
@@ -145,10 +173,13 @@ class TagPage {
      * Navega fuera de la página de tags y confirma el abandono.
      */
     async seeTagsLeavePage(context) {
+        await screenshot.takeScreenshot(context, 'BeforeLeavePageTag');
         await context.driver.$(backButtonTag).click();
+        await screenshot.takeScreenshot(context, 'ModalBeforeLeavePageTag');
         await context.driver.pause(delay);
         await context.driver.$(leavePageButtonTag).click();
         await context.driver.pause(delay);
+        await screenshot.takeScreenshot(context, 'AfterLeavePageTag');
     }
 
     /**
@@ -156,12 +187,16 @@ class TagPage {
      * @param {string} tagName_ - Nombre editado del tag (opcional, por defecto usa el nombre editado de la propiedad).
      */
     async SeeTagEdited(context, tagName_ = this.tagNameEdit) {
+        await screenshot.takeScreenshot(context, 'BeforeTagEdited');
         await context.driver.$(backButtonTag).click();
         await context.driver.pause(delay);
+        await screenshot.takeScreenshot(context, 'ListTagedited');
         await context.driver.$(tableTags).$(`${listNameTag}*=${tagName_}`).click();
         await context.driver.pause(delay);
+        await screenshot.takeScreenshot(context, 'TagEdited');
         await context.driver.$(backButtonTag).click();
         await context.driver.pause(delay);
+        await screenshot.takeScreenshot(context, 'AfterTagEdited');
     }
 
     /**
@@ -170,8 +205,10 @@ class TagPage {
      * @param {string} tagName_ - Nombre del tag a buscar (por defecto usa `this.tagName`).
      */
     async seeTagsLeavePageCancel(context, tagName_ = this.tagName) {
+        await screenshot.takeScreenshot(context, 'BeforeSeeTagsLeavePageCancel');
         await context.driver.$(tableTags).$(`${listNameTag}*=${tagName_}`).click();
         await context.driver.$(nameTag).click();
+        await screenshot.takeScreenshot(context, 'AfterSeeTagsLeavePageCancel');
         await context.driver.pause(delay);
     }
 
