@@ -19,54 +19,60 @@ const options = {
     ignore: 'antialiasing'
 };
 
-async function ResembleJS(folderPath) {
-    const baseDir = path.join('./features/screenshots/base_version/', folderPath);
-    const rcDir = path.join('./features/screenshots/rc_version/', folderPath);
-    const diffDir = path.join('./features/screenshots/compare_version/', folderPath);
+async function ResembleJS() {
+    const baseDir = './features/screenshots/base_version/';
+    const rcDir = './features/screenshots/rc_version/';
+    const diffDir = './features/screenshots/compare_version/';
 
-    // Encuentra el subdirectorio dinámico
-    const subDir = fs.readdirSync(baseDir).find(file => fs.lstatSync(path.join(baseDir, file)).isDirectory());
-
-    if (!subDir) {
-        throw new Error('No subdirectory found in base directory');
+    if (!fs.existsSync(diffDir)) {
+        fs.mkdirSync(diffDir, { recursive: true });
     }
 
-    const baseImagesPath = path.join(baseDir, subDir);
-    const rcImagesPath = path.join(rcDir, subDir);
-    const diffSubDir = path.join(diffDir, subDir);
+    const baseSubDirs = fs.readdirSync(baseDir).filter(file => fs.lstatSync(path.join(baseDir, file)).isDirectory());
 
-    if (!fs.existsSync(diffSubDir)) {
-        fs.mkdirSync(diffSubDir, { recursive: true });
-    }
+    for (const subDir of baseSubDirs) {
+        const baseImagesPath = path.join(baseDir, subDir);
+        const rcImagesPath = path.join(rcDir, subDir);
+        const diffSubDir = path.join(diffDir, subDir);
 
-    const baseImages = fs.readdirSync(baseImagesPath).filter(file => path.extname(file) === '.png');
-
-    const reports = [];
-
-    for (const image of baseImages) {
-        const baseImagePath = path.join(baseImagesPath, image);
-        const rcImagePath = path.join(rcImagesPath, image);
-        const diffImagePath = path.join(diffSubDir, `diff-${image}`);
-
-        if (fs.existsSync(rcImagePath)) {
-            const data = await compareImages(
-                fs.readFileSync(baseImagePath),
-                fs.readFileSync(rcImagePath),
-                options
-            );
-
-            const baseImage64 = fs.readFileSync(baseImagePath).toString('base64');
-            const rcImage64 = fs.readFileSync(rcImagePath).toString('base64');
-
-            const diffImageBuffer = Buffer.from(data.getBuffer());
-            fs.writeFileSync(diffImagePath, diffImageBuffer);
-
-            const diffImageB64 = diffImageBuffer.toString('base64');
-            reports.push(createReportSection(baseImage64, rcImage64, diffImageB64, data.misMatchPercentage, image));
+        if (!fs.existsSync(rcImagesPath)) {
+            console.warn(`Skipping ${subDir} as it does not exist in rc_version`);
+            continue;
         }
-    }
 
-    fs.writeFileSync(path.join(diffSubDir, 'report.html'), createReport(reports));
+        if (!fs.existsSync(diffSubDir)) {
+            fs.mkdirSync(diffSubDir, { recursive: true });
+        }
+
+        const baseImages = fs.readdirSync(baseImagesPath).filter(file => path.extname(file) === '.png');
+
+        const reports = [];
+
+        for (const image of baseImages) {
+            const baseImagePath = path.join(baseImagesPath, image);
+            const rcImagePath = path.join(rcImagesPath, image);
+            const diffImagePath = path.join(diffSubDir, `diff-${image}`);
+
+            if (fs.existsSync(rcImagePath)) {
+                const data = await compareImages(
+                    fs.readFileSync(baseImagePath),
+                    fs.readFileSync(rcImagePath),
+                    options
+                );
+
+                const baseImage64 = fs.readFileSync(baseImagePath).toString('base64');
+                const rcImage64 = fs.readFileSync(rcImagePath).toString('base64');
+
+                const diffImageBuffer = Buffer.from(data.getBuffer());
+                fs.writeFileSync(diffImagePath, diffImageBuffer);
+
+                const diffImageB64 = diffImageBuffer.toString('base64');
+                reports.push(createReportSection(baseImage64, rcImage64, diffImageB64, data.misMatchPercentage, image));
+            }
+        }
+
+        fs.writeFileSync(path.join(diffSubDir, 'report.html'), createReport(reports));
+    }
 }
 
 function createReport(reports) {
@@ -90,17 +96,17 @@ function createReportSection(baseImage, rcImage, diffImageB64, diffPercent, step
     <h2>Step: ${step}</h2>
     <div class="row">
         <div class="col-md-6">
-            <h3>Reference</h3>
-            <img src="data:image/png;base64, ${baseImage}" class="img-fluid" alt="Reference Image">
+            <h3>Base version (4.5)</h3>
+            <img src="data:image/png;base64, ${baseImage}" class="img-fluid" alt="Base Image">
         </div>
         <div class="col-md-6">
-            <h3>Test</h3>
-            <img src="data:image/png;base64, ${rcImage}" class="img-fluid" alt="Test Image">
+            <h3>RC version (5.96)</h3>
+            <img src="data:image/png;base64, ${rcImage}" class="img-fluid" alt="RC Image">
         </div>
     </div>
     <div class="row my-4">
         <div class="col text-center">
-            <h3>Diff</h3>
+            <h3>Differences</h3>
             <img src="data:image/png;base64, ${diffImageB64}" class="img-fluid" alt="Diff Image">
         </div>
     </div>
@@ -111,5 +117,4 @@ function createReportSection(baseImage, rcImage, diffImageB64, diffPercent, step
     </div>`;
 }
 
-const folderPath = process.argv[2];
-ResembleJS(folderPath);
+ResembleJS();
