@@ -44,6 +44,10 @@ class WhenSteps {
 
     whenCreateMemberInvalidEmail(){
         memberPage.CreateMemberInvalidEmail();
+    }
+    
+    whenCreateMemberOverflowNote(){
+        memberPage.CreateMemberOverflowNote();
     }   
 
     whenCreateMemberExistingEmail(){

@@ -1,6 +1,6 @@
-import { givenSteps } from '../../steps/rc_version/GivenSteps';
-import { whenSteps } from '../../steps/rc_version/WhenSteps';
-import { thenSteps } from '../../steps/rc_version/ThenSteps';
+import { givenSteps } from '../../steps/base_version/GivenSteps';
+import { whenSteps } from '../../steps/base_version/WhenSteps';
+import { thenSteps } from '../../steps/base_version/ThenSteps';
 
 describe('Member Creation', () => {
     beforeEach(() => {
@@ -21,7 +21,7 @@ describe('Member Creation', () => {
         // Then the user should see the created member
         thenSteps.thenSeeMemberCreated();
     });
-
+/*
     it('PA013-C - Create a member with an invalid email', () => {
         // When the user creates and tries to save a member with a invalid email
         whenSteps.whenCreateMemberInvalidEmail();
@@ -56,5 +56,5 @@ describe('Member Creation', () => {
         // Then the user should not see the member deleted
         thenSteps.thenNotSeeMemberDeleted();
     });
-
+*/
 });

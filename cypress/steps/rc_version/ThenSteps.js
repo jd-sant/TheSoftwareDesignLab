@@ -41,13 +41,13 @@ class ThenSteps {
         memberPage.SeeMemberCreated();
     }
 
-    thenSeeMemberEdited(){
-        memberPage.SeeMemberCreated();
-    }
-
     thenSeeFormError(){
         memberPage.SeeFormError();
     }
+
+    thenSeeFormNoteError(){
+        memberPage.SeeFormNoteError();
+    }    
 
     thenSeeExistingEmailError(){
         memberPage.SeeExistingEmailError();

@@ -17,6 +17,10 @@ When('the user creates and tries to save a member with a invalid email', functio
   return memberPage.CreateMemberInvalidEmail(this);
 });
 
+When('the user creates and tries to save a member with an overflow note', function () {
+  return memberPage.CreateMemberOverflowNote(this);
+});
+
 When('the user creates and tries to save a member with an existing email', function () {
   return memberPage.CreateMemberExistingEmail(this);
 });
@@ -37,6 +41,10 @@ Then('the user should see the created member', function () {
 
 Then('the user should see an error on the input email', function () {
   return memberPage.SeeFormError(this);
+});
+
+Then('the user should see an error on the textarea note', function () {
+  return memberPage.SeeFormNoteError(this);
 });
 
 Then('the user should see an existence error on the input email', function () {
