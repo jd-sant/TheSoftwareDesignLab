@@ -16,6 +16,7 @@ module.exports = {
     videosFolder: './results_' + exec_date + '/videos',
     trashAssetsBeforeRuns: false,
     screenshotOnRunFailure: true, 
+    screenshotsFolder: './cypress/screenshots/base_version/',
     pageLoadTimeout:20000,
     defaultCommandTimeout:20000,
     viewportWidth: 1200,

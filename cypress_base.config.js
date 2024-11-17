@@ -17,6 +17,7 @@ module.exports = {
     trashAssetsBeforeRuns: false,
     screenshotOnRunFailure: true, 
     pageLoadTimeout:20000,
+    screenshotsFolder: './cypress/screenshots/base_version/',
     defaultCommandTimeout:20000,
     viewportWidth: 1200,
     viewportHeight: 900,
