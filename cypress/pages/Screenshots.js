@@ -18,7 +18,7 @@ class Screenshot {
         }
         const formattedCounter = String(this.screenshotCounter).padStart(3, '0'); // Formatea el número con ceros iniciales
         const screenshotName = `${formattedCounter}_${name}`;
-        cy.screenshot(`${this.datetime}-${pathScreenShot}/${screenshotName}`);
+        cy.screenshot(`${pathScreenShot}/${screenshotName}`);
         this.screenshotCounter++; // Incrementa el contador
         
     }

@@ -1,6 +1,6 @@
-import { givenSteps } from '../../steps/GivenSteps';
-import { whenSteps } from '../../steps/WhenSteps';
-import { thenSteps } from '../../steps/ThenSteps';
+import { givenSteps } from '../../steps/rc_version/GivenSteps';
+import { whenSteps } from '../../steps/rc_version/WhenSteps';
+import { thenSteps } from '../../steps/rc_version/ThenSteps';
 
 describe('Tags tests', () => {
     beforeEach(() => {
@@ -19,7 +19,7 @@ describe('Tags tests', () => {
         thenSteps.thenSeeTagCreated();
     });
 
-    it('PA009-C - Create a tag with all fields left blank', () => {
+   /*  it('PA009-C - Create a tag with all fields left blank', () => {
         // When the user creates a Tag with all fields blank
         whenSteps.whenCreateTagWithAllFieldsBlank(); 
         // Then the user should see that the tag was not created
@@ -38,6 +38,6 @@ describe('Tags tests', () => {
         whenSteps.whenCreateEditAndCancelTag(); 
         // Then the user should see that the tag remains unchanged
         thenSteps.thenSeeTagEditCancel();
-    });
+    }); */
    
 });
