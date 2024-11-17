@@ -1,10 +1,10 @@
-import { dashboardPage } from "../pages/DashboardPage";
-import { postPage } from "../pages/PostPage";
-import { tagPage } from "../pages/TagPage";
-import { memberPage } from "../pages/MemberPage";
-import { loginPage } from "../pages/LoginPage";
-import { pagePage } from "../pages/PagePage";
-import { settingsPage } from "../pages/SettingsPage";
+import { dashboardPage } from "../../pages/base_version/DashboardPage";
+import { postPage } from "../../pages/base_version/PostPage";
+import { tagPage } from "../../pages/base_version/TagPage";
+import { memberPage } from "../../pages/base_version/MemberPage";
+import { loginPage } from "../../pages/base_version/LoginPage";
+import { pagePage } from "../../pages/base_version/PagePage";
+import { settingsPage } from "../../pages/base_version/SettingsPage";
 
 
 class ThenSteps {

@@ -1,5 +1,5 @@
-import { dashboardPage } from "../pages/DashboardPage";
-import { loginPage } from "../pages/LoginPage";
+import { dashboardPage } from "../../pages/rc_version/DashboardPage";
+import { loginPage } from "../../pages/rc_version/LoginPage";
 
 class GivenSteps {
 

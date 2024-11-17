@@ -1,6 +1,6 @@
-import { givenSteps } from '../../steps/rc_version/GivenSteps';
-import { whenSteps } from '../../steps/rc_version/WhenSteps';
-import { thenSteps } from '../../steps/rc_version/ThenSteps';
+import { givenSteps } from '../../steps/base_version/GivenSteps';
+import { whenSteps } from '../../steps/base_version/WhenSteps';
+import { thenSteps } from '../../steps/base_version/ThenSteps';
 
 describe('Create User', () => {
     beforeEach(() => {

@@ -1,8 +1,8 @@
-import { loginPage } from "../pages/LoginPage";
-import { postPage } from "../pages/PostPage";
-import { memberPage } from "../pages/MemberPage";
-import { tagPage } from "../pages/TagPage";
-import {pagePage} from "../pages/PagePage";
+import { loginPage } from "../../pages/rc_version/LoginPage";
+import { postPage } from "../../pages/rc_version/PostPage";
+import { memberPage } from "../../pages/rc_version/MemberPage";
+import { tagPage } from "../../pages/rc_version/TagPage";
+import {pagePage} from "../../pages/rc_version/PagePage";
 
 class WhenSteps {
 
