@@ -4,9 +4,6 @@ import { thenSteps } from '../../steps/rc_version/ThenSteps';
 
 describe('Post Creation', () => {
     beforeEach(() => {
-        Cypress.Screenshot.defaults({
-            disableTimersAndAnimations: false,
-          })
         // Given the user has navigated to the Ghost site
         givenSteps.givenNavigateToTheSite();
         // And the user has logged in Ghost

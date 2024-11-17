@@ -9,7 +9,12 @@ class Screenshot {
       * Toma un screenshot con un nombre único y ordenado.
       * @param {string} name - Nombre del screenshot.
       */
-    takeScreenshot(name) {
+    takeScreenshot(name, disabledAnimations = false) {
+        if (disabledAnimations){
+            Cypress.Screenshot.defaults({
+                disableTimersAndAnimations: false,
+            });
+        }
         const pathScreenShot = Cypress.currentTest.title
         if (pathScreenShot != this.currentTest){
             this.currentTest = Cypress.currentTest.title
