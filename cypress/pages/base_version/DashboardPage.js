@@ -2,7 +2,7 @@ const delay = Cypress.env('delay') || 300;
 const idNavigateNewPost = '.ember-view.gh-secondary-action.gh-nav-new-post';
 const idNavigateMember = 'a[data-test-nav="members"]';
 const dashboardHeading = '.gh-onboarding-header h2';
-const idNavigateTags = 'a[data-test-nav="tags"]';
+const idNavigateTags = 'ul.gh-nav-list.gh-nav-manage > li > a[href="#/tags/"]';
 const idNavigateNewPage = '#ember28';
 const idNavigateCreatePage = 'a[data-test-new-page-button]';
 

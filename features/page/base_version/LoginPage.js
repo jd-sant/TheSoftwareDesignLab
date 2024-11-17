@@ -1,8 +1,10 @@
+const screenshot = require('../pages/Screenshots');
+
 const assert = require('assert');
 const delay = 2000;
-const loginIdInput = 'input[id="identification"]';
-const loginPassInput = 'input[id="password"]';
-const loginButton = 'button[data-test-button="sign-in"]';
+const loginIdInput = 'input[name="identification"]';
+const loginPassInput = 'input[name="password"]';
+const loginButton = 'button[class="login gh-btn gh-btn-login gh-btn-block gh-btn-icon js-login-button ember-view"]';
 const siteTittle = 'input[id="blog-title"]';
 const userName = 'input[id="name"]';
 const userEmail = 'input[id="email"]';
@@ -15,13 +17,17 @@ class LoginPage {
     async NavigateToTheSite(context, page) {
         await context.driver.url(page);
         await context.driver.pause(delay);
+        await screenshot.takeScreenshot(context, 'NavigateToTheSite')
     }
 
     async UserIsLogin(context,email,pass) {
         await context.driver.$(loginIdInput).setValue(email);
+        await screenshot.takeScreenshot(context, 'UserLoginTypeEmail')
         await context.driver.$(loginPassInput).setValue(pass);
+        await screenshot.takeScreenshot(context, 'UserLoginTypePass')
         await context.driver.$(loginButton).click();
         await context.driver.pause(delay);
+        await screenshot.takeScreenshot(context, 'UserLoggedIn')
     }
   
     async BadLogin(context,email,pass) {

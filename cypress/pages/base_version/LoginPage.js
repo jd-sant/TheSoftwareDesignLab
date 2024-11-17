@@ -1,3 +1,5 @@
+import { screenshot } from '../Screenshots';
+
 const url = Cypress.config('baseUrl') || 'http://localhost:3001';
 const siteName = Cypress.env('siteName') || 'Kraken Testing';
 const adminName = Cypress.env('adminName') || 'The Kraken';
@@ -14,63 +16,41 @@ const skipButton = '.gh-flow-skip';
 const loginIdInput = 'input[name="identification"]';
 const loginPassInput_ = 'input[name="password"]';
 const loginButton = 'button[class="login gh-btn gh-btn-login gh-btn-block gh-btn-icon js-login-button ember-view"]';
+
 class LoginPage {
-
-    // Contador para los screenshots
-    screenshotCounter = 0;
-    currentTest = Cypress.currentTest?.title || 'unnamedTest';
-
-    /**
-      * Toma un screenshot con un nombre único y ordenado.
-      * @param {string} name - Nombre del screenshot.
-      */
-    takeScreenshot(name) {
-        const pathScreenShot = Cypress.currentTest.title
-        if (pathScreenShot != this.currentTest){
-            this.currentTest = Cypress.currentTest.title
-            this.screenshotCounter = 0
-            this.datetime = new Date().toISOString().replace(/:/g,".");
-        }
-        const formattedCounter = String(this.screenshotCounter).padStart(3, '0'); // Formatea el número con ceros iniciales
-        const screenshotName = `${formattedCounter}_${name}`;
-        // cy.screenshot(`${this.datetime}-${pathScreenShot}/${screenshotName}`);
-        cy.screenshot(`${pathScreenShot}/${screenshotName}`);
-        this.screenshotCounter++; // Incrementa el contador
-        
-    }
 
     NavigateToTheSite() {
         cy.visit(url + '/ghost/#/signin');
         cy.wait(delay);
-        this.takeScreenshot('NavigateToTheSite');
+        screenshot.takeScreenshot('NavigateToTheSite');
     }
 
     UserIsLogin(email = adminEmail, passwd = adminPass){
         cy.get(loginIdInput).clear();
         cy.get(loginIdInput).type(email);
-        this.takeScreenshot('UserLoginTypeEmail');
+        screenshot.takeScreenshot('UserLoginTypeEmail');
         cy.get(loginPassInput_).clear();
         cy.get(loginPassInput_).type(passwd);
-        this.takeScreenshot('UserLoginTypePass');
+        screenshot.takeScreenshot('UserLoginTypePass');
         cy.get(loginButton).click();
         cy.wait(delay);
-        this.takeScreenshot('UserLoggedIn');
+        screenshot.takeScreenshot('UserLoggedIn');
     }
 
     CreateUser(){
         cy.get(createAccountButton).click();
         cy.get(siteTittle).type(siteName);
-        this.takeScreenshot('CreateUserTypeSiteName');
+        screenshot.takeScreenshot('CreateUserTypeSiteName');
         cy.get(userName).type(adminName);
-        this.takeScreenshot('CreateUserTypeAdminName');
+        screenshot.takeScreenshot('CreateUserTypeAdminName');
         cy.get(userEmail).type(adminEmail);
-        this.takeScreenshot('CreateUserTypeAdminEmail');
+        screenshot.takeScreenshot('CreateUserTypeAdminEmail');
         cy.get(loginPassInput).type(adminPass);
-        this.takeScreenshot('CreateUserTypeAdminPass');
+        screenshot.takeScreenshot('CreateUserTypeAdminPass');
         cy.get(createUserButton).click();
         cy.get(skipButton).click();
         cy.wait(delay);
-        this.takeScreenshot('UserCreated');
+        screenshot.takeScreenshot('UserCreated');
     }
 
     BadLogin(){

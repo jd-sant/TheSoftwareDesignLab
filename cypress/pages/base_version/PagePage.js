@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { screenshot } from './Screenshots';
+import { screenshot } from '../Screenshots';
 const delay = Cypress.env('delay') || 300;
 
 const pageTitleInput = 'textarea[data-test-editor-title-input]';
