@@ -22,24 +22,4 @@ describe('Post Creation', () => {
         thenSteps.thenSeePostPublished();
     });
 
-    // it('PA005-C - Create a post with special characters', () => {
-    //     // When the user creates and publishes the post with special characters
-    //     whenSteps.whenCreateAndPublishPostSpecial(); 
-    //     // Then the user should be the post published
-    //     thenSteps.thenSeeSpecialPostPublished();
-    // });
-    
-    // it('PA006-C - Create a post with Unplash images', () => {
-    //     // When the user creates and publishes the post with images from Unplash
-    //     whenSteps.whenCreateAndPublishPostWithImages(); 
-    //     // Then the user should see the post published
-    //     thenSteps.thenSeePostPublished();
-    // });
-
-    // it('PA007-C - Create a post with multiple languages', () => {
-    //     // When the user creates and publishes the post with multiple languages
-    //     whenSteps.whenCreateAndPublishPostWithMultipleLanguages(); 
-    //     // Then the user should be the post published
-    //     thenSteps.thenSeeMultilanguagePostPublished();
-    // });
 });

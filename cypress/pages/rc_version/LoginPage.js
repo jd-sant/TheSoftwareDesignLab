@@ -46,7 +46,7 @@ class LoginPage {
         cy.get(loginPassInput).type(adminPass);
         screenshot.takeScreenshot('CreateUserTypeAdminPass');
         cy.get(createUserButton).click();
-        cy.wait(delay);
+        cy.wait(delay*2);
         screenshot.takeScreenshot('UserCreated');
     }
 

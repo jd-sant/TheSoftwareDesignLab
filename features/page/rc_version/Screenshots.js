@@ -27,7 +27,8 @@ class Screenshot {
         const screenshotPath = path.join(
             'features/',
             'screenshots',
-            `${this.datetime}-${scenarioName}`,
+            'rc_version',
+            `${scenarioName}`,
             screenshotName
         );
 

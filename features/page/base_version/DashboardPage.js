@@ -1,17 +1,18 @@
 const assert = require('assert');
 const delay = 2000;
 const idNavigateNewPost = '.ember-view.gh-secondary-action.gh-nav-new-post';
-const idNavigateTags = 'a[data-test-nav="tags"]';
-const dashboardHeading = '.gh-onboarding-header h2';
 const idNavigateMember = 'a[data-test-nav="members"]';
-const idNavigateNewPage = 'a[data-test-nav="pages"]';
+const dashboardHeading = '.gh-onboarding-header h2';
+const idNavigateTags = 'a[data-test-nav="tags"]';
+const idNavigateNewPage = '#ember28';
 const idNavigateCreatePage = 'a[data-test-new-page-button]';
-
+const screenshot = require('./Screenshots');
 class DashboardPage {
 
     async NavigateToPostPage(context) {
         await context.driver.$(idNavigateNewPost).click();
         await context.driver.pause(delay);
+        await screenshot.takeScreenshot(context,'NavigateToPostPage');
     };
 
     async NavigateToTagPage(context) {

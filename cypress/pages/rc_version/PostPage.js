@@ -21,31 +21,9 @@ const imageUnplashClass = '.gh-unsplash-photo-container > .gh-unsplash-photo-ove
 const imageUnplashContentClass = '[data-kg-unsplash-insert-button="true"]';
 const postAddCard = 'button[aria-label="Add a card"]';
 const postUnplashCard = 'button[data-kg-card-menu-item="Unsplash"]';
+import { screenshot } from '../Screenshots';
 
 class PostPage {
-
-    // Contador para los screenshots
-    screenshotCounter = 0;
-    currentTest = Cypress.currentTest?.title || 'unnamedTest';
-
-    /**
-      * Toma un screenshot con un nombre único y ordenado.
-      * @param {string} name - Nombre del screenshot.
-      */
-    takeScreenshot(name) {
-        const pathScreenShot = Cypress.currentTest.title
-        if (pathScreenShot != this.currentTest){
-            this.currentTest = Cypress.currentTest.title
-            this.screenshotCounter = 0
-            this.datetime = new Date().toISOString().replace(/:/g,".");
-        }
-        const formattedCounter = String(this.screenshotCounter).padStart(3, '0'); // Formatea el número con ceros iniciales
-        const screenshotName = `${formattedCounter}_${name}`;
-        // cy.screenshot(`${this.datetime}-${pathScreenShot}/${screenshotName}`);
-        cy.screenshot(`${pathScreenShot}/${screenshotName}`);
-        this.screenshotCounter++; // Incrementa el contador
-        
-    }
 
     postTitle = faker.book.title();
     postContent = faker.lorem.paragraphs(4,'\n');
@@ -59,52 +37,52 @@ class PostPage {
         cy.get(class_).then(($el) => {
             const randomIndex = Math.floor(Math.random() * $el.length);
             const randomImage = $el[randomIndex];
-            this.takeScreenshot('SelectUnplashImage');
+            screenshot.takeScreenshot('SelectUnplashImage', true);
             cy.wrap(randomImage).click({force: true});
-            this.takeScreenshot('SelectUnplashImageClick');
+            screenshot.takeScreenshot('SelectUnplashImageClick', true);
             cy.wait(delay);
         });
     }
 
     PublishPost(){
         cy.get(publishPostButton).click()
-        this.takeScreenshot('PublishPostClick-1');
+        screenshot.takeScreenshot('PublishPostClick-1', true);
         cy.wait(2000)
         cy.get(confirmPublishButton).click();
-        this.takeScreenshot('PublishPostClick-2');
+        screenshot.takeScreenshot('PublishPostClick-2', true);
         cy.get(finalPublishButton).click();
-        this.takeScreenshot('PublishPostClick-3');
+        // screenshot.takeScreenshot('PublishPostClick-3', true);
         cy.wait(delay);
         cy.get(modalClass).should('be.visible');
-        this.takeScreenshot('PublishPostClick-4');
+        // screenshot.takeScreenshot('PublishPostClick-4', true);
         cy.get(closeModalButton).click();
-        this.takeScreenshot('CloseModal');
+        screenshot.takeScreenshot('CloseModal');
         cy.wait(delay);
     }
 
     ClearAndTypePost(postTitle_ = this.postTitle, postContent_ = this.postContent) {
         cy.get(postTitleInput).clear();
         cy.get(postTitleInput).type(postTitle_);
-        this.takeScreenshot('FillPostTittle')
+        screenshot.takeScreenshot('FillPostTittle')
         cy.get(postContentInput).clear()
         cy.get(postContentInput).type(postContent_);
-        this.takeScreenshot('FillPostContent')
+        screenshot.takeScreenshot('FillPostContent')
         cy.wait(delay);
     }
 
     ClearAndTypePostWithImages(postTitle_ = this.postTitle, postContent_ = this.postContent) {
         cy.get(postTitleInput).clear();
         cy.get(postTitleInput).type(postTitle_);
-        this.takeScreenshot('FillPostTittleImage')
+        screenshot.takeScreenshot('FillPostTittleImage')
         cy.get(postContentInput).clear()
         cy.get(postAddCard).click();
-        this.takeScreenshot('AddCard')
+        screenshot.takeScreenshot('AddCard', true)
         cy.get(postUnplashCard).click();
-        this.takeScreenshot('AddUnplashCard')
+        screenshot.takeScreenshot('AddUnplashCard', true)
         this.AddUnplashImage(imageUnplashContentClass);
         cy.get(postContentImageInput).clear();
         cy.get(postContentImageInput).type(postContent_);
-        this.takeScreenshot('FillPostContentImage')
+        screenshot.takeScreenshot('FillPostContentImage')
         cy.wait(delay);
     }
 
@@ -119,12 +97,12 @@ class PostPage {
 
     SeePostPublished(postTitle_ = this.postTitle) {
         cy.get(dropdownPostFilter).click();
-        this.takeScreenshot('DropdownPostFilter');
+        screenshot.takeScreenshot('DropdownPostFilter');
         cy.get(optionPublishedPost).click()
-        this.takeScreenshot('OptionPublishedPost');
+        screenshot.takeScreenshot('OptionPublishedPost');
         cy.wait(delay);
         cy.get(classPublisdPostTitle).first().should('to.contain', postTitle_);
-        this.takeScreenshot('SeePostPublished');
+        screenshot.takeScreenshot('SeePostPublished');
         cy.wait(delay);
     }
 
@@ -138,7 +116,7 @@ class PostPage {
 
     CreateAndPublishPostWithImages(postTitle_ = this.postTitle, postContent_ = this.postContent){
         cy.get(imagePostFeatureClass).click();
-        this.takeScreenshot('ClickImage');
+        screenshot.takeScreenshot('ClickImage', true);
         cy.wait(delay);
         this.AddUnplashImage();
         this.ClearAndTypePostWithImages(postTitle_, postContent_);

@@ -5,48 +5,25 @@ const editSiteNameButton = 'main > section > div:nth-child(2) > section > div:nt
 const siteNameField = 'main > section > div:nth-child(2) > section > div:nth-child(1) > div:nth-child(2) > div > div > div > div:nth-child(1) > input';
 const siteDescriptionField = 'main > section > div:nth-child(2) > section > div:nth-child(1) > div:nth-child(2) > div > div > div > div:nth-child(2) > input';
 const saveButton = 'main > section > div:nth-child(1) > header > section > button';
-
+import { screenshot } from '../Screenshots';
 class SettingsPage {
-
-     // Contador para los screenshots
-     screenshotCounter = 0;
-     currentTest = Cypress.currentTest?.title || 'unnamedTest';
- 
-     /**
-       * Toma un screenshot con un nombre único y ordenado.
-       * @param {string} name - Nombre del screenshot.
-       */
-     takeScreenshot(name) {
-         const pathScreenShot = Cypress.currentTest.title
-         if (pathScreenShot != this.currentTest){
-             this.currentTest = Cypress.currentTest.title
-             this.screenshotCounter = 0
-             this.datetime = new Date().toISOString().replace(/:/g,".");
-         }
-         const formattedCounter = String(this.screenshotCounter).padStart(3, '0'); // Formatea el número con ceros iniciales
-         const screenshotName = `${formattedCounter}_${name}`;
-         // cy.screenshot(`${this.datetime}-${pathScreenShot}/${screenshotName}`);
-         cy.screenshot(`${pathScreenShot}/${screenshotName}`);
-         this.screenshotCounter++; // Incrementa el contador
-         
-     }
 
     CanChangeSiteDescription(){
         cy.get(settingsButton).click();
-        this.takeScreenshot('SettingsButton');
+        screenshot.takeScreenshot('SettingsButton');
         cy.wait(delay);
         cy.get(generalSettingsButton).click();
         cy.get(editSiteNameButton).click();
-        this.takeScreenshot('EditSiteNameButton');
+        screenshot.takeScreenshot('EditSiteNameButton');
         cy.get(siteNameField).clear();
         cy.get(siteNameField).type('Kraken testing!!!', {force: true});
-        this.takeScreenshot('SiteNameField');
+        screenshot.takeScreenshot('SiteNameField');
         cy.get(siteDescriptionField).clear();
         cy.get(siteDescriptionField).type('Site for the Flying Dutchman Crew!!!', {force: true});
-        this.takeScreenshot('SiteDescriptionField');
+        screenshot.takeScreenshot('SiteDescriptionField');
         cy.get(saveButton).click();
         cy.wait(delay);
-        this.takeScreenshot('SaveButton');
+        screenshot.takeScreenshot('SaveButton');
     }
 }
 

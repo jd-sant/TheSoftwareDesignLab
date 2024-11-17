@@ -16,7 +16,7 @@ const imageUnplashClass = '.gh-unsplash-photo-container > .gh-unsplash-photo-ove
 const imageUnplashContentClass = '[data-kg-unsplash-insert-button="true"]';
 const postAddCard = 'button[aria-label="Add a card"]';
 const postUnplashCard = 'button[data-kg-card-menu-item="Unsplash"]';
-
+const screenshot = require('./Screenshots');
 class PostPage {
 
     postTitle = faker.book.title();
@@ -30,18 +30,23 @@ class PostPage {
     async ClearAndTypePost(context,postTitle_ = this.postTitle, postContent_ = this.postContent) {
         await context.driver.$(postTitleInput).click();
         await context.driver.$(postTitleInput).setValue(postTitle_);
+        await screenshot.takeScreenshot(context,'FillPostTittle')
         await context.driver.$(postContentInput).click();
         await context.driver.$(postContentInput).setValue(postContent_);
+        await screenshot.takeScreenshot(context,'FillPostContent')
         await context.driver.pause(delay);
     }
 
     async PublishPost(context){
         await context.driver.$(publishPostButton).click();
+        await screenshot.takeScreenshot(context,'PublishPostClick-1', true);
         await context.driver.pause(delay);
         await context.driver.$(confirmPublishButton).click();
+        await screenshot.takeScreenshot(context,'PublishPostClick-2', true);
         await context.driver.$(finalPublishButton).click();
         await context.driver.pause(3000);
         await context.driver.$(closeModalButton).click();
+        await screenshot.takeScreenshot(context,'CloseModal');
         await context.driver.pause(delay);
     }
 
@@ -52,9 +57,12 @@ class PostPage {
 
     async SeePostPublished(context, postTitle_ = this.postTitle) {
         await context.driver.$(dropdownPostFilter).click();
+        await screenshot.takeScreenshot(context,'DropdownPostFilter');
         await context.driver.$(optionPublishedPost).click();
+        await screenshot.takeScreenshot(context,'OptionPublishedPost');
         await context.driver.pause(delay);
         const postTitle = await context.driver.$(classPublisdPostTitle).getText();
+        await screenshot.takeScreenshot(context,'SeePostPublished');
         return await assert.equal(postTitle,postTitle_);
     }
 
@@ -64,33 +72,35 @@ class PostPage {
     }
 
     async SeeSpecialPostPublished(context) {
-        await context.driver.$(dropdownPostFilter).click();
-        await context.driver.$(optionPublishedPost).click();
-        await context.driver.pause(delay);
-        const postTitle = await context.driver.$(classPublisdPostTitle).getText();
-        return await assert.equal(postTitle,this.postTitleSpecial);
+        await this.SeePostPublished(context,this.postTitleSpecial);
     }
 
     async ClearAndTypePostWithImages(context, postTitle_ = this.postTitle, postContent_ = this.postContent) {
         await context.driver.$(postTitleInput).click();
         await context.driver.$(postTitleInput).setValue(postTitle_);
+        await screenshot.takeScreenshot(context,'FillPostTittleImage')
         await context.driver.pause(delay);
         await context.driver.$(postContentImageInput).click();
         await context.driver.$(postAddCard).click();
+        await screenshot.takeScreenshot(context,'AddCard', true)
         await context.driver.$(postUnplashCard).click();
+        await screenshot.takeScreenshot(context,'AddUnplashCard', true)
         await this.AddUnplashImage(context,imageUnplashContentClass);
         await context.driver.$(postContentImageInput).click();
         await context.driver.$(postContentImageInput).setValue(postContent_);
+        await screenshot.takeScreenshot(context,'FillPostContentImage')
         await context.driver.pause(delay);
     }
 
     async AddUnplashImage(context, class_ = imageUnplashClass) {
         await context.driver.$(class_).click();
+        await screenshot.takeScreenshot(context,'SelectUnplashImageClick', true);
         await context.driver.pause(delay);
     }
 
     async CreateAndPublishPostWithImages(context) {
         await context.driver.$(imagePostFeatureClass).click();
+        await screenshot.takeScreenshot(context,'ClickImage', true);
         await context.driver.pause(delay);
         await this.AddUnplashImage(context);
         await this.ClearAndTypePostWithImages(context);
@@ -103,11 +113,7 @@ class PostPage {
     }
 
     async SeeMultilanguagePostPublished(context) {
-        await context.driver.$(dropdownPostFilter).click();
-        await context.driver.$(optionPublishedPost).click();
-        await context.driver.pause(delay);
-        const postTitle = await context.driver.$(classPublisdPostTitle).getText();
-        return await assert.equal(postTitle,this.postTitleMultilanguage);
+        await this.SeePostPublished(context,this.postTitleMultilanguage);
     }
 }
 
