@@ -1,3 +1,5 @@
+import { screenshot } from '../Screenshots';
+
 const url = Cypress.config('baseUrl') || 'http://localhost:3001';
 const siteName = Cypress.env('siteName') || 'Kraken Testing';
 const adminName = Cypress.env('adminName') || 'The Kraken';
@@ -14,7 +16,6 @@ const skipButton = '.gh-flow-skip';
 const loginIdInput = 'input[name="identification"]';
 const loginPassInput_ = 'input[name="password"]';
 const loginButton = 'button[class="login gh-btn gh-btn-login gh-btn-block gh-btn-icon js-login-button ember-view"]';
-import { screenshot } from '../Screenshots';
 
 class LoginPage {
 

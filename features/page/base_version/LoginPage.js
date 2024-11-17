@@ -22,13 +22,14 @@ class LoginPage {
 
     async UserIsLogin(context,email,pass) {
         await context.driver.$(loginIdInput).setValue(email);
-        await screenshot.takeScreenshot(context,'UserLoginTypeEmail');
+        await screenshot.takeScreenshot(context, 'UserLoginTypeEmail')
         await context.driver.$(loginPassInput_).setValue(pass);
-        await screenshot.takeScreenshot(context,'UserLoginTypePass');
+        await screenshot.takeScreenshot(context, 'UserLoginTypePass')
         await context.driver.$(loginButton).click();
         await context.driver.pause(delay);
-        await screenshot.takeScreenshot(context,'UserLoggedIn');
+        await screenshot.takeScreenshot(context, 'UserLoggedIn')
     }
+
 
     async CreateUser(context,SITE_TITLE,FULL_NAME,EMAIL,PASSWORD) {
         await context.driver.$(createAccountButton).click();
