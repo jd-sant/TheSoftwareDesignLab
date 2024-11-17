@@ -1,6 +1,6 @@
-import { givenSteps } from '../../steps/GivenSteps';
-import { whenSteps } from '../../steps/WhenSteps';
-import { thenSteps } from '../../steps/ThenSteps';
+import { givenSteps } from '../../steps/rc_version/GivenSteps';
+import { whenSteps } from '../../steps/rc_version/WhenSteps';
+import { thenSteps } from '../../steps/rc_version/ThenSteps';
 
 describe('Page Creation', () => {
     beforeEach(() => {
