@@ -136,4 +136,7 @@ reports
 # Cypress 
 results_*
 
-screenshots
+screenshots/*.png
+!screenshots/base_version/*
+!screenshots/compare_version/*
+!screenshots/rc_version/*
