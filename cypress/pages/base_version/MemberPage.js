@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 const delay = Cypress.env('delay') || 300;
 import { screenshot } from '../Screenshots';
 
-const memberSection = 'h2[class="gh-canvas-title"] > a[href="#/members/"]';
+const memberSection = 'h2[class="gh-canvas-title"] > :nth-child(1)';
 const newMemberButton = 'a[class="ember-view gh-btn gh-btn-primary"]';
 const saveMemberButton = 'button[class="gh-btn gh-btn-primary gh-btn-icon ember-view"]';
 const memberNameInput = 'input[id="member-name"]';
