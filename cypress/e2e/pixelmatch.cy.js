@@ -57,7 +57,7 @@ function compareImages(baseImagePath, rcImagePath, diffImagePath, diffDir, test)
 
             const numDiffPixels = pixelmatch(img1.data, img2.data, diff.data, width, height, {
                 threshold: 0.1,
-                includeAA: true,
+                includeAA: false,
                 alpha: 0.1,
                 aaColor: [255, 0, 0],
                 diffColor: [255, 0, 255]
@@ -82,7 +82,7 @@ function comparePixelMatch(imagesToScan) {
     const test = Cypress.currentTest.title;
     const baseDir = './cypress/screenshots/base_version/' + test + '/';
     const rcDir = './cypress/screenshots/rc_version/' + test + '/';
-    const diffDir = './cypress/screenshots/diff/' + test + '/';
+    const diffDir = './cypress/screenshots/compare_version/' + test + '/';
     cy.writeFile(`./${diffDir}report-${test}.html`, createReportInitial());
     imagesToScan.forEach(image => {
         const baseImagePath = `${baseDir}${image}`;
