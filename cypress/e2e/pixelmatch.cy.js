@@ -97,15 +97,19 @@ function comparePixelMatch(imagesToScan) {
 }
 
 describe('Compare images from two directories', () => {
-    it.skip('0_User_Creation.cy.js/PA001-C - Create admin user', () => {
+    it('0_User_Creation.cy.js/PA001-C - Create admin user', () => {
         const images = ["000_NavigateToTheSite.png","001_CreateUserTypeSiteName.png","002_CreateUserTypeAdminName.png","003_CreateUserTypeAdminEmail.png","004_CreateUserTypeAdminPass.png","005_UserCreated.png","006_SettingsButton.png","007_EditSiteNameButton.png","008_SiteNameField.png","009_SiteDescriptionField.png","010_SaveButton.png"]; // Lista de nombres de imágenes
         comparePixelMatch(images);
 
     });
-    it.skip('1_Post_Creation.cy.js/PA004-C - Create a normal post', () => {
+    it('1_Post_Creation.cy.js/PA004-C - Create a normal post', () => {
         const images = []; // Lista de nombres de imágenes
         comparePixelMatch(images);
     });
+    it('2_Tag_Creation.cy.js/PA008-C - Create a tag', () => {
+        const images = ["000_NavigateToTheSite.png", "001_UserLoginTypeEmail.png", "002_UserLoginTypePass.png", "003_UserLoggedIn.png", "004_BeforeNavigateToNewTag.png", "005_AfterNavigateToNewTag.png", "006_tagBeforeClearAndType.png", "007_fillNameTag.png", "008_fillColorTag.png", "009_fillDescriptionTag.png", "010_AttachFileTag.png", "011_tagAfterClearAndType.png", "012_tagBeforeSaveButton.png", "013_tagAfterSaveButton.png", "014_BeforeTagCreated.png", "015_ListTagCreated.png", "016_AfterTagCreated.png"];
+        comparePixelMatch(images);
+    })
 
     it('4_Page_Creation.cy.js/PA017-C - Create a page', () => {
         const images = ["000_NavigateToTheSite.png", "001_UserLoginTypeEmail.png", "002_UserLoginTypePass.png", "003_UserLoggedIn.png", "004_BeforeClearPageTitle.png", "005_BeforeTypePageTitle.png", "006_AfterTypePageTitle.png", "007_BeforeTypePageContent.png", "008_AfterTypePageContent.png", "009_BeforeClickingPublishPageButton.png", "010_BeforeClickingConfirmPublishPageButton.png", "011_AfterFinalPublishPage.png", "012_BeforeCloseModalButton.png", "013_AfterCloseModalButton.png", "014_BeforeClickDropdownFilter.png", "015_AfterClickDropdownFilter.png", "016_AfterPublishedPageFilter.png", "017_ValidationPublishedPageFilter.png"]; // Lista de nombres de imágenes
