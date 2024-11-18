@@ -36,9 +36,8 @@ class PagePage {
         cy.get(confirmPublishButton).click();
         cy.get(finalPublishButton).click();
         cy.wait(delay);
-        screenshot.takeScreenshot('AfterFinalPublishPage')
         cy.get(modalClass).should('be.visible');
-        screenshot.takeScreenshot('BeforeCloseModalButton')
+        screenshot.takeScreenshot('AfterFinalPublishPage')
         cy.get(closeModalButton).click();
         screenshot.takeScreenshot('AfterCloseModalButton')
         cy.wait(delay);
@@ -52,6 +51,7 @@ class PagePage {
         cy.get(confirmPublishButton).click();
         screenshot.takeScreenshot('BeforeFinalPublishPage')
         cy.get(finalPublishButton).click();
+        cy.wait(2000);
         screenshot.takeScreenshot('AfterFinalPublishPage')
     }
 

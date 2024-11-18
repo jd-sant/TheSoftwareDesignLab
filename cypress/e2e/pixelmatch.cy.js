@@ -112,7 +112,7 @@ describe('Compare images from two directories', () => {
     })
 
     it('4_Page_Creation.cy.js/PA017-C - Create a page', () => {
-        const images = ["000_NavigateToTheSite.png", "001_UserLoginTypeEmail.png", "002_UserLoginTypePass.png", "003_UserLoggedIn.png", "004_BeforeClearPageTitle.png", "005_BeforeTypePageTitle.png", "006_AfterTypePageTitle.png", "007_BeforeTypePageContent.png", "008_AfterTypePageContent.png", "009_BeforeClickingPublishPageButton.png", "010_BeforeClickingConfirmPublishPageButton.png", "011_AfterFinalPublishPage.png", "012_BeforeCloseModalButton.png", "013_AfterCloseModalButton.png", "014_BeforeClickDropdownFilter.png", "015_AfterClickDropdownFilter.png", "016_AfterPublishedPageFilter.png", "017_ValidationPublishedPageFilter.png"]; // Lista de nombres de imágenes
+        const images = ["000_NavigateToTheSite.png", "001_UserLoginTypeEmail.png", "002_UserLoginTypePass.png", "003_UserLoggedIn.png", "004_BeforeClearPageTitle.png", "005_BeforeTypePageTitle.png", "006_AfterTypePageTitle.png", "007_BeforeTypePageContent.png", "008_AfterTypePageContent.png", "009_BeforeClickingPublishPageButton.png", "010_BeforeClickingConfirmPublishPageButton.png", "011_AfterFinalPublishPage.png", "012_AfterCloseModalButton.png", "013_BeforeClickDropdownFilter.png", "014_AfterClickDropdownFilter.png", "015_AfterPublishedPageFilter.png", "016_ValidationPublishedPageFilter.png"]; // Lista de nombres de imágenes
         comparePixelMatch(images);
     });
 });
