@@ -22,22 +22,26 @@ Diego Santamaria | jd.santamariab1@uniandes.edu.co
   1. Diríjase desde una terminal a la carpeta ghost
   2. Ejecute el comando `sudo docker compose up -d` para el caso de sistemas Linux o `docker-compose up -d` en sistemas windows para crear el contenedor
   3. Ubíquese en la raíz del proyecto
-  4. Ejecución versión RC
+  4. Ejecución versión RC uno a uno
       * Ejecute el comando `./node_modules/cypress/bin/cypress run -s cypress/e2e/rc_version/0_User_Creation.cy.js`
       * Ejecute el comando `./node_modules/cypress/bin/cypress run -s cypress/e2e/rc_version/1_Post_Creation.cy.js`
       * Ejecute el comando `./node_modules/cypress/bin/cypress run -s cypress/e2e/rc_version/2_Tag_Creation.cy.js`
       * Ejecute el comando `./node_modules/cypress/bin/cypress run -s cypress/e2e/rc_version/3_Member_Creation.cy.js`
       * Ejecute el comando `./node_modules/cypress/bin/cypress run -s cypress/e2e/rc_version/4_Page_Creation.cy.js`
-  5. Ejecución version base
+  5. Ejecución versión RC completa
+      * Ejecute el comando `./node_modules/cypress/bin/cypress run -s cypress/e2e/rc_version/`
+  6. Ejecución version base uno a uno
       * Ejecute el comando `./node_modules/cypress/bin/cypress run -C config_base.config.js -s cypress/e2e/rc_version/0_User_Creation.cy.js`
       * Ejecute el comando `./node_modules/cypress/bin/cypress run -C config_base.config.js -s cypress/e2e/rc_version/1_Post_Creation.cy.js`
       * Ejecute el comando `./node_modules/cypress/bin/cypress run -C config_base.config.js -s cypress/e2e/rc_version/2_Tag_Creation.cy.js`
       * Ejecute el comando `./node_modules/cypress/bin/cypress run -C config_base.config.js -s cypress/e2e/rc_version/3_Member_Creation.cy.js`
       * Ejecute el comando `./node_modules/cypress/bin/cypress run -C config_base.config.js -s cypress/e2e/rc_version/4_Page_Creation.cy.js`
-  7. Al finalizar cada ejecución, deberá observar un resultado como el siguiente: ![image](https://github.com/user-attachments/assets/fe9646c4-e495-47c3-a910-5ed70b93968e)
-  8. Se generará una carpeta de nombre results_* en donde encontrara el video de la ejecución de las pruebas.
-  9. Diríjase desde una terminal a la carpeta ghost
-  10. Ejecutar el comando `sudo docker compose down` para el caso de sistemas Linux o `docker-compose down` en sistemas windows para eliminar el contenedor
+  7. Ejecución version base completa
+      * Ejecute el comando `./node_modules/cypress/bin/cypress run -C config_base.config.js -s cypress/e2e/rc_version/`
+  8. Al finalizar cada ejecución, deberá observar un resultado como el siguiente: ![image](https://github.com/user-attachments/assets/fe9646c4-e495-47c3-a910-5ed70b93968e)
+  9. Se generará una carpeta de nombre results_* en donde encontrara el video de la ejecución de las pruebas.
+  10. Diríjase desde una terminal a la carpeta ghost
+  11. Ejecutar el comando `sudo docker compose down` para el caso de sistemas Linux o `docker-compose down` en sistemas windows para eliminar el contenedor
 
 
 ### Ejecución pruebas Kraken
