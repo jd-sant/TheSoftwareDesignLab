@@ -62,3 +62,13 @@ Diego Santamaria | jd.santamariab1@uniandes.edu.co
      * Repita los pasos anteriores hasta terminar con todos los feature donde el ultimo feature a ejecutar es el 4-4_Page-Creation.feature
   11. Diríjase desde una terminal a la carpeta ghost
   12. Ejecutar el comando `sudo docker compose down` para el caso de sistemas Linux o `docker-compose down` en sistemas windows para eliminar el contenedor
+
+### Ejecución PixelMatch
+1. Ubiquese en la raiz del proyecto
+2. Ejecute el comando `./node_modules/cypress/bin/cypress run -s cypress/e2e/pixelmatch.cy.js`
+3. Debera observar en la carpeta cypress/screenshots una carpeta llamada compare_version en donde encontrara las imágenes de diferencias para cada uno de los escenarios junto con su respectivo reporte
+
+### Ejecución ResembleJS
+1. Ubiquese en la raiz del proyecto
+2. Ejecute el comando `node feature/ResembleJS.js`
+3. Debera observar en la carpeta feature/screenshots una carpeta llamada compare_version en donde encontrara las imágenes de diferencias para cada uno de los escenarios junto con su respectivo reporte
