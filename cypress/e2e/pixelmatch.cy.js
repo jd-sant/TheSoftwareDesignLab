@@ -111,6 +111,11 @@ describe('Compare images from two directories', () => {
         comparePixelMatch(images);
     })
 
+    it('PA012-C - Create a member', () => {
+        const images = ["000_NavigateToTheSite.png", "001_UserLoginTypeEmail.png", "002_UserLoginTypePass.png", "003_UserLoggedIn.png", "004_navigatedToMemberPage.png", "005_navigatedToCreateMemberPage.png", "006_memberBeforeFill.png", "007_memberAfterFill.png", "008_memberSaveAction.png", "009_returnToMemberPage.png", "010_findMemberCreated.png"];
+        comparePixelMatch(images);
+    })
+
     it('4_Page_Creation.cy.js/PA017-C - Create a page', () => {
         const images = ["000_NavigateToTheSite.png", "001_UserLoginTypeEmail.png", "002_UserLoginTypePass.png", "003_UserLoggedIn.png", "004_BeforeClearPageTitle.png", "005_BeforeTypePageTitle.png", "006_AfterTypePageTitle.png", "007_BeforeTypePageContent.png", "008_AfterTypePageContent.png", "009_BeforeClickingPublishPageButton.png", "010_BeforeClickingConfirmPublishPageButton.png", "011_AfterFinalPublishPage.png", "012_AfterCloseModalButton.png", "013_BeforeClickDropdownFilter.png", "014_AfterClickDropdownFilter.png", "015_AfterPublishedPageFilter.png", "016_ValidationPublishedPageFilter.png"]; // Lista de nombres de imágenes
         comparePixelMatch(images);
