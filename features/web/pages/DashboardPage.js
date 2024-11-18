@@ -3,7 +3,7 @@ const delay = 2000;
 const idNavigateNewPost = '.ember-view.gh-secondary-action.gh-nav-new-post';
 const idNavigateTags = 'a[data-test-nav="tags"]';
 const dashboardHeading = '.gh-onboarding-header h2';
-const idNavigateMember = 'nav[class="gh-nav ember-view"] > :nth-child(2) > :nth-child(1) > :nth-child(2) > :nth-child(4) > :nth-child(1) ';
+const idNavigateMember = 'a[data-test-nav="members"]';
 const idNavigateNewPage = 'a[data-test-nav="pages"]';
 const idNavigateCreatePage = 'a[data-test-new-page-button]';
 const screenshot = require('./Screenshots');

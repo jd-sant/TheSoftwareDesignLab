@@ -8,14 +8,12 @@ const pageContentInput = '[data-secondary-instance="false"] > .koenig-lexical   
 const publishPageButton = '.gh-editor-header > .gh-editor-publish-buttons > .darkgrey > span';
 const confirmPublishButton = '[data-test-button="continue"]';
 const finalPublishButton = '[data-test-button="confirm-publish"]';
-const modalClass = '.modal-content';
 const closeModalButton = '[data-test-button="close-publish-flow"]';
 const dropdownPageFilter = '.gh-contentfilter-type > .ember-view > svg';
 const optionPublishedPage = '.ember-power-select-option[data-option-index="2"]';
 const classPublisdPageTitle = '.gh-content-entry-title';
 const optionPublishedFeaturePage = '.ember-power-select-option[data-option-index="4"]';
 const titlePublishErrorMessage = '.gh-alert-content';
-const titleValidationError = 'p[data-test-confirm-error]';
 const pageSideMenuButton = 'button[data-test-psm-trigger=""]';
 const pageFeatureButton = 'label[data-ember-action]';
 
@@ -52,7 +50,6 @@ class PagePage {
         await screenshot.takeScreenshot(context, 'BeforeClickingConfirmPublishPageButton')
         await context.driver.pause(delay);
         await context.driver.$(confirmPublishButton).click();
-        await screenshot.takeScreenshot(context, 'BeforeFinalPublishPage')
         await context.driver.$(finalPublishButton).click();
         await screenshot.takeScreenshot(context, 'AfterFinalPublishPage')
         await context.driver.pause(3000);
@@ -112,7 +109,7 @@ class PagePage {
         await context.driver.$(pageTitleInput).click();
         await screenshot.takeScreenshot(context, 'BeforeTypePageTitleInvalid')
         await context.driver.$(pageTitleInput).setValue(pageTitle__);
-        screenshot.takeScreenshot('AfterTypePageTitleInvalid')
+        await screenshot.takeScreenshot(context, 'AfterTypePageTitleInvalid')
     }
 
     async CreatePageInvalidTitle(context){
@@ -121,22 +118,22 @@ class PagePage {
     }
 
     async LongTitlePublishError(context){
-        screenshot.takeScreenshot('BeforeTitlePublishErrorMessage')
+        await screenshot.takeScreenshot(context, 'BeforeTitlePublishErrorMessage')
         const errorMessage = await context.driver.$(titlePublishErrorMessage).getText();
-        screenshot.takeScreenshot('AfterTitlePublishErrorMessage')
+        await screenshot.takeScreenshot(context, 'AfterTitlePublishErrorMessage')
         return await assert.equal(errorMessage.trim(), 'Validation failed: Title cannot be longer than 255 characters.')
     }
 
     async FeaturePage(context){
-        screenshot.takeScreenshot('BeforeClickSideMenuButton')
+        await screenshot.takeScreenshot(context, 'BeforeClickSideMenuButton')
         await context.driver.$(pageSideMenuButton).click();
-        screenshot.takeScreenshot('AfterClickSideMenuButton')
+        await screenshot.takeScreenshot(context, 'AfterClickSideMenuButton')
         await context.driver.pause(delay);
         await context.driver.$(pageFeatureButton).click();
-        screenshot.takeScreenshot('AfterClickFeatureButton')
+        await screenshot.takeScreenshot(context, 'AfterClickFeatureButton')
         await context.driver.pause(delay);
         await context.driver.$(pageSideMenuButton).click();
-        screenshot.takeScreenshot('AfterCloseSideMenuButton')
+        await screenshot.takeScreenshot(context, 'AfterCloseSideMenuButton')
     }
 
     async CreateAndPublishFeaturePage(context, pageTitle_ = this.pageTitle, pageContent_ = this.pageContent) {
@@ -146,14 +143,14 @@ class PagePage {
     }
 
     async SeeFeaturePagePublished(context){
-        screenshot.takeScreenshot('BeforeClickDropdownFilter')
+        await screenshot.takeScreenshot(context, 'BeforeClickDropdownFilter')
         await context.driver.$(dropdownPageFilter).click();
-        screenshot.takeScreenshot('AfterClickDropdownFilter')
+        await screenshot.takeScreenshot(context, 'AfterClickDropdownFilter')
         await context.driver.$(optionPublishedFeaturePage).click()
-        screenshot.takeScreenshot('AfterFeaturePageFilter')
+        await screenshot.takeScreenshot(context, 'AfterFeaturePageFilter')
         await context.driver.pause(delay);
         const pageTitle = await context.driver.$(classPublisdPageTitle).getText();
-        screenshot.takeScreenshot('ValidationFeaturePageFilter')
+        await screenshot.takeScreenshot(context, 'ValidationFeaturePageFilter')
         return await assert.equal(pageTitle, this.pageTitle)
     }
 }
