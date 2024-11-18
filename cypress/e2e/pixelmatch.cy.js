@@ -103,7 +103,7 @@ describe('Compare images from two directories', () => {
 
     });
     it('1_Post_Creation.cy.js/PA004-C - Create a normal post', () => {
-        const images = []; // Lista de nombres de imágenes
+        const images = ["000_NavigateToTheSite.png","001_UserLoginTypeEmail.png","002_UserLoginTypePass.png","003_UserLoggedIn.png","004_NavigateToPostPage.png","005_FillPostTittle.png","006_FillPostContent.png","007_PublishPostClick-1.png","008_PublishPostClick-2.png","009_CloseModal.png","010_DropdownPostFilter.png","011_OptionPublishedPost.png","012_SeePostPublished.png"]; // Lista de nombres de imágenes
         comparePixelMatch(images);
     });
     it('2_Tag_Creation.cy.js/PA008-C - Create a tag', () => {
@@ -111,7 +111,7 @@ describe('Compare images from two directories', () => {
         comparePixelMatch(images);
     })
 
-    it('PA012-C - Create a member', () => {
+    it('3_Member_Creation.cy/PA012-C - Create a member', () => {
         const images = ["000_NavigateToTheSite.png", "001_UserLoginTypeEmail.png", "002_UserLoginTypePass.png", "003_UserLoggedIn.png", "004_navigatedToMemberPage.png", "005_navigatedToCreateMemberPage.png", "006_memberBeforeFill.png", "007_memberAfterFill.png", "008_memberSaveAction.png", "009_returnToMemberPage.png", "010_findMemberCreated.png"];
         comparePixelMatch(images);
     })
