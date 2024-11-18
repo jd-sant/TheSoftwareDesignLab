@@ -31,13 +31,13 @@ Diego Santamaria | jd.santamariab1@uniandes.edu.co
   5. Ejecución versión RC completa
       * Ejecute el comando `./node_modules/cypress/bin/cypress run -s cypress/e2e/rc_version/`
   6. Ejecución version base uno a uno
-      * Ejecute el comando `./node_modules/cypress/bin/cypress run -C config_base.config.js -s cypress/e2e/rc_version/0_User_Creation.cy.js`
-      * Ejecute el comando `./node_modules/cypress/bin/cypress run -C config_base.config.js -s cypress/e2e/rc_version/1_Post_Creation.cy.js`
-      * Ejecute el comando `./node_modules/cypress/bin/cypress run -C config_base.config.js -s cypress/e2e/rc_version/2_Tag_Creation.cy.js`
-      * Ejecute el comando `./node_modules/cypress/bin/cypress run -C config_base.config.js -s cypress/e2e/rc_version/3_Member_Creation.cy.js`
-      * Ejecute el comando `./node_modules/cypress/bin/cypress run -C config_base.config.js -s cypress/e2e/rc_version/4_Page_Creation.cy.js`
+      * Ejecute el comando `./node_modules/cypress/bin/cypress run -C cypress_base.config.js -s cypress/e2e/base_version/0_User_Creation.cy.js`
+      * Ejecute el comando `./node_modules/cypress/bin/cypress run -C cypress_base.config.js -s cypress/e2e/base_version/1_Post_Creation.cy.js`
+      * Ejecute el comando `./node_modules/cypress/bin/cypress run -C cypress_base.config.js -s cypress/e2e/base_version/2_Tag_Creation.cy.js`
+      * Ejecute el comando `./node_modules/cypress/bin/cypress run -C cypress_base.config.js -s cypress/e2e/base_version/3_Member_Creation.cy.js`
+      * Ejecute el comando `./node_modules/cypress/bin/cypress run -C cypress_base.config.js -s cypress/e2e/base_version/4_Page_Creation.cy.js`
   7. Ejecución version base completa
-      * Ejecute el comando `./node_modules/cypress/bin/cypress run -C config_base.config.js -s cypress/e2e/rc_version/`
+      * Ejecute el comando `./node_modules/cypress/bin/cypress run -C cypress_base.config.js -s cypress/e2e/base_version/`
   8. Al finalizar cada ejecución, deberá observar un resultado como el siguiente: ![image](https://github.com/user-attachments/assets/fe9646c4-e495-47c3-a910-5ed70b93968e)
   9. Se generará una carpeta de nombre results_* en donde encontrara el video de la ejecución de las pruebas.
   10. Diríjase desde una terminal a la carpeta ghost
