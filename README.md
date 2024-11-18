@@ -47,13 +47,15 @@ Diego Santamaria | jd.santamariab1@uniandes.edu.co
   3. Ubíquese en la raíz del proyecto
   4. Diríjase a la carpeta features en donde encontrará una subcarpeta llamada all con todos los feature
   5. Ejecución versión RC
-     * Mueva los archivos de la carpeta feature/pages/rc_version a la carpeta feature/web/pages. Adicional, asegurese que las url en el archivo properties.json apuntan al puerto 3001
+     * Elimine los archivos *.js de la carpeta feature/web/pages
+     * Copie los archivos de la carpeta feature/pages/rc_version a la carpeta feature/web/pages. Adicional, asegurese que las url en el archivo properties.json apuntan al puerto 3001
      * Mueva el feature de la la carpeta all a la carpeta feature iniciando con el archivo 0-1_Create_User.feature ![image](https://github.com/user-attachments/assets/0ee7a318-7332-47f1-b9ae-50aeeaa4427f)
      * Para ejecutar la prueba ejecute el comando `./node_modules/kraken-node/bin/kraken-node run`
      * Retorne el archivo feature a la carpeta all y continue con el siguiente escenario
      * Repita los pasos anteriores hasta terminar con todos los feature donde el ultimo feature a ejecutar es el 4-4_Page-Creation.feature
   5. Ejecución version base
-     * Mueva los archivos de la carpeta feature/pages/base_version a la carpeta feature/web/pages. Adicional, asegurese que las url en el archivo properties.json apuntan al puerto 3002
+     * Elimine los archivos *.js de la carpeta feature/web/pages
+     * Copie los archivos de la carpeta feature/pages/base_version a la carpeta feature/web/pages. Adicional, asegurese que las url en el archivo properties.json apuntan al puerto 3002
      * Mueva el feature de la la carpeta all a la carpeta feature iniciando con el archivo 0-1_Create_User.feature ![image](https://github.com/user-attachments/assets/0ee7a318-7332-47f1-b9ae-50aeeaa4427f)
      * Para ejecutar la prueba ejecute el comando `./node_modules/kraken-node/bin/kraken-node run`
      * Retorne el archivo feature a la carpeta all y continue con el siguiente escenario
