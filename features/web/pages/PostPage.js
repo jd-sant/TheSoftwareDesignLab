@@ -115,6 +115,11 @@ class PostPage {
     async SeeMultilanguagePostPublished(context) {
         await this.SeePostPublished(context,this.postTitleMultilanguage);
     }
+
+    async CreateAndPublishPostWithTitleOnly(context) {
+        await this.ClearAndTypePost(context,this.postTitle, ' ');
+        await this.PublishPost(context);
+    }
 }
 
 module.exports = new PostPage();
