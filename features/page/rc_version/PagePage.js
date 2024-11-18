@@ -8,12 +8,13 @@ const pageContentInput = '[data-secondary-instance="false"] > .koenig-lexical   
 const publishPageButton = '.gh-editor-header > .gh-editor-publish-buttons > .darkgrey > span';
 const confirmPublishButton = '[data-test-button="continue"]';
 const finalPublishButton = '[data-test-button="confirm-publish"]';
+const modalClass = '.modal-content';
 const closeModalButton = '[data-test-button="close-publish-flow"]';
 const dropdownPageFilter = '.gh-contentfilter-type > .ember-view > svg';
 const optionPublishedPage = '.ember-power-select-option[data-option-index="2"]';
 const classPublisdPageTitle = '.gh-content-entry-title';
 const optionPublishedFeaturePage = '.ember-power-select-option[data-option-index="4"]';
-const titlePublishErrorMessage = 'span[data-test-task-button-state="failure"]';
+const titlePublishErrorMessage = '.gh-alert-content';
 const pageSideMenuButton = 'button[data-test-psm-trigger=""]';
 const pageFeatureButton = 'label[data-ember-action]';
 
