@@ -111,7 +111,7 @@ describe('Compare images from two directories', () => {
         comparePixelMatch(images);
     })
 
-    it('3_Member_Creation.cy/PA012-C - Create a member', () => {
+    it('3_Member_Creation.cy.js/PA012-C - Create a member', () => {
         const images = ["000_NavigateToTheSite.png", "001_UserLoginTypeEmail.png", "002_UserLoginTypePass.png", "003_UserLoggedIn.png", "004_navigatedToMemberPage.png", "005_navigatedToCreateMemberPage.png", "006_memberBeforeFill.png", "007_memberAfterFill.png", "008_memberSaveAction.png", "009_returnToMemberPage.png", "010_findMemberCreated.png"];
         comparePixelMatch(images);
     })
