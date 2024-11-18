@@ -3,17 +3,17 @@ const screenshot = require('../pages/Screenshots');
 
 const assert = require('assert');
 const delay = 2000;
-const pageTitleInput = 'textarea[class="gh-editor-title ember-text-area gh-input ember-view"]';
-const pageContentInput = 'div[class="koenig-editor__editor __mobiledoc-editor __has-no-content"]';
-const publishPageButton = 'div[class="gh-publishmenu ember-view"]';
-const confirmPublishButton = 'button[class="gh-btn gh-btn-black gh-publishmenu-button gh-btn-icon ember-view"]';
+const pageTitleInput = 'textarea[data-test-editor-title-input]';
+const pageContentInput = '[data-secondary-instance="false"] > .koenig-lexical    > [data-kg="editor"] > .kg-prose > p';
+const publishPageButton = '.gh-editor-header > .gh-editor-publish-buttons > .darkgrey > span';
+const confirmPublishButton = '[data-test-button="continue"]';
 const finalPublishButton = '[data-test-button="confirm-publish"]';
-const closeModalButton = 'div[class="ml3 flex items-center"]';
+const closeModalButton = '[data-test-button="close-publish-flow"]';
 const dropdownPageFilter = '.gh-contentfilter-type > .ember-view > svg';
 const optionPublishedPage = '.ember-power-select-option[data-option-index="2"]';
 const classPublisdPageTitle = '.gh-content-entry-title';
 const optionPublishedFeaturePage = '.ember-power-select-option[data-option-index="4"]';
-const titlePublishErrorMessage = '.gh-alert-content';
+const titlePublishErrorMessage = 'span[data-test-task-button-state="failure"]';
 const pageSideMenuButton = 'button[data-test-psm-trigger=""]';
 const pageFeatureButton = 'label[data-ember-action]';
 
