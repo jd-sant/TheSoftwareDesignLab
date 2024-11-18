@@ -25,6 +25,10 @@ When('the user creates and publishes the post with multiple languages', function
   return postPage.CreateAndPublishPostWithMultipleLanguages(this);
 });
 
+When('the user creates and publishes the post with title only', function () {
+  return postPage.CreateAndPublishPostWithTitleOnly(this);
+});
+
 // Then Steps
 Then('the user should see the post published', function () {
   return postPage.SeePostPublished(this);

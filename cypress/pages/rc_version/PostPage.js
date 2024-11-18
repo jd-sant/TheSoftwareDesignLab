@@ -126,6 +126,10 @@ class PostPage {
     CreateAndPublishPostWithMultipleLanguages(){
         this.CreateAndPublishPost(this.postTitleMultilanguage, this.postContentMultilanguage);
     }
+
+    CreateAndPublishPostWithTitleOnly(){
+        this.CreateAndPublishPost(this.postTitle, ' ');
+    }
 }
 
 export const postPage = new PostPage();

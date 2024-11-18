@@ -89,6 +89,10 @@ class WhenSteps {
     whenCreateAndPublishFeaturePage(){
         pagePage.CreateAndPublishFeaturePage();
     }
+
+    whenCreateAndPublishPostWithTitleOnly(){    
+        postPage.CreateAndPublishPostWithTitleOnly();
+    }
 }
 
 export const whenSteps = new WhenSteps();

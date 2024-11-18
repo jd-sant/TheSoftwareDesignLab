@@ -12,6 +12,13 @@ describe('Post Creation', () => {
         givenSteps.givenNavigateToPostPage(); 
     });
 
+    it('PA002-C - Create a post with title only', () => {
+        // When the user creates and publishes the post with title only
+        whenSteps.whenCreateAndPublishPostWithTitleOnly(); 
+        // Then the user should see the post published
+        thenSteps.thenSeePostPublished();
+    });
+
     it('PA004-C - Create a normal post', () => {
         // When the user creates and publishes the post
         whenSteps.whenCreateAndPublishPost(); 
