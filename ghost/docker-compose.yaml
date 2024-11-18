@@ -1,13 +1,22 @@
 version: '3.8'
 
 services:
-  ghost:
+  ghost_5-96:
     image: ghost:5.96.0
-    container_name: some-ghost
+    container_name: some-ghost-5.96
     environment:
       - NODE_ENV=development
       - url=http://localhost:3001
     ports:
       - "3001:2368"
+    restart: unless-stopped
+  ghost_4-5:
+    image: ghost:4.5
+    container_name: some-ghost-4.5
+    environment:
+      - NODE_ENV=development
+      - url=http://localhost:3002
+    ports:
+      - "3002:2368"
     restart: unless-stopped
 

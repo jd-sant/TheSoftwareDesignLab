@@ -14,10 +14,13 @@ module.exports = {
     video: true,
     videoCompression: 15,
     videosFolder: './results_' + exec_date + '/videos',
+    trashAssetsBeforeRuns: false,
     screenshotOnRunFailure: true, 
-    screenshotsFolder: './results_' + exec_date + '/screenshots',
+    screenshotsFolder: './cypress/screenshots/rc_version/',
     pageLoadTimeout:20000,
     defaultCommandTimeout:20000,
+    viewportWidth: 1200,
+    viewportHeight: 900,
     // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
       return require('./cypress/plugins/index.js')(on, config)
