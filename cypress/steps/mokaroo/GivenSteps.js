@@ -1,5 +1,5 @@
-import { dashboardPage } from "../../pages/a_priori/DashboardPage";
-import { loginPage } from "../../pages/a_priori/LoginPage";
+import { dashboardPage } from "../../pages/mokaroo/DashboardPage";
+import { loginPage } from "../../pages/mokaroo/LoginPage";
 
 class GivenSteps {
 

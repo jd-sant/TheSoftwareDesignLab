@@ -1,4 +1,4 @@
-import { memberPage } from "../../pages/a_priori/MemberPage";
+import { memberPage } from "../../pages/mokaroo/MemberPage";
 
 
 class ThenSteps {
