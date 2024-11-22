@@ -2,7 +2,7 @@ import { givenSteps } from '../../steps/a_priori/GivenSteps';
 import { whenSteps } from '../../steps/a_priori/WhenSteps';
 import { thenSteps } from '../../steps/a_priori/ThenSteps';
 
-describe('Member Creation', () => {
+describe('Member Creation (a-priori)', () => {
   let baseData;
     beforeEach(() => {
       cy.fixture('memberPositive.json').then((data) => {
@@ -20,7 +20,7 @@ describe('Member Creation', () => {
       givenSteps.givenNavigateToMemberPage();
     });
 
-    it('PA012-C - Create a member', () => {
+    it('PA012-C - Create a member (a-priori)', () => {
         // When the user creates and saves a member
         whenSteps.whenCreateAndSaveMember(baseData);
         // Then the user should see the created member
