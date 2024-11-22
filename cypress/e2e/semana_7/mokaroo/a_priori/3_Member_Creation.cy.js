@@ -1,6 +1,6 @@
-import { givenSteps } from '../../steps/a_priori/GivenSteps';
-import { whenSteps } from '../../steps/a_priori/WhenSteps';
-import { thenSteps } from '../../steps/a_priori/ThenSteps';
+import { givenSteps } from '../../../../steps/mokaroo/GivenSteps';
+import { whenSteps } from '../../../../steps/mokaroo/WhenSteps';
+import { thenSteps } from '../../../../steps/mokaroo/ThenSteps';
 
 describe('Member Creation (a-priori)', () => {
   let baseData;
