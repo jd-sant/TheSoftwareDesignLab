@@ -45,13 +45,6 @@ describe('Member Creation (pseudo-aleatorio)', () => {
     thenSteps.thenSeeFormError(baseData);
   });
 
-  it('PA0XX-C - Create a member with overflow label (a-priori)', () => {
-    // When the user creates and tries to save a member with overflow label
-    whenSteps.whenCreateMemberOverflowLabel(baseData);
-    // Then the user should see an error on the input label
-    thenSteps.thenSeeFormLabelError(baseData);
-  });
-
   it('PA0XX-C - Create a member with empty name (pseudo-aleatorio)', () => {
     // When the user creates and tries to save a member with empty name
     whenSteps.whenCreateEmptyNameMember(baseData);
