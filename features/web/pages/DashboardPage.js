@@ -1,11 +1,11 @@
 const assert = require('assert');
 const delay = 2000;
 const idNavigateNewPost = '.ember-view.gh-secondary-action.gh-nav-new-post';
-const idNavigateTags = 'a[data-test-nav="tags"]';
+const idNavigateMember = 'nav[class="gh-nav ember-view"] > :nth-child(2) > :nth-child(1) > :nth-child(2) > :nth-child(4) > :nth-child(1) ';
 const dashboardHeading = '.gh-onboarding-header h2';
-const idNavigateMember = 'a[data-test-nav="members"]';
-const idNavigateNewPage = 'a[data-test-nav="pages"]';
-const idNavigateCreatePage = 'a[data-test-new-page-button]';
+const idNavigateTags = 'ul.gh-nav-list.gh-nav-manage > li > a[href="#/tags/"]';
+const idNavigateNewPage = '#ember39';
+const idNavigateCreatePage = 'a[class="ember-view gh-btn gh-btn-primary view-actions-top-row"]';
 const screenshot = require('./Screenshots');
 class DashboardPage {
 

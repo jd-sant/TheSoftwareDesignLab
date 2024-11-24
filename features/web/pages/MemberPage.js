@@ -2,15 +2,16 @@ const { faker, fakerAR, fakerRU, fakerZH_CN, fakerJA, fakerHY } = require('@fake
 const screenshot = require('../pages/Screenshots');
 const assert = require('assert');
 const delay = 2000;
-const memberSection = 'a[data-test-link="members-back"]';
-const newMemberButton = 'a[data-test-new-member-button="true"]';
-const saveMemberButton = 'button[data-test-button="save"]';
-const memberNameInput = 'input[data-test-input="member-name"]';
-const memberEmailInput = 'input[data-test-input="member-email"]';
+const memberSection = 'h2[class="gh-canvas-title"] > a[href="#/members/"]';
+const newMemberButton = 'a[class="ember-view gh-btn gh-btn-primary"]';
+const saveMemberButton = 'button[class="gh-btn gh-btn-primary gh-btn-icon ember-view"]';
+const memberNameInput = 'input[id="member-name"]';
+const memberEmailInput = 'input[id="member-email"]';
 const memberLabelInput = 'input[class="ember-power-select-trigger-multiple-input"]';
-const memberNoteInput = 'textarea[data-test-input="member-note"]';
-const searchMemberInput = 'input[data-test-input="members-search"]';
-const classCreatedMemberName = '.ma0.pa0.gh-members-list-name';
+const memberNoteInput = 'textarea[id="member-note"]';
+const searchMemberInput = 'div[class="relative gh-members-header-search"] > :nth-child(2)';
+const classCreatedMemberName = 'h3[class="ma0 pa0 gh-members-list-name "]';
+/*
 const memberEmailInputResponse = '.gh-cp-member-email-name > :nth-child(2) > p.response';
 const memberNoteInputResponse = 'div[class="form-group mb0 gh-member-note error"] > p.response';
 const retrySaveMemberButton = 'span[data-test-task-button-state="failure"]';
@@ -18,6 +19,7 @@ const optionsMember = 'button[data-test-button="member-actions"] > :nth-child(1)
 const deleteMemberButton = 'button[data-test-button="delete-member"]';
 const deleteMemberModalButton = 'div[data-test-modal="delete-member"] > :nth-child(4) > :nth-child(2) > span[data-test-task-button-state="idle"]';
 const bodyTag = 'div[data-test-no-matching-members] > h4';
+*/
 
 
 class MemberPage {
@@ -81,7 +83,7 @@ class MemberPage {
         return await assert.equal(memberName,memberName_);
     }
 
-// ************************************************************
+/* // ************************************************************
     async CreateMemberInvalidEmail(context) {
         await screenshot.takeScreenshot(context,'navigatedToMemberPage');
         await this.NavigateToCreateMemberPage(context);
@@ -223,6 +225,7 @@ async SeeFormNoteError(context) {
         const isVisible = await (await context.driver.$(bodyTag)).isDisplayed();
         return await assert.equal(isVisible,true);
     }
+*/
 }
 
 module.exports = new MemberPage();
