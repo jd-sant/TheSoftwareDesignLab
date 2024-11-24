@@ -1,14 +1,27 @@
-import { givenSteps } from '../../../../steps/mokaroo/GivenSteps';
-import { whenSteps } from '../../../../steps/mokaroo/WhenSteps';
-import { thenSteps } from '../../../../steps/mokaroo/ThenSteps';
-
+import { givenSteps } from '../../../steps/mokaroo/GivenSteps';
+import { whenSteps } from '../../../steps/mokaroo/WhenSteps';
+import { thenSteps } from '../../../steps/mokaroo/ThenSteps';
+import { faker } from '@faker-js/faker';
+import { fakerHY as fakerArmenian } from '@faker-js/faker';
+import { fakerRU as fakerRussian } from '@faker-js/faker';
+import { fakerZH_CN as fakerChinese } from '@faker-js/faker';
+import { fakerJA as fakerJapanese } from '@faker-js/faker';
+import { fakerAR as fakerArabic } from '@faker-js/faker';
 describe('Post Creation', () => {
     let baseData;
     beforeEach(() => {
-        cy.fixture('postSchema.json').then((data) => {
-            const randomIndex = Math.floor(Math.random() * data.length);
-            baseData = data[randomIndex]; // Asignar los datos a la variable baseData
-        });
+        baseData = {
+            postTitle_256 : faker.string.alphanumeric(256),
+            postContent : faker.lorem.paragraph(),
+            postTitle : faker.string.alphanumeric({ length: { min: 5, max: 254 } }),
+            postTitle_special : faker.string.sample(),
+            postContent_special : faker.string.hexadecimal() + faker.string.symbol() + faker.string.sample(),
+            postTitle_symbols : faker.string.symbol({ min: 5, max: 10 }),
+            postTitle_emojis : faker.internet.emoji(),
+            postTitle_multilanguage : fakerArmenian.lorem.words(3) + fakerRussian.lorem.words(3) + fakerChinese.lorem.words(3) + fakerJapanese.lorem.words(3) + fakerArabic.lorem.words(3),
+            postContent_multilanguage : fakerArmenian.lorem.paragraphs(2,'\n') + fakerRussian.lorem.paragraphs(2,'\n') + fakerChinese.lorem.paragraphs(2,'\n') + fakerJapanese.lorem.paragraphs(2,'\n') + fakerArabic.lorem.paragraphs(2,'\n'),
+            postURL : faker.finance.bitcoinAddress(),
+        };
         Cypress.Screenshot.defaults({
             disableTimersAndAnimations: false,
         });

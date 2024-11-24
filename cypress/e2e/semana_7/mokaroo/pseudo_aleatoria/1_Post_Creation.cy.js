@@ -59,4 +59,32 @@ describe('Post Creation', () => {
         // Then the user should be the post published
         thenSteps.thenSeeMultilanguagePostPublished(baseData);
     });
+
+    it('PA00#-C - Create a post with emojis as title', () => {
+        // When the user creates and publishes the post with emojis as title
+        whenSteps.whenCreateAndPublishPostWithEmojis(baseData); 
+        // Then the user should be the post published
+        thenSteps.thenPublishButtonUnavailable(baseData);
+    });
+
+    it('PA00#-C - Create a post with symbols as title', () => {
+        // When the user creates and publishes the post with symbols as title
+        whenSteps.whenCreateAndPublishPostWithSymbols(baseData); 
+        // Then the user should be the post published
+        thenSteps.thenPublishButtonUnavailable(baseData);
+    });
+
+    it('PA00#-C - Create a post 256 characters as title', () => {
+        // When the user creates and publishes the post with 256 characters as title
+        whenSteps.whenCreateAndPublishLongTitlePost(baseData); 
+        // Then the user should be the post published
+        thenSteps.thenPostLongTitlePublishError();
+    });
+
+    it('PA00#-C - Create a post and change the url', () => {
+        // When the user creates and publishes the post
+        whenSteps.whenCreateAndPublishPostURL(baseData); 
+        // Then the user should be the post published
+        thenSteps.thenSeePostPublishedURL(baseData);
+    });
 });

@@ -1,10 +1,5 @@
-import { faker } from '@faker-js/faker';
-import { fakerHY as fakerArmenian } from '@faker-js/faker';
-import { fakerRU as fakerRussian } from '@faker-js/faker';
-import { fakerZH_CN as fakerChinese } from '@faker-js/faker';
-import { fakerJA as fakerJapanese } from '@faker-js/faker';
-import { fakerAR as fakerArabic } from '@faker-js/faker';
 const delay = Cypress.env('delay') || 300;
+const url = Cypress.config('baseUrl') || 'http://localhost:3001';
 const postTitleInput = 'textarea[data-test-editor-title-input]';
 const postContentInput = '[data-secondary-instance="false"] > .koenig-lexical > [data-kg="editor"] > .kg-prose > p';
 const postContentImageInput = '[data-secondary-instance="false"] > :nth-child(1) > :nth-child(1) > [contenteditable="true"][data-koenig-dnd-container="true"] > p[data-koenig-dnd-droppable="true"]';
@@ -21,6 +16,10 @@ const imageUnplashClass = '.gh-unsplash-photo-container > .gh-unsplash-photo-ove
 const imageUnplashContentClass = '[data-kg-unsplash-insert-button="true"]';
 const postAddCard = 'button[aria-label="Add a card"]';
 const postUnplashCard = 'button[data-kg-card-menu-item="Unsplash"]';
+const titlePublishErrorMessage = 'span[data-test-task-button-state="failure"]';
+const titleValidationError = 'p[data-test-confirm-error]';
+const pageSideMenuButton = 'button[data-test-psm-trigger=""]';
+const postUrlField = '.post-setting-slug';
 import { screenshot } from '../Screenshots';
 
 class PostPage {
@@ -55,17 +54,29 @@ class PostPage {
 
     ClearAndTypePost(postTitle_, postContent_) {
         cy.get(postTitleInput).clear();
-        cy.get(postTitleInput).type(postTitle_);
+        cy.get(postTitleInput).type(postTitle_,{ force: true });
         screenshot.takeScreenshot('FillPostTittle')
         cy.get(postContentInput).clear()
-        cy.get(postContentInput).type(postContent_);
+        cy.get(postContentInput).type(postContent_,{ force: true });
         screenshot.takeScreenshot('FillPostContent')
+        cy.wait(delay);
+    }
+
+    ClearAndTypeLongPost(postTitle_, postContent_) {
+        cy.get(postTitleInput).clear();
+        cy.get(postTitleInput).type(' ',{ force: true });
+        cy.get(postContentInput).clear()
+        cy.get(postContentInput).type(postContent_,{ force: true });
+        screenshot.takeScreenshot('FillPostContent')
+        cy.get(postTitleInput).clear();
+        cy.get(postTitleInput).type(postTitle_,{ force: true });
+        screenshot.takeScreenshot('FillPostTittle')
         cy.wait(delay);
     }
 
     ClearAndTypePostWithImages(postTitle_, postContent_) {
         cy.get(postTitleInput).clear();
-        cy.get(postTitleInput).type(postTitle_);
+        cy.get(postTitleInput).type(postTitle_,{ force: true });
         screenshot.takeScreenshot('FillPostTittleImage')
         cy.get(postContentInput).clear()
         cy.get(postAddCard).click();
@@ -74,7 +85,7 @@ class PostPage {
         screenshot.takeScreenshot('AddUnplashCard', true)
         this.AddUnplashImage(imageUnplashContentClass);
         cy.get(postContentImageInput).clear();
-        cy.get(postContentImageInput).type(postContent_);
+        cy.get(postContentImageInput).type(postContent_,{ force: true });
         screenshot.takeScreenshot('FillPostContentImage')
         cy.wait(delay);
     }
@@ -122,6 +133,71 @@ class PostPage {
 
     CreateAndPublishPostWithTitleOnly(baseData){
         this.CreateAndPublishPost(baseData.postTitle, ' ');
+    }
+
+    CreateAndPublishPostWithEmojis(baseData){
+        this.ClearAndTypePost(baseData.postTitle_emojis, baseData.postContent);
+    }
+
+    PublishButtonUnavailable(){
+        cy.get(publishPostButton).should('not.exist');
+        screenshot.takeScreenshot('PublishButtonUnavailable');
+    }
+
+    CreateAndPublishPostWithSymbols(baseData){
+        this.ClearAndTypePost(baseData.postTitle_symbols, baseData.postContent);
+    }
+    
+    CreateAndPublishLongTitlePost(baseData){
+        this.ClearAndTypeLongPost(baseData.postTitle_256, baseData.postContent);
+        this.ClickPublishPage();
+    }
+
+    ClickPublishPage(){
+        screenshot.takeScreenshot('BeforeClickingPublishPageButton')
+        cy.get(publishPostButton).click();
+        screenshot.takeScreenshot('BeforeClickingConfirmPublishPageButton')
+        cy.wait(2000);
+        cy.get(confirmPublishButton).click();
+        screenshot.takeScreenshot('BeforeFinalPublishPage')
+        cy.get(finalPublishButton).click();
+        cy.wait(2000);
+        screenshot.takeScreenshot('AfterFinalPublishPage')
+    }
+
+    PostLongTitlePublishError(){
+        screenshot.takeScreenshot('BeforeTitlePublishErrorMessage')
+        cy.get(titlePublishErrorMessage).should('be.visible');
+        screenshot.takeScreenshot('AfterTitlePublishErrorMessage')
+        cy.get(titleValidationError).should('to.contain', 'Validation failed: Title cannot be longer than 255 characters.')
+        cy.wait(delay);
+        screenshot.takeScreenshot('ValidationTitlePublishErrorMessage')
+    }
+
+    ChangePostURL(postURL_){
+        screenshot.takeScreenshot('BeforeClickSideMenuButton')
+        cy.get(pageSideMenuButton).click();
+        cy.wait(delay);
+        screenshot.takeScreenshot('AfterClickSideMenuButton')
+        cy.get(postUrlField).clear();
+        cy.get(postUrlField).type(postURL_, {force: true});
+        cy.wait(delay);
+        screenshot.takeScreenshot('AfterChangePostURL')
+        cy.get(pageSideMenuButton).click();
+        screenshot.takeScreenshot('AfterCloseSideMenuButton')
+    }
+
+    CreateAndPublishPostURL(baseData){
+        this.ClearAndTypePost(baseData.postTitle, baseData.postContent);
+        this.ChangePostURL(baseData.postURL);
+        this.PublishPost();
+    }
+
+    SeePostPublishedURL(baseData){
+        cy.visit(url + '/' + baseData.postURL);
+        cy.wait(delay);
+        screenshot.takeScreenshot('NavigateToThePost');
+        cy.contains(baseData.postTitle);
     }
 }
 

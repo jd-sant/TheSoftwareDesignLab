@@ -1,5 +1,6 @@
 import { memberPage } from "../../pages/mokaroo/MemberPage";
 import { postPage } from "../../pages/mokaroo/PostPage";
+import { settingsPage } from "../../pages/mokaroo/SettingsPage";
 
 class ThenSteps {
 
@@ -41,7 +42,22 @@ class ThenSteps {
         postPage.SeeMultilanguagePostPublished(baseData);
     }
 
+    thenPublishButtonUnavailable(){
+        postPage.PublishButtonUnavailable();
+    }
 
+    thenPostLongTitlePublishError(){
+        postPage.PostLongTitlePublishError();
+    }
+
+    thenSeePostPublishedURL(baseData){
+        postPage.SeePostPublishedURL(baseData);
+    }
+
+    // Admin User
+    thenCanChangeSiteDescription(baseData){
+        settingsPage.CanChangeSiteDescription(baseData);
+    }
 }
 
 export const thenSteps = new ThenSteps();
