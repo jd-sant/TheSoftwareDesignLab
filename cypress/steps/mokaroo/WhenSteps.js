@@ -1,5 +1,6 @@
 import { memberPage } from "../../pages/mokaroo/MemberPage";
 import { postPage } from "../../pages/mokaroo/PostPage";
+import { loginPage } from "../../pages/mokaroo/LoginPage";
 class WhenSteps {
 
     // Members
@@ -64,6 +65,26 @@ class WhenSteps {
         postPage.CreateAndPublishPostWithMultipleLanguages(baseData);
     }
 
+    whenCreateAndPublishPostWithEmojis(baseData) {
+        postPage.CreateAndPublishPostWithEmojis(baseData);
+    }
+
+    whenCreateAndPublishPostWithSymbols(baseData) {
+        postPage.CreateAndPublishPostWithSymbols(baseData);
+    }
+
+    whenCreateAndPublishLongTitlePost(baseData) {
+        postPage.CreateAndPublishLongTitlePost(baseData);
+    }
+
+    whenCreateAndPublishPostURL(baseData) {
+        postPage.CreateAndPublishPostURL(baseData);
+    }
+    
+    // Admin user
+    whenCreateUser(){
+        loginPage.CreateUser();
+    }
 }
 
 export const whenSteps = new WhenSteps();
