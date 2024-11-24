@@ -12,6 +12,7 @@ const searchMemberInput = 'input[data-test-input="members-search"]';
 const classCreatedMemberName = '.ma0.pa0.gh-members-list-name';
 const memberEmailInputResponse = '.gh-cp-member-email-name > :nth-child(2) > p.response';
 const memberNoteInputResponse = 'div[class="form-group mb0 gh-member-note error"] > p.response';
+const memberNameInputResponse = '.gh-cp-member-email-name > :nth-child(1) > p.response';
 const retrySaveMemberButton = 'span[data-test-task-button-state="failure"]';
 const optionsMember = 'button[data-test-button="member-actions"] > :nth-child(1)';
 const deleteMemberButton = 'button[data-test-button="delete-member"]';
@@ -19,35 +20,35 @@ const deleteMemberModalButton = 'div[data-test-modal="delete-member"] > :nth-chi
 const bodyTag = 'div[data-test-no-matching-members] > h4';
 
 class MemberPage {
-    
-    NavigateToCreateMemberPage() {                
+
+    NavigateToCreateMemberPage() {
         cy.wait(delay);
         cy.get(newMemberButton).click();
-        cy.wait(delay);        
+        cy.wait(delay);
     }
-    
-    ClearAndTypeMember(memberName_, memberEmail_, memberLabel_, memberNote_) {        
+
+    ClearAndTypeMember(memberName_, memberEmail_, memberLabel_, memberNote_) {
         cy.get(memberNameInput).clear({ force: true }).type(memberName_, { force: true });
         cy.get(memberEmailInput).clear({ force: true }).type(memberEmail_, { force: true });
         cy.get(memberLabelInput).clear({ force: true }).type(memberLabel_, { force: true });
         cy.get(memberLabelInput).type('{enter}', { force: true });
         cy.get(memberLabelInput).type('{esc}', { force: true });
         cy.get(memberNoteInput).clear({ force: true }).type(memberNote_, { force: true });
-        cy.wait(delay);        
+        cy.wait(delay);
     }
 
     SaveMember() {
         cy.get(saveMemberButton).click({ force: true });
-        cy.wait(delay);       
+        cy.wait(delay);
     }
 
     CreateAndSaveMember(baseData) {
         console.log(baseData)
-        screenshot.takeScreenshot('navigatedToMemberPage');               
+        screenshot.takeScreenshot('navigatedToMemberPage');
         this.NavigateToCreateMemberPage();
         screenshot.takeScreenshot('navigatedToCreateMemberPage');
         screenshot.takeScreenshot('memberBeforeFill');
-        this.ClearAndTypeMember(baseData.memberName, baseData.memberEmail, baseData.memberLabel, baseData.memberNote);  
+        this.ClearAndTypeMember(baseData.memberName, baseData.memberEmail, baseData.memberLabel, baseData.memberNote);
         screenshot.takeScreenshot('memberAfterFill');
         this.SaveMember();
     }
@@ -63,10 +64,33 @@ class MemberPage {
         screenshot.takeScreenshot('findMemberCreated');
         cy.get(classCreatedMemberName).first().should('to.contain', baseData.memberName);
     }
+    // ************************************************************
+    CreateEmptyNameMember(baseData) {
+        screenshot.takeScreenshot('navigatedToMemberPage');
+        this.NavigateToCreateMemberPage();
+        screenshot.takeScreenshot('navigatedToCreateMemberPage');
+        screenshot.takeScreenshot('memberBeforeFill');
+        this.ClearAndTypeMember(' ', baseData.memberEmail, baseData.memberLabel, baseData.memberNote);
+        screenshot.takeScreenshot('memberAfterFill');
+        this.SaveMember();
+        screenshot.takeScreenshot('memberSaveAction');
+    }
 
-// ************************************************************
-     CreateMemberInvalidEmail(baseData) {
-        screenshot.takeScreenshot('navigatedToMemberPage');               
+    SeeMemberCreatedWithEmptyName(baseData) {
+        screenshot.takeScreenshot('memberSaveAction');
+        cy.get(memberSection).click({ force: true });
+        cy.wait(delay);
+        screenshot.takeScreenshot('returnToMemberPage');
+        cy.get(searchMemberInput).clear({ force: true }).type(baseData.memberEmail, { force: true });
+        cy.get(searchMemberInput).type('{enter}', { force: true });
+        cy.wait(delay);
+        screenshot.takeScreenshot('findMemberCreated');
+        cy.get(classCreatedMemberName).first().should('to.contain', baseData.memberEmail);
+    }
+
+    // ************************************************************
+    CreateMemberInvalidEmail(baseData) {
+        screenshot.takeScreenshot('navigatedToMemberPage');
         this.NavigateToCreateMemberPage();
         screenshot.takeScreenshot('navigatedToCreateMemberPage');
         screenshot.takeScreenshot('memberBeforeFill');
@@ -80,15 +104,72 @@ class MemberPage {
         screenshot.takeScreenshot('InvalidEmailError');
         cy.wait(delay);
         cy.get(retrySaveMemberButton).should('be.visible');
-        cy.get(memberEmailInputResponse).should('to.contain', 'Invalid Email.');       
+        cy.get(memberEmailInputResponse).should('to.contain', 'Invalid Email.');
+    }
+
+    // ************************************************************
+    CreateMemberInvalidDotsEmail(baseData) {
+        screenshot.takeScreenshot('navigatedToMemberPage');
+        this.NavigateToCreateMemberPage();
+        screenshot.takeScreenshot('navigatedToCreateMemberPage');
+        screenshot.takeScreenshot('memberBeforeFill');
+        this.ClearAndTypeMember(baseData.memberName, baseData.memberDotsEmail, baseData.memberLabel, baseData.memberNote);
+        screenshot.takeScreenshot('memberAfterFill');
+        this.SaveMember();
+        screenshot.takeScreenshot('memberSaveAction');
+    }
+
+    SeeFormDotsEmailError() {
+        screenshot.takeScreenshot('InvalidEmailError');
+        cy.wait(delay);
+        cy.get(retrySaveMemberButton).should('be.visible');
+        cy.get(memberEmailInputResponse).should('to.contain', 'Invalid Email.');
+    }
+
+    // ************************************************************
+    CreateMemberOverflowName(baseData) {
+        screenshot.takeScreenshot('navigatedToMemberPage');
+        this.NavigateToCreateMemberPage();
+        screenshot.takeScreenshot('navigatedToCreateMemberPage');
+        screenshot.takeScreenshot('memberBeforeFill');
+        this.ClearAndTypeMember(baseData.memberNoteLong.substring(0, 193) + "a", baseData.memberEmail, baseData.memberLabel, baseData.memberNote);
+        screenshot.takeScreenshot('memberAfterFill');
+        this.SaveMember();
+        screenshot.takeScreenshot('memberSaveAction');
+    }
+
+    SeeFormNameError() {
+        screenshot.takeScreenshot('InvalidNameError');
+        cy.wait(delay);
+        cy.get(retrySaveMemberButton).should('be.visible');
+        cy.get(memberNameInputResponse).should('to.contain', 'Name cannot be longer than 191 characters.');
+    }
+
+    // ************************************************************
+    CreateMemberOverflowLabel(baseData) {
+        screenshot.takeScreenshot('navigatedToMemberPage');
+        this.NavigateToCreateMemberPage();
+        screenshot.takeScreenshot('navigatedToCreateMemberPage');
+        screenshot.takeScreenshot('memberBeforeFill');
+        this.ClearAndTypeMember(baseData.memberName, baseData.memberEmail, baseData.memberNoteLong.substring(0, 193) + "a", baseData.memberNote);
+        screenshot.takeScreenshot('memberAfterFill');
+        this.SaveMember();
+        screenshot.takeScreenshot('memberSaveAction');
+    }
+
+    SeeFormLabelError() {
+        screenshot.takeScreenshot('InvalidNameError');
+        cy.wait(delay);
+        cy.get(retrySaveMemberButton).should('be.visible');
+        cy.get(memberNameInputResponse).should('not.contain', 'Validation failed for name.');
     }
 
     // ************************************************************
     CreateMemberOverflowNote(baseData) {
-        screenshot.takeScreenshot('navigatedToMemberPage');               
+        screenshot.takeScreenshot('navigatedToMemberPage');
         this.NavigateToCreateMemberPage();
         screenshot.takeScreenshot('navigatedToCreateMemberPage');
-        screenshot.takeScreenshot('memberBeforeFill');        
+        screenshot.takeScreenshot('memberBeforeFill');
         this.ClearAndTypeMember(baseData.memberName, baseData.memberEmail, baseData.memberLabel, baseData.memberNoteLong.substring(0, 510));
         screenshot.takeScreenshot('memberAfterFill');
         this.SaveMember();
@@ -99,11 +180,10 @@ class MemberPage {
         screenshot.takeScreenshot('InvalidNoteError');
         cy.wait(delay);
         cy.get(retrySaveMemberButton).should('be.visible');
-        cy.get(memberNoteInputResponse).should('to.contain', 'Note is too long.');       
+        cy.get(memberNoteInputResponse).should('to.contain', 'Note is too long.');
     }
 
     // ************************************************************
-
     CreateMemberExistingEmail(baseData, baseData2) {
         this.NavigateToCreateMemberPage();
         this.ClearAndTypeMember(baseData.memberName, baseData.memberEmail, baseData.memberLabel, baseData.memberNote);
@@ -112,10 +192,10 @@ class MemberPage {
         cy.get(memberSection).click({ force: true });
         cy.wait(delay);
 
-        screenshot.takeScreenshot('navigatedToMemberPage');               
+        screenshot.takeScreenshot('navigatedToMemberPage');
         this.NavigateToCreateMemberPage();
         screenshot.takeScreenshot('navigatedToCreateMemberPage');
-        screenshot.takeScreenshot('memberBeforeFill');        
+        screenshot.takeScreenshot('memberBeforeFill');
         this.ClearAndTypeMember(baseData2.memberName, baseData.memberEmail, baseData2.memberLabel, baseData2.memberNote);
         screenshot.takeScreenshot('memberAfterFill');
         this.SaveMember();
@@ -124,32 +204,32 @@ class MemberPage {
 
     SeeExistingEmailError() {
         screenshot.takeScreenshot('AlreadyExistingEmailError');
-        cy.wait(delay);        
+        cy.wait(delay);
         cy.get(retrySaveMemberButton).should('be.visible');
         cy.get(memberEmailInputResponse).should('to.contain', 'Member already exists. Attempting to add member with existing email address')
     }
 
     // ************************************************************    
-    ClearAndTypeEditMember(memberName_, memberLabel_, memberNote_) {        
+    ClearAndTypeEditMember(memberName_, memberLabel_, memberNote_) {
         cy.get(memberNameInput).clear({ force: true }).type(memberName_, { force: true });
         cy.get(memberLabelInput).clear({ force: true }).type(memberLabel_, { force: true });
         cy.get(memberLabelInput).type('{enter}', { force: true });
         cy.get(memberLabelInput).type('{esc}', { force: true });
         cy.get(memberNoteInput).clear({ force: true }).type(memberNote_, { force: true });
-        cy.wait(delay);        
+        cy.wait(delay);
     }
 
-    EditAndSaveMember(baseData, baseData2) {                   
-        this.NavigateToCreateMemberPage();        
+    EditAndSaveMember(baseData, baseData2) {
+        this.NavigateToCreateMemberPage();
         this.ClearAndTypeMember(baseData.memberName, baseData.memberEmail, baseData.memberLabel, baseData.memberNote);
         this.SaveMember();
         cy.wait(delay);
         cy.get(memberSection).click({ force: true });
         cy.wait(delay);
 
-        screenshot.takeScreenshot('navigatedToMemberPage');    
+        screenshot.takeScreenshot('navigatedToMemberPage');
         cy.get(classCreatedMemberName).first().click({ force: true });
-        screenshot.takeScreenshot('memberBeforeFillEdit');        
+        screenshot.takeScreenshot('memberBeforeFillEdit');
         this.ClearAndTypeEditMember(baseData2.memberName, baseData2.memberLabel, baseData2.memberNote);
         screenshot.takeScreenshot('memberAfterFillEdit');
         this.SaveMember();
@@ -169,10 +249,9 @@ class MemberPage {
         cy.get(classCreatedMemberName).first().should('to.contain', baseData2.memberName);
     }
 
-    // ************************************************************    
-
+    // ************************************************************ 
     DeleteMember(baseData) {
-        screenshot.takeScreenshot('navigatedToMemberPage'); 
+        screenshot.takeScreenshot('navigatedToMemberPage');
         this.NavigateToCreateMemberPage();
         this.ClearAndTypeMember(baseData.memberName, baseData.memberEmail, baseData.memberLabel, baseData.memberNote);
         this.SaveMember()
@@ -181,20 +260,20 @@ class MemberPage {
         cy.wait(delay);
 
         cy.get(searchMemberInput).clear({ force: true }).type(baseData.memberName, { force: true });
-        cy.get(searchMemberInput).type('{enter}', { force: true });        
+        cy.get(searchMemberInput).type('{enter}', { force: true });
         cy.wait(delay);
         cy.get(classCreatedMemberName).first().click({ force: true });
         cy.wait(delay);
         screenshot.takeScreenshot('selectMemberToDelete');
         cy.get(optionsMember).first().click({ force: true });
-        cy.get(deleteMemberButton).first().click({ force: true });        
+        cy.get(deleteMemberButton).first().click({ force: true });
         cy.wait(delay);
         screenshot.takeScreenshot('deleteMemberActionModal');
         cy.get(deleteMemberModalButton).last().click({ force: true });
-        cy.wait(delay);                
+        cy.wait(delay);
     }
 
-    NotSeeMemberDeleted(baseData) {        
+    NotSeeMemberDeleted(baseData) {
         cy.wait(delay);
         cy.get(searchMemberInput).clear({ force: true }).type('{enter}', { force: true });
         cy.wait(delay);

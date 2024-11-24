@@ -8,8 +8,24 @@ class ThenSteps {
         memberPage.SeeMemberCreated(baseData);
     }
 
+    thenSeeMemberCreatedWithEmptyName(baseData){
+        memberPage.SeeMemberCreatedWithEmptyName(baseData);
+    }
+
     thenSeeFormError(baseData){
         memberPage.SeeFormError(baseData);
+    }
+
+    thenSeeFormDotsEmailError(baseData){
+        memberPage.SeeFormDotsEmailError(baseData);
+    }
+
+    thenSeeFormNameError(baseData){
+        memberPage.SeeFormNameError(baseData);
+    } 
+
+    thenSeeFormLabelError(baseData){
+        memberPage.SeeFormLabelError(baseData);
     }
 
     thenSeeFormNoteError(baseData){

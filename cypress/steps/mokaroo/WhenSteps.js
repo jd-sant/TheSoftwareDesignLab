@@ -5,10 +5,26 @@ class WhenSteps {
     // Members
     whenCreateAndSaveMember(baseData) {
         memberPage.CreateAndSaveMember(baseData);
+    }    
+
+    whenCreateEmptyNameMember(baseData) {
+        memberPage.CreateEmptyNameMember(baseData);
     }
 
     whenCreateMemberInvalidEmail(baseData) {
         memberPage.CreateMemberInvalidEmail(baseData);
+    }
+    
+    whenCreateMemberInvalidDotsEmail(baseData) {
+        memberPage.CreateMemberInvalidDotsEmail(baseData);
+    }
+
+    whenCreateMemberOverflowName(baseData) {
+        memberPage.CreateMemberOverflowName(baseData);
+    }
+
+    whenCreateMemberOverflowLabel(baseData) {
+        memberPage.CreateMemberOverflowLabel(baseData);
     }
 
     whenCreateMemberOverflowNote(baseData) {
