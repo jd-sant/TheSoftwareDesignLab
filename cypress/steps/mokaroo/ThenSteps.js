@@ -1,6 +1,7 @@
 import { memberPage } from "../../pages/mokaroo/MemberPage";
 import { postPage } from "../../pages/mokaroo/PostPage";
 import { settingsPage } from "../../pages/mokaroo/SettingsPage";
+import { tagPage } from "../../pages/mokaroo/TagPage";
 
 class ThenSteps {
 
@@ -44,6 +45,48 @@ class ThenSteps {
     thenNotSeeMemberDeleted(baseData){
         memberPage.NotSeeMemberDeleted(baseData);
     }
+
+    // tag
+    thenSeeTagCreated(baseData){
+        tagPage.wrapSeeTagCreated(baseData);
+    }
+
+    thenSeeTags(){
+        tagPage.seeTagsLeavePage();
+    }
+
+    thenSeeTagEdit(baseDataEdit){
+        tagPage.wrapSeeTagEdited(baseDataEdit);
+    }
+
+    thenSeeTagEditCancel(baseData){
+        tagPage.wrapSeeTagsLeavePageCancel(baseData);
+    }
+
+    thenSeeTagNotCreate(){
+        tagPage.seeTagNotCreate('nameTag');
+    }
+
+    thenSeeTagNotCreateForColor(){
+        tagPage.seeTagNotCreate('colorTag');
+    }
+
+    thenSeeTagNotCreateForDescription(){
+        tagPage.seeTagNotCreate('descriptionTag');
+    }
+
+    thenSeeTagNotCreateForSlug(){
+        tagPage.seeTagNotCreate('slugTag');
+    }
+
+    thenNotSeeTagAgain(baseData){
+        tagPage.notSeeTagDelete(baseData);
+    }
+
+    thenSeeTagWithMetaData(baseData){
+        tagPage.seeTagWithMetaData(baseData)
+    }
+
 
 // Posts
     thenSeePostPublished(baseData){

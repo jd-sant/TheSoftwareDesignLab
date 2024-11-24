@@ -1,6 +1,8 @@
 import { memberPage } from "../../pages/mokaroo/MemberPage";
 import { postPage } from "../../pages/mokaroo/PostPage";
 import { loginPage } from "../../pages/mokaroo/LoginPage";
+import { tagPage } from "../../pages/mokaroo/TagPage";
+
 class WhenSteps {
 
     // Members
@@ -42,6 +44,47 @@ class WhenSteps {
 
     whenDeleteMember(baseData) {
         memberPage.DeleteMember(baseData);
+    }
+
+    //tag
+    whenCreateTag(baseData){
+        tagPage.wrapCreateTag(baseData);
+    }
+
+    whenCreateTagWithAllFieldsBlank(){
+        tagPage.CreateTagWitAllFieldsBlank();
+    }
+
+    whenCreateAndEditTag(baseData, baseDataEdit){
+        tagPage.CreateTagAndEdit(baseData, baseDataEdit);
+    }
+
+    whenCreateEditAndCancelTag(baseData, baseDataEdit){
+        tagPage.CreateTagEditAndCancel(baseData, baseDataEdit);
+    }
+
+    whenCreateTagLongCharacters(baseData){
+        tagPage.CreateTagLongCharacters(baseData)
+    }
+
+    whenCreateTagColorInvalid(baseData){
+        tagPage.createTagInvalidColor(baseData)
+    }
+
+    whenCreateTagLongDescription(baseData){
+        tagPage.createTagLongDescription(baseData)
+    }
+
+    whenCreateTagLongSlug(baseData){
+        tagPage.createTagLongSlug(baseData)
+    }
+
+    whenDeleteTag(baseData){
+        tagPage.DeleteTag(baseData);
+    }
+
+    whenCreateTagWithMetaData(baseData){
+        tagPage.createTagWithMetaData(baseData);
     }
 
     // Post
