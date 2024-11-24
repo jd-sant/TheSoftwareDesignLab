@@ -23,42 +23,42 @@ describe('Member Creation (a-priori)', () => {
       givenSteps.givenNavigateToMemberPage();
     });
 
-    it.skip('PA012-C - Create a member (a-priori)', () => {
+    it('PA012-C - Create a member (a-priori)', () => {
       // When the user creates and saves a member
       whenSteps.whenCreateAndSaveMember(baseData);
       // Then the user should see the created member
       thenSteps.thenSeeMemberCreated(baseData);
     });
 
-    it.skip('PA013-C - Create a member with an invalid email', () => {
+    it('PA013-C - Create a member with an invalid email (a-priori)', () => {
       // When the user creates and tries to save a member with a invalid email
       whenSteps.whenCreateMemberInvalidEmail(baseData);
       // Then the user should see an error on the input email
       thenSteps.thenSeeFormError(baseData);
     });
 
-    it.skip('PA003-C - Create a member with an overflow note', () => {
+    it('PA003-C - Create a member with an overflow note (a-priori)', () => {
         // When the user creates and tries to save a member with an overflow note
         whenSteps.whenCreateMemberOverflowNote(baseData);
         // Then the user should see an error on the textarea note
         thenSteps.thenSeeFormNoteError(baseData);
     });
 
-    it.skip('PA014-C - Create a member with an existing email', () => {
+    it('PA014-C - Create a member with an existing email (a-priori)', () => {
         // When the user creates and tries to save a member with an existing email
         whenSteps.whenCreateMemberExistingEmail(baseData, baseData2);
         // Then the user should see an existence error on the input email
         thenSteps.thenSeeExistingEmailError(baseData, baseData2);
     });
 
-    it('PA015-C - Edit a member', () => {
+    it('PA015-C - Edit a member (a-priori)', () => {
         // When the user edits and save a member
         whenSteps.whenEditAndSaveMember(baseData, baseData2);
         // Then the user should see the member edited
         thenSteps.thenSeeMemberEdited(baseData2);
     });
 
-    it.skip('PA016-C - Delete a member', () => {
+    it('PA016-C - Delete a member (a-priori)', () => {
         // When the user deletes a member
         whenSteps.whenDeleteMember(baseData);
         // Then the user should not see the member deleted
