@@ -76,3 +76,30 @@ Diego Santamaria | jd.santamariab1@uniandes.edu.co
 1. Ubiquese en la raiz del proyecto
 2. Ejecute el comando `node feature/ResembleJS.js`
 3. Debera observar en la carpeta feature/screenshots una carpeta llamada compare_version en donde encontrara las imágenes de diferencias para cada uno de los escenarios junto con su respectivo reporte
+
+## Semana 7
+### Ejecución escenarios cypress a-priori
+1. Diríjase desde una terminal a la carpeta ghost
+2. Ejecute el comando `sudo docker compose up -d` para el caso de sistemas Linux o `docker-compose up -d` en sistemas windows para crear el contenedor
+3. Ubíquese en la raíz del proyecto
+4. Ejecute el siguiente comando ./node_modules/cypress/bin/cypress run -s cypress/e2e/semana_7/mokaroo/a_priori/
+5. Debera encontrar en la carpeta results_* el video de ejecución de las pruebas
+6. Diríjase desde una terminal a la carpeta ghost
+7. Ejecutar el comando `sudo docker compose down` para el caso de sistemas Linux o `docker-compose down` en sistemas windows para eliminar el contenedor
+### Ejecución escenarios cypres pseudo-aleatorio
+1. Diríjase desde una terminal a la carpeta ghost
+2. Ejecute el comando `sudo docker compose up -d` para el caso de sistemas Linux o `docker-compose up -d` en sistemas windows para crear el contenedor
+3. Ubíquese en la raíz del proyecto
+4. Ejecute el siguiente comando ./node_modules/cypress/bin/cypress run -s cypress/e2e/semana_7/mokaroo/pseudo_aleatoria/
+5. Debera encontrar en la carpeta results_* el video de ejecución de las prueba
+6. Diríjase desde una terminal a la carpeta ghost
+7. Ejecutar el comando `sudo docker compose down` para el caso de sistemas Linux o `docker-compose down` en sistemas windows para eliminar el contenedor
+### Ejecución escenarios cypress aleatorios
+1. Diríjase desde una terminal a la carpeta ghost
+2. Ejecute el comando `sudo docker compose up -d` para el caso de sistemas Linux o `docker-compose up -d` en sistemas windows para crear el contenedor
+3. Ubíquese en la raíz del proyecto
+4. Ejecute el siguiente comando ./node_modules/cypress/bin/cypress run -s cypress/e2e/semana_7/faker/
+5. Debera encontrar en la carpeta results_* el video de ejecución de las pruebas
+6. Diríjase desde una terminal a la carpeta ghost
+7. Ejecutar el comando `sudo docker compose down` para el caso de sistemas Linux o `docker-compose down` en sistemas windows para eliminar el contenedor
+
