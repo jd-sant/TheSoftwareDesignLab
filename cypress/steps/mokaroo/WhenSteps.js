@@ -2,6 +2,7 @@ import { memberPage } from "../../pages/mokaroo/MemberPage";
 import { postPage } from "../../pages/mokaroo/PostPage";
 import { loginPage } from "../../pages/mokaroo/LoginPage";
 import { tagPage } from "../../pages/mokaroo/TagPage";
+import { pagePage } from "../../pages/mokaroo/PagePage";
 
 class WhenSteps {
 
@@ -124,6 +125,48 @@ class WhenSteps {
         postPage.CreateAndPublishPostURL(baseData);
     }
     
+    // Create Page
+
+    whenCreateAndPublishPage(baseData){
+        pagePage.CreateAndPublishPage(baseData.pageTitle, baseData.pageContent);
+    }
+
+    whenCreateAndPublishPageWithTitleOnly(baseData){
+        pagePage.CreateAndPublishPageWithTitleOnly(baseData)
+    }
+
+    whenCreateAndPublishPageSpecial(baseData) {
+        pagePage.CreateAndPublishPageSpecial(baseData);
+    }
+
+    whenCreateAndPublishPageWithMultipleLanguages(baseData) {
+        pagePage.CreateAndPublishPageWithMultipleLanguages(baseData);
+    }
+
+    whenCreateAndPublishPageWithEmojis(baseData) {
+        pagePage.CreateAndPublishPageWithEmojis(baseData);
+    }
+
+    whenCreateAndPublishPageWithSymbols(baseData) {
+        pagePage.CreateAndPublishPageWithSymbols(baseData);
+    }
+
+    whenCreateAndPublishPageWithContentOnly(baseData){
+        pagePage.CreateAndPublishPageWithContentOnly(baseData);
+    }
+
+    whenCreateAndPublishLongTitlePage(baseData) {
+        pagePage.CreateAndPublishLongTitlePage(baseData);
+    }
+
+    whenCreateAndPublishPageURL(baseData) {
+        pagePage.CreateAndPublishPageURL(baseData);
+    }
+
+    whenCreateAndPublishPageExcerpt(baseData) {
+        pagePage.CreateAndPublishPageExcerpt(baseData);
+    }
+
     // Admin user
     whenCreateUser(){
         loginPage.CreateUser();
