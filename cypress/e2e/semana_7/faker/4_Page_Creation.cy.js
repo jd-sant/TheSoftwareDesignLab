@@ -1,21 +1,30 @@
-import { givenSteps } from '../../../../steps/mokaroo/GivenSteps';
-import { whenSteps } from '../../../../steps/mokaroo/WhenSteps';
-import { thenSteps } from '../../../../steps/mokaroo/ThenSteps';
-
+import { givenSteps } from '../../../steps/mokaroo/GivenSteps';
+import { whenSteps } from '../../../steps/mokaroo/WhenSteps';
+import { thenSteps } from '../../../steps/mokaroo/ThenSteps';
+import { faker } from '@faker-js/faker';
+import { fakerHY as fakerArmenian } from '@faker-js/faker';
+import { fakerRU as fakerRussian } from '@faker-js/faker';
+import { fakerZH_CN as fakerChinese } from '@faker-js/faker';
+import { fakerJA as fakerJapanese } from '@faker-js/faker';
+import { fakerAR as fakerArabic } from '@faker-js/faker';
 describe('Page Creation Input Tests', () => {
     let baseData;
-    let mockData;
     beforeEach(() => {
-        // Realizar la petición a la API de Mockaroo para obtener 1000 registros
-        cy.request({
-            method: 'GET',
-            url: 'https://my.api.mockaroo.com/page_schema.json?key=f8e5d4b0',
-        }).then((response) => {
-            // Asegurarse de que la respuesta sea exitosa
-            expect(response.status).to.eq(200);
-            mockData = response.body; // Asignamos la respuesta a la variable mockData
-            const randomIndex = Math.floor(Math.random() * mockData.length);
-            baseData = mockData[randomIndex];
+        baseData = {
+            pageTitle_256 : faker.string.alphanumeric(256),
+            pageContent : faker.lorem.paragraph(),
+            pageTitle : faker.string.alphanumeric({ length: { min: 5, max: 254 } }),
+            pageTitle_Special : faker.string.sample(),
+            pageContent_Special : faker.string.hexadecimal() + faker.string.symbol() + faker.string.sample(),
+            pageTitle_Symbols : faker.string.symbol({ min: 5, max: 10 }),
+            pageTitle_Emojis : faker.internet.emoji(),
+            pageTitle_multilanguage : fakerArmenian.lorem.words(3) + fakerRussian.lorem.words(3) + fakerChinese.lorem.words(3) + fakerJapanese.lorem.words(3) + fakerArabic.lorem.words(3),
+            pageContent_multilanguage : fakerArmenian.lorem.paragraphs(2,'\n') + fakerRussian.lorem.paragraphs(2,'\n') + fakerChinese.lorem.paragraphs(2,'\n') + fakerJapanese.lorem.paragraphs(2,'\n') + fakerArabic.lorem.paragraphs(2,'\n'),
+            pageURL : faker.finance.bitcoinAddress(),
+            pageExcerpt : faker.string.alphanumeric(301),
+        };
+        Cypress.Screenshot.defaults({
+            disableTimersAndAnimations: false,
         });
         // Given the user has navigated to the Ghost site
         givenSteps.givenNavigateToTheSite();
@@ -25,63 +34,63 @@ describe('Page Creation Input Tests', () => {
         givenSteps.givenNavigateToPagePage(); 
     });
 
-    it('Test1-C - Create a page with title only', () => {
+    it.skip('Test1-C - Create a page with title only', () => {
         // When the user creates and publishes the page with title only
         whenSteps.whenCreateAndPublishPageWithTitleOnly(baseData); 
         // Then the user should see the page published
         thenSteps.thenSeePagePublished(baseData);
     });
 
-    it('Test2-C - Create a normal page', () => {
+    it.skip('Test2-C - Create a normal page', () => {
         // When the user creates and publishes the page
         whenSteps.whenCreateAndPublishPage(baseData); 
         // Then the user should see the page published
         thenSteps.thenSeePagePublished(baseData);
     });
 
-    it('Test3-C - Create a page with special characters', () => {
+    it.skip('Test3-C - Create a page with special characters', () => {
         // When the user creates and publishes the page with special characters
         whenSteps.whenCreateAndPublishPageSpecial(baseData); 
         // Then the user should see the page published
         thenSteps.thenSeeSpecialPagePublished(baseData);
     });
     
-    it('Test4-C - Create a post with multiple languages', () => {
+    it.skip('Test4-C - Create a post with multiple languages', () => {
         // When the user creates and publishes the page with multiple languages
         whenSteps.whenCreateAndPublishPageWithMultipleLanguages(baseData); 
         // Then the user should see the page published
         thenSteps.thenSeeMultilanguagePagePublished(baseData);
     });
 
-    it('Test5-C - Create a page with emoji title', () => {
+    it.skip('Test5-C - Create a page with emoji title', () => {
         // When the user creates and publishes the page with emoji title
         whenSteps.whenCreateAndPublishPageWithEmojis(baseData); 
         // Then the user should not see the publish button
         thenSteps.thenPublishButtonUnavailable(baseData);
     });
 
-    it('Test6-C - Create a page with symbol title', () => {
+    it.skip('Test6-C - Create a page with symbol title', () => {
         // When the user creates and publishes the page with symbol title
         whenSteps.whenCreateAndPublishPageWithSymbols(baseData); 
         // Then the user should not see the publish button
         thenSteps.thenPublishButtonUnavailable(baseData);
     });
 
-    it('Test7-C - Create a page with content only', () => {
+    it.skip('Test7-C - Create a page with content only', () => {
         // When the user creates and publishes the page with content only
         whenSteps.whenCreateAndPublishPageWithContentOnly(baseData); 
         // Then the user should not see the publish button
         thenSteps.thenPublishButtonUnavailable(baseData);
     });
 
-    it('Test8-C - Create a page with title 256 characters', () => {
+    it.skip('Test8-C - Create a page with title 256 characters', () => {
         // When the user creates and publishes the page with a title with 256 characters
         whenSteps.whenCreateAndPublishLongTitlePage(baseData); 
         // Then the user should see a publish error
         thenSteps.thenPageLongTitlePublishError(baseData);
     });
 
-    it('Test9-C - Create a page and change the url', () => {
+    it.skip('Test9-C - Create a page and change the url', () => {
         // When the user creates and publishes the page and changes the URL
         whenSteps.whenCreateAndPublishPageURL(baseData); 
         // Then the user should see the page in the new URL

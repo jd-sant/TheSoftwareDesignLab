@@ -10,13 +10,11 @@ const closeModalButton = '[data-test-button="close-publish-flow"]';
 const dropdownPageFilter = '.gh-contentfilter-type > .ember-view > svg';
 const optionPublishedPage = '.ember-power-select-option[data-option-index="2"]';
 const classPublisdPageTitle = '.gh-content-entry-title';
-const optionPublishedFeaturePage = '.ember-power-select-option[data-option-index="4"]';
 const titlePublishErrorMessage = 'span[data-test-task-button-state="failure"]';
 const titleValidationError = 'p[data-test-confirm-error]';
 const excerptValidationError = 'div[class="gh-alert-content"]'
 const pageSideMenuButton = 'button[data-test-psm-trigger=""]';
 const pageUrlField = '.post-setting-slug';
-const pageFeatureButton = 'label[data-ember-action]';
 const pageAreaExcerpt = 'textarea[class="post-setting-custom-excerpt ember-text-area gh-input ember-view"]';
 import { screenshot } from '../Screenshots';
 
@@ -39,6 +37,18 @@ class PagePage {
     }
 
     ClickPublishPage(){
+        screenshot.takeScreenshot('BeforeClickingPublishPageButton')
+        cy.get(publishPageButton).click();
+        screenshot.takeScreenshot('BeforeClickingConfirmPublishPageButton')
+        cy.wait(2000);
+        cy.get(confirmPublishButton).click();
+        screenshot.takeScreenshot('BeforeFinalPublishPage')
+        cy.get(finalPublishButton).click();
+        cy.wait(2000);
+        screenshot.takeScreenshot('AfterFinalPublishPage')
+    }
+    
+    ClickPublishPageValidation(){
         screenshot.takeScreenshot('BeforeClickingPublishPageButton')
         cy.get(publishPageButton).click();
         screenshot.takeScreenshot('BeforeClickingConfirmPublishPageButton')
@@ -211,7 +221,7 @@ class PagePage {
     CreateAndPublishPageExcerpt(baseData){
         this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
         this.AddPageExcerpt(baseData.pageExcerpt);
-        this.ClickPublishPage()
+        this.ClickPublishPageValidation()
     }
 
     PageLongExcerptPublishError(){
