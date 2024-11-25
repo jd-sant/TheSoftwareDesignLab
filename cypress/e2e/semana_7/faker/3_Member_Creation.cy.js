@@ -35,70 +35,70 @@ describe('Member Creation', () => {
         givenSteps.givenNavigateToMemberPage();
     });
 
-    it('PA021-C - Create a member (a-priori)', () => {
+    it('PA021-C - Create a member', () => {
         // When the user creates and saves a member
         whenSteps.whenCreateAndSaveMember(baseData);
         // Then the user should see the created member
         thenSteps.thenSeeMemberCreated(baseData);
     });
 
-    it('PA022-C - Create a member with an invalid email (a-priori)', () => {
+    it('PA022-C - Create a member with an invalid email', () => {
         // When the user creates and tries to save a member with a invalid email
         whenSteps.whenCreateMemberInvalidEmail(baseData);
         // Then the user should see an error on the input email
         thenSteps.thenSeeFormError(baseData);
     });
 
-    it('PA023-C - Create a member with empty name (a-priori)', () => {
+    it('PA023-C - Create a member with empty name', () => {
         // When the user creates and tries to save a member with empty name
         whenSteps.whenCreateEmptyNameMember(baseData);
         // Then the user should see the created member by the email
         thenSteps.thenSeeMemberCreatedWithEmptyName(baseData);
     });
 
-    it('PA024-C - Create a member with multiple dots in email (a-priori)', () => {
+    it('PA024-C - Create a member with multiple dots in email', () => {
         // When the user creates and tries to save a member with a multiple dots in email
         whenSteps.whenCreateMemberInvalidDotsEmail(baseData);
         // Then the user should see an error on the input email
         thenSteps.thenSeeFormDotsEmailError(baseData);
     });
 
-    it('PA025-C - Create a member with an overflow name (a-priori)', () => {
+    it('PA025-C - Create a member with an overflow name', () => {
         // When the user creates and tries to save a member with an overflow name
         whenSteps.whenCreateMemberOverflowName(baseData);
         // Then the user should see an error on the textarea name
         thenSteps.thenSeeFormNameError(baseData);
     });
 
-    it('PA026-C - Create a member with overflow label (a-priori)', () => {
+    it('PA026-C - Create a member with overflow label', () => {
         // When the user creates and tries to save a member with overflow label
         whenSteps.whenCreateMemberOverflowLabel(baseData);
         // Then the user should see an error on the input label
         thenSteps.thenSeeFormLabelError(baseData);
     });
 
-    it('PA027-C - Create a member with an overflow note (a-priori)', () => {
+    it('PA027-C - Create a member with an overflow note', () => {
         // When the user creates and tries to save a member with an overflow note
         whenSteps.whenCreateMemberOverflowNote(baseData);
         // Then the user should see an error on the textarea note
         thenSteps.thenSeeFormNoteError(baseData);
     });
 
-    it('PA028-C - Create a member with an existing email (a-priori)', () => {
+    it('PA028-C - Create a member with an existing email', () => {
         // When the user creates and tries to save a member with an existing email
         whenSteps.whenCreateMemberExistingEmail(baseData, baseData2);
         // Then the user should see an existence error on the input email
         thenSteps.thenSeeExistingEmailError(baseData, baseData2);
     });
 
-    it('PA029-C - Edit a member (a-priori)', () => {
+    it('PA029-C - Edit a member', () => {
         // When the user edits and save a member
         whenSteps.whenEditAndSaveMember(baseData, baseData2);
         // Then the user should see the member edited
         thenSteps.thenSeeMemberEdited(baseData2);
     });
 
-    it('PA030-C - Delete a member (a-priori)', () => {
+    it('PA030-C - Delete a member', () => {
         // When the user deletes a member
         whenSteps.whenDeleteMember(baseData);
         // Then the user should not see the member deleted
