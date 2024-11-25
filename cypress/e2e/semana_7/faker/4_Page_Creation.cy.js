@@ -34,70 +34,70 @@ describe('Page Creation Input Tests', () => {
         givenSteps.givenNavigateToPagePage(); 
     });
 
-    it.skip('Test1-C - Create a page with title only', () => {
+    it('PA031-C - Create a page with title only', () => {
         // When the user creates and publishes the page with title only
         whenSteps.whenCreateAndPublishPageWithTitleOnly(baseData); 
         // Then the user should see the page published
         thenSteps.thenSeePagePublished(baseData);
     });
 
-    it.skip('Test2-C - Create a normal page', () => {
+    it('PA032-C - Create a normal page', () => {
         // When the user creates and publishes the page
         whenSteps.whenCreateAndPublishPage(baseData); 
         // Then the user should see the page published
         thenSteps.thenSeePagePublished(baseData);
     });
 
-    it.skip('Test3-C - Create a page with special characters', () => {
+    it('PA033-C - Create a page with special characters', () => {
         // When the user creates and publishes the page with special characters
         whenSteps.whenCreateAndPublishPageSpecial(baseData); 
         // Then the user should see the page published
         thenSteps.thenSeeSpecialPagePublished(baseData);
     });
     
-    it.skip('Test4-C - Create a post with multiple languages', () => {
+    it('PA034-C - Create a post with multiple languages', () => {
         // When the user creates and publishes the page with multiple languages
         whenSteps.whenCreateAndPublishPageWithMultipleLanguages(baseData); 
         // Then the user should see the page published
         thenSteps.thenSeeMultilanguagePagePublished(baseData);
     });
 
-    it.skip('Test5-C - Create a page with emoji title', () => {
+    it('PA035-C - Create a page with emoji title', () => {
         // When the user creates and publishes the page with emoji title
         whenSteps.whenCreateAndPublishPageWithEmojis(baseData); 
         // Then the user should not see the publish button
         thenSteps.thenPublishButtonUnavailable(baseData);
     });
 
-    it.skip('Test6-C - Create a page with symbol title', () => {
+    it('PA036-C- Create a page with symbol title', () => {
         // When the user creates and publishes the page with symbol title
         whenSteps.whenCreateAndPublishPageWithSymbols(baseData); 
         // Then the user should not see the publish button
         thenSteps.thenPublishButtonUnavailable(baseData);
     });
 
-    it.skip('Test7-C - Create a page with content only', () => {
+    it('PA037-C - Create a page with content only', () => {
         // When the user creates and publishes the page with content only
         whenSteps.whenCreateAndPublishPageWithContentOnly(baseData); 
         // Then the user should not see the publish button
         thenSteps.thenPublishButtonUnavailable(baseData);
     });
 
-    it.skip('Test8-C - Create a page with title 256 characters', () => {
+    it('PA038-C - Create a page with title 256 characters', () => {
         // When the user creates and publishes the page with a title with 256 characters
         whenSteps.whenCreateAndPublishLongTitlePage(baseData); 
         // Then the user should see a publish error
         thenSteps.thenPageLongTitlePublishError(baseData);
     });
 
-    it.skip('Test9-C - Create a page and change the url', () => {
+    it('PA039-C - Create a page and change the url', () => {
         // When the user creates and publishes the page and changes the URL
         whenSteps.whenCreateAndPublishPageURL(baseData); 
         // Then the user should see the page in the new URL
         thenSteps.thenSeePagePublishedURL(baseData);
     });
 
-    it('Test10-C - Create a page with a 301 character excerpt', () => {
+    it('PA040-C - Create a page with a 301 character excerpt', () => {
         // When the user creates and publishes the page with a excerpt of 301 characters
         whenSteps.whenCreateAndPublishPageExcerpt(baseData); 
         // Then the user should be the page published

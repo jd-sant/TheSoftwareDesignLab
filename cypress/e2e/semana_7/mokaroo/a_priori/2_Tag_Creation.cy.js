@@ -21,70 +21,70 @@ describe('Tag Creation', () => {
         givenSteps.givenNavigateToTagPage();
     });
 
-    it('PA008-C - Create a tag', () => {
+    it('PA051-C - Create a tag', () => {
         // When the user creates a Tag
         whenSteps.whenCreateTag(baseData); 
         // Then the user should see the tag created
         thenSteps.thenSeeTagCreated(baseData);
     }); 
 
-    it('PA009-C - Create a tag with all fields left blank', () => {
+    it('PA052-C - Create a tag with all fields left blank', () => {
         // When the user creates a Tag with all fields blank
         whenSteps.whenCreateTagWithAllFieldsBlank(); 
         // Then the user should see that the tag was not created
         thenSteps.thenSeeTags();
     }); 
 
-    it('PA010-C - Edit a tag with all fields filled', () => {
+    it('PA053-C - Edit a tag with all fields filled', () => {
         // When the user edits the tag with all fields filled
         whenSteps.whenCreateAndEditTag(baseData, baseDataEdit); 
         // Then the user should see that the tag edited
         thenSteps.thenSeeTagEdit(baseDataEdit);
     }); 
 
-    it('PA011-C - Edit a tag with all fields filled and cancel edit', () => {
+    it('PA054-C - Edit a tag with all fields filled and cancel edit', () => {
         // When the user edits the tag with all fields filled and cancels the edit
         whenSteps.whenCreateEditAndCancelTag(baseData, baseDataEdit); 
         // Then the user should see that the tag remains unchanged
         thenSteps.thenSeeTagEditCancel(baseData);
     }); 
 
-    it('PA0#-C - Create a tag with 192 characters in field name', () => {
+    it('PA055-C - Create a tag with 192 characters in field name', () => {
         // When the user try to create a tag with 192 characters in name
         whenSteps.whenCreateTagLongCharacters(baseData); 
         // Then the user should see that the tag not created and show error
         thenSteps.thenSeeTagNotCreate(baseData);
     }); 
 
-    it('PA0#-C - Create a tag with invalid color', () => {
+    it('PA056-C - Create a tag with invalid color', () => {
         // When the user try to create a tag with invalid color
         whenSteps.whenCreateTagColorInvalid(baseData); 
         // Then the user should see that the tag not created and show error
         thenSteps.thenSeeTagNotCreateForColor();
     }); 
 
-    it('PA0#-C - Create a tag with 501 characters in field description', () => {
+    it('PA057-C - Create a tag with 501 characters in field description', () => {
         // When the user try to create a tag with 501 characters in description
         whenSteps.whenCreateTagLongDescription(baseData); 
         // Then the user should see that the tag not created and show error
         thenSteps.thenSeeTagNotCreateForDescription();
     }); 
 
-    it('PA0#-C - Create a tag with 192 characters in slug (url)', () => {
+    it('PA058-C - Create a tag with 192 characters in slug (url)', () => {
         // When the user try to create a tag with 1921 characters in slug
         whenSteps.whenCreateTagLongSlug(baseData); 
         // Then the user should see that the tag not created and show error
         thenSteps.thenSeeTagNotCreateForSlug();
     });
 
-    it('PA0#-C - Delete a tag created', () => {
+    it('PA059-C - Delete a tag created', () => {
         // When the user delete a tag created
         whenSteps.whenDeleteTag(baseData); 
         // Then the user should not see the tag
         thenSteps.thenNotSeeTagAgain(baseData);
     });
 
-    it('PA0#-C - Create Tag with Meta data', () => {
+    it('PA060-C - Create Tag with Meta data', () => {
         // When the user create a tag with metada
         whenSteps.whenCreateTagWithMetaData(baseData); 
         // Then the user should see the tag with title and description meta data

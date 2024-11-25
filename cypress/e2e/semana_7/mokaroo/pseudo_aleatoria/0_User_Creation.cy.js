@@ -24,7 +24,7 @@ describe('Create User', () => {
         givenSteps.givenNavigateToTheSite();
     });
     
-    it('PA001-C - Create admin user', () => {
+    it('PA081-C - Create admin user', () => {
         // When the user fills the form to create a new user
         whenSteps.whenCreateUser();
         // Then the user should change site description

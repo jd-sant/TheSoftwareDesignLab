@@ -25,70 +25,70 @@ describe('Page Creation Input Tests', () => {
         givenSteps.givenNavigateToPagePage(); 
     });
 
-    it('Test1-C - Create a page with title only', () => {
+    it('PA111-C - Create a page with title only', () => {
         // When the user creates and publishes the page with title only
         whenSteps.whenCreateAndPublishPageWithTitleOnly(baseData); 
         // Then the user should see the page published
         thenSteps.thenSeePagePublished(baseData);
     });
 
-    it('Test2-C - Create a normal page', () => {
+    it('PA112-C - Create a normal page', () => {
         // When the user creates and publishes the page
         whenSteps.whenCreateAndPublishPage(baseData); 
         // Then the user should see the page published
         thenSteps.thenSeePagePublished(baseData);
     });
 
-    it('Test3-C - Create a page with special characters', () => {
+    it('PA113-C - Create a page with special characters', () => {
         // When the user creates and publishes the page with special characters
         whenSteps.whenCreateAndPublishPageSpecial(baseData); 
         // Then the user should see the page published
         thenSteps.thenSeeSpecialPagePublished(baseData);
     });
     
-    it('Test4-C - Create a post with multiple languages', () => {
+    it('PA114-C - Create a post with multiple languages', () => {
         // When the user creates and publishes the page with multiple languages
         whenSteps.whenCreateAndPublishPageWithMultipleLanguages(baseData); 
         // Then the user should see the page published
         thenSteps.thenSeeMultilanguagePagePublished(baseData);
     });
 
-    it('Test5-C - Create a page with emoji title', () => {
+    it('PA115-C - Create a page with emoji title', () => {
         // When the user creates and publishes the page with emoji title
         whenSteps.whenCreateAndPublishPageWithEmojis(baseData); 
         // Then the user should not see the publish button
         thenSteps.thenPublishButtonUnavailable(baseData);
     });
 
-    it('Test6-C - Create a page with symbol title', () => {
+    it('PA116-C - Create a page with symbol title', () => {
         // When the user creates and publishes the page with symbol title
         whenSteps.whenCreateAndPublishPageWithSymbols(baseData); 
         // Then the user should not see the publish button
         thenSteps.thenPublishButtonUnavailable(baseData);
     });
 
-    it('Test7-C - Create a page with content only', () => {
+    it('PA117-C - Create a page with content only', () => {
         // When the user creates and publishes the page with content only
         whenSteps.whenCreateAndPublishPageWithContentOnly(baseData); 
         // Then the user should not see the publish button
         thenSteps.thenPublishButtonUnavailable(baseData);
     });
 
-    it('Test8-C - Create a page with title 256 characters', () => {
+    it('PA118-C - Create a page with title 256 characters', () => {
         // When the user creates and publishes the page with a title with 256 characters
         whenSteps.whenCreateAndPublishLongTitlePage(baseData); 
         // Then the user should see a publish error
         thenSteps.thenPageLongTitlePublishError(baseData);
     });
 
-    it('Test9-C - Create a page and change the url', () => {
+    it('PA119-C - Create a page and change the url', () => {
         // When the user creates and publishes the page and changes the URL
         whenSteps.whenCreateAndPublishPageURL(baseData); 
         // Then the user should see the page in the new URL
         thenSteps.thenSeePagePublishedURL(baseData);
     });
 
-    it('Test10-C - Create a page with a 301 character excerpt', () => {
+    it('PA120-C - Create a page with a 301 character excerpt', () => {
         // When the user creates and publishes the page with a excerpt of 301 characters
         whenSteps.whenCreateAndPublishPageExcerpt(baseData); 
         // Then the user should be the page published

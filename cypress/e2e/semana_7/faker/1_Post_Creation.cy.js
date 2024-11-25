@@ -40,56 +40,56 @@ describe('Post Creation', () => {
         thenSteps.thenSeePostPublished(baseData);
     });
 
-    it('PA004-C - Create a normal post', () => {
+    it('PA003-C - Create a normal post', () => {
         // When the user creates and publishes the post
         whenSteps.whenCreateAndPublishPost(baseData); 
         // Then the user should be the post published
         thenSteps.thenSeePostPublished(baseData);
     });
 
-    it('PA005-C - Create a post with special characters', () => {
+    it('PA004-C - Create a post with special characters', () => {
         // When the user creates and publishes the post with special characters
         whenSteps.whenCreateAndPublishPostSpecial(baseData); 
         // Then the user should be the post published
         thenSteps.thenSeeSpecialPostPublished(baseData);
     });
     
-    it('PA006-C - Create a post with Unplash images', () => {
+    it('PA005-C - Create a post with Unplash images', () => {
         // When the user creates and publishes the post with images from Unplash
         whenSteps.whenCreateAndPublishPostWithImages(baseData); 
         // Then the user should see the post published
         thenSteps.thenSeePostPublished(baseData);
     });
 
-    it('PA007-C - Create a post with multiple languages', () => {
+    it('PA006-C - Create a post with multiple languages', () => {
         // When the user creates and publishes the post with multiple languages
         whenSteps.whenCreateAndPublishPostWithMultipleLanguages(baseData); 
         // Then the user should be the post published
         thenSteps.thenSeeMultilanguagePostPublished(baseData);
     });
 
-    it('PA00#-C - Create a post with emojis as title', () => {
+    it('PA007-C - Create a post with emojis as title', () => {
         // When the user creates and publishes the post with emojis as title
         whenSteps.whenCreateAndPublishPostWithEmojis(baseData); 
         // Then the user should be the post published
         thenSteps.thenPublishButtonUnavailable(baseData);
     });
 
-    it('PA00#-C - Create a post with symbols as title', () => {
+    it('PA008-C - Create a post with symbols as title', () => {
         // When the user creates and publishes the post with symbols as title
         whenSteps.whenCreateAndPublishPostWithSymbols(baseData); 
         // Then the user should be the post published
         thenSteps.thenPublishButtonUnavailable(baseData);
     });
 
-    it('PA00#-C - Create a post 256 characters as title', () => {
+    it('PA009-C - Create a post 256 characters as title', () => {
         // When the user creates and publishes the post with 256 characters as title
         whenSteps.whenCreateAndPublishLongTitlePost(baseData); 
         // Then the user should be the post published
         thenSteps.thenPostLongTitlePublishError();
     });
 
-    it('PA00#-C - Create a post and change the url', () => {
+    it('PA010-C - Create a post and change the url', () => {
         // When the user creates and publishes the post
         whenSteps.whenCreateAndPublishPostURL(baseData); 
         // Then the user should be the post published
