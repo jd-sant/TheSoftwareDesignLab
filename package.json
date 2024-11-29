@@ -1,5 +1,6 @@
 {
   "devDependencies": {
-    "cypress": "^13.16.0"
+    "cypress": "^13.16.0",
+    "resemblejs": "^5.0.0"
   }
 }
