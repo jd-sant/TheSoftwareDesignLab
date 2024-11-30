@@ -18,14 +18,14 @@ describe('Tag Creation', () => {
         givenSteps.givenNavigateToSettingsPage();
     });
 
-    it.skip('PA0#-C - Change site timezone', () => {
+    it('PA0#-C - Change site timezone', () => {
         // When the user change site timezone
         whenSteps.whenChangeSiteTimezone(baseData); 
         // Then the user should see that timezone change
         thenSteps.thenSeeSiteTimezoneChanged(baseData);
     });
 
-    it.skip('PA0#-C - Change languaje to spanish', () => {
+    it('PA0#-C - Change languaje to spanish', () => {
         // When the user change site timezone
         whenSteps.whenChangePublicationLanguage(); 
         // Then the user should see that timezone change
