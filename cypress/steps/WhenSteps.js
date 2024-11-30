@@ -164,6 +164,10 @@ class WhenSteps {
     whenCreateEmptyPost(baseData) {
         postPage.CreateEmptyPost(baseData);
     }
+
+    whenUpdatePostPublishedDate() {
+        postPage.UpdatePostPublishedDate();
+    }
     
     // Create Page
 

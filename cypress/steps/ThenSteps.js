@@ -154,6 +154,10 @@ class ThenSteps {
         postPage.CantPublishExistingPost(baseData);
     }
 
+    thenUpdatedButtonEnable(){
+        postPage.UpdatedButtonEnable();
+    }
+
     // Create Page
 
     thenSeePagePublished(baseData){
