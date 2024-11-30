@@ -39,6 +39,18 @@ class ThenSteps {
         memberPage.SeeMembersCreatedByNameEndsWith(baseData, baseData2, baseData3);
     }
 
+    thenSeeBlankLabelError(baseData){
+        memberPage.SeeBlankLabelError(baseData);
+    }
+
+    thenSeeWithoutLettersNameError(baseData){
+        memberPage.SeeWithoutLettersNameError(baseData);
+    }
+
+    thenSeeAccentsEmailError(baseData){
+        memberPage.SeeAccentsEmailError(baseData);
+    }
+
     thenSeeMemberCreatedWithEmptyName(baseData){
         memberPage.SeeMemberCreatedWithEmptyName(baseData);
     }

@@ -39,6 +39,20 @@ class WhenSteps {
         memberPage.CreateMemberFindByNameEndsWith(baseData, baseData2, baseData3);
     }
     
+    whenCreateMemberWithBlankLabel(baseData) {
+        memberPage.CreateMemberWithBlankLabel(baseData);
+    }
+
+    whenCreateMemberWithoutLettersName(baseData) {
+        memberPage.CreateMemberWithoutLettersName(baseData);
+    }
+
+    whenCreateMemberWithAccentsInEmail(baseData) {
+        memberPage.CreateMemberWithAccentsInEmail(baseData);
+    }
+
+    
+    
     whenCreateEmptyNameMember(baseData) {
         memberPage.CreateEmptyNameMember(baseData);
     }

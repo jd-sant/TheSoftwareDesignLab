@@ -341,6 +341,62 @@ class MemberPage {
     }
 
     // ************************************************************
+    CreateMemberWithBlankLabel(baseData) {
+        screenshot.takeScreenshot('navigatedToMemberPage');
+        this.NavigateToCreateMemberPage();
+        screenshot.takeScreenshot('navigatedToCreateMemberPage');
+        screenshot.takeScreenshot('memberBeforeFill');
+        this.ClearAndTypeMember(baseData.memberName, baseData.memberEmail, "  ", baseData.memberNote);
+        screenshot.takeScreenshot('memberAfterFill');
+        this.SaveMember();
+        screenshot.takeScreenshot('memberSaveAction');
+    }
+
+    SeeBlankLabelError() {
+        screenshot.takeScreenshot('InvalidNameError');
+        cy.wait(delay);
+        cy.get(retrySaveMemberButton).should('be.visible');        
+        cy.get('body').should('contain', 'Validation failed for name');
+    }
+    // ************************************************************
+
+    CreateMemberWithoutLettersName(baseData) {
+        screenshot.takeScreenshot('navigatedToMemberPage');
+        this.NavigateToCreateMemberPage();
+        screenshot.takeScreenshot('navigatedToCreateMemberPage');
+        screenshot.takeScreenshot('memberBeforeFill');
+        this.ClearAndTypeMember("./**", baseData.memberEmail, baseData.memberLabel, baseData.memberNote);
+        screenshot.takeScreenshot('memberAfterFill');
+        this.SaveMember();
+        screenshot.takeScreenshot('memberSaveAction');
+    }
+
+    SeeWithoutLettersNameError() {
+        screenshot.takeScreenshot('InvalidNameError');
+        cy.wait(delay);
+        cy.get(retrySaveMemberButton).should('be.visible');        
+        cy.get('body').should('contain', 'Validation failed for name');
+    }
+    // ************************************************************   
+    
+    CreateMemberWithAccentsInEmail(baseData) {
+        screenshot.takeScreenshot('navigatedToMemberPage');
+        this.NavigateToCreateMemberPage();
+        screenshot.takeScreenshot('navigatedToCreateMemberPage');
+        screenshot.takeScreenshot('memberBeforeFill');
+        this.ClearAndTypeMember(baseData.memberName, "áéíóú"+baseData.memberEmail, baseData.memberLabel, baseData.memberNote);
+        screenshot.takeScreenshot('memberAfterFill');
+        this.SaveMember();
+        screenshot.takeScreenshot('memberSaveAction');
+    }
+
+    SeeAccentsEmailError() {
+        screenshot.takeScreenshot('InvalidEmailError');
+        cy.wait(delay);
+        cy.get(retrySaveMemberButton).should('be.visible');        
+        cy.get('body').should('contain', 'Validation failed for email');
+    }
+    // ************************************************************  
 }
 
 export const memberPage = new MemberPage();
