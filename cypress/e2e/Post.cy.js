@@ -25,21 +25,21 @@ describe('Post Feature Testing', () => {
         givenSteps.givenNavigateToPostPage(); 
     });
     
-    it.skip('PA0##-C - Create a empty post', () => {
+    it('PA0##-C - Create a empty post', () => {
         // When the user creates a empty post
         whenSteps.whenCreateEmptyPost(baseData);
         // Then the user shouldn't see the publish button
         thenSteps.thenPublishButtonUnavailable();
     });
 
-    it.skip('PA0##-C - Create an existing post', () => {
+    it('PA0##-C - Create an existing post', () => {
         // When the user creates a post
         whenSteps.whenCreateAndPublishPost(baseData); 
         // Then the user shouldn't be able to publish the same post again
         thenSteps.thenCantPublishExistingPost(baseData);
     });
 
-    it.skip('PA0##-C - Update post published date', () => {
+    it('PA0##-C - Update post published date', () => {
         // When a user edit a post and update the published date
         whenSteps.whenUpdatePostPublishedDate();
         // Then the user should see the updated button enable

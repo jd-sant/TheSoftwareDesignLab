@@ -21,6 +21,7 @@ module.exports = {
     defaultCommandTimeout:20000,
     viewportWidth: 1200,
     viewportHeight: 900,
+    chromeWebSecurity: false,
     // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
       // implement node event listeners here
