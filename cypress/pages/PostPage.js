@@ -20,24 +20,26 @@ const titlePublishErrorMessage = 'span[data-test-task-button-state="failure"]';
 const titleValidationError = 'p[data-test-confirm-error]';
 const pageSideMenuButton = 'button[data-test-psm-trigger=""]';
 const postUrlField = '.post-setting-slug';
+const publishedPost = 'a[class="ember-view permalink gh-list-data gh-post-list-title"]';
+const updatePostButton = 'button[data-test-button="publish-save"]';
 import { screenshot } from '../support/Screenshots';
 import { dashboardPage } from './DashboardPage';
 
 class PostPage {
 
-    AddUnplashImage(class_ = imageUnplashClass){
+    AddUnplashImage(class_ = imageUnplashClass) {
         cy.wait(delay);
         cy.get(class_).then(($el) => {
             const randomIndex = Math.floor(Math.random() * $el.length);
             const randomImage = $el[randomIndex];
             screenshot.takeScreenshot('SelectUnplashImage', true);
-            cy.wrap(randomImage).click({force: true});
+            cy.wrap(randomImage).click({ force: true });
             screenshot.takeScreenshot('SelectUnplashImageClick', true);
             cy.wait(delay);
         });
     }
 
-    PublishPost(){
+    PublishPost() {
         cy.get(publishPostButton).click()
         screenshot.takeScreenshot('PublishPostClick-1', true);
         cy.wait(2000)
@@ -55,29 +57,29 @@ class PostPage {
 
     ClearAndTypePost(postTitle_, postContent_) {
         cy.get(postTitleInput).clear();
-        cy.get(postTitleInput).type(postTitle_,{ force: true });
+        cy.get(postTitleInput).type(postTitle_, { force: true });
         screenshot.takeScreenshot('FillPostTittle')
         cy.get(postContentInput).clear()
-        cy.get(postContentInput).type(postContent_,{ force: true });
+        cy.get(postContentInput).type(postContent_, { force: true });
         screenshot.takeScreenshot('FillPostContent')
         cy.wait(delay);
     }
 
     ClearAndTypeLongPost(postTitle_, postContent_) {
         cy.get(postTitleInput).clear();
-        cy.get(postTitleInput).type(' ',{ force: true });
+        cy.get(postTitleInput).type(' ', { force: true });
         cy.get(postContentInput).clear()
-        cy.get(postContentInput).type(postContent_,{ force: true });
+        cy.get(postContentInput).type(postContent_, { force: true });
         screenshot.takeScreenshot('FillPostContent')
         cy.get(postTitleInput).clear();
-        cy.get(postTitleInput).type(postTitle_,{ force: true });
+        cy.get(postTitleInput).type(postTitle_, { force: true });
         screenshot.takeScreenshot('FillPostTittle')
         cy.wait(delay);
     }
 
     ClearAndTypePostWithImages(postTitle_, postContent_) {
         cy.get(postTitleInput).clear();
-        cy.get(postTitleInput).type(postTitle_,{ force: true });
+        cy.get(postTitleInput).type(postTitle_, { force: true });
         screenshot.takeScreenshot('FillPostTittleImage')
         cy.get(postContentInput).clear()
         cy.get(postAddCard).click();
@@ -86,17 +88,17 @@ class PostPage {
         screenshot.takeScreenshot('AddUnplashCard', true)
         this.AddUnplashImage(imageUnplashContentClass);
         cy.get(postContentImageInput).clear();
-        cy.get(postContentImageInput).type(postContent_,{ force: true });
+        cy.get(postContentImageInput).type(postContent_, { force: true });
         screenshot.takeScreenshot('FillPostContentImage')
         cy.wait(delay);
     }
 
-    CreateAndPublishPost(postTitle_, postContent_ ) {
+    CreateAndPublishPost(postTitle_, postContent_) {
         this.ClearAndTypePost(postTitle_, postContent_);
         this.PublishPost();
     }
-    
-    CreateAndPublishPostSpecial(baseData){
+
+    CreateAndPublishPostSpecial(baseData) {
         this.CreateAndPublishPost(baseData.postTitle_special, baseData.postContent_special);
     }
 
@@ -119,7 +121,7 @@ class PostPage {
         this.SeePostPublished(baseData.postTitle_multilanguage);
     }
 
-    CreateAndPublishPostWithImages(baseData){
+    CreateAndPublishPostWithImages(baseData) {
         cy.get(imagePostFeatureClass).click();
         screenshot.takeScreenshot('ClickImage', true);
         cy.wait(delay);
@@ -128,33 +130,33 @@ class PostPage {
         this.PublishPost();
     }
 
-    CreateAndPublishPostWithMultipleLanguages(baseData){
+    CreateAndPublishPostWithMultipleLanguages(baseData) {
         this.CreateAndPublishPost(baseData.postTitle_multilanguage, baseData.postContent_multilanguage);
     }
 
-    CreateAndPublishPostWithTitleOnly(baseData){
+    CreateAndPublishPostWithTitleOnly(baseData) {
         this.CreateAndPublishPost(baseData.postTitle, ' ');
     }
 
-    CreateAndPublishPostWithEmojis(baseData){
+    CreateAndPublishPostWithEmojis(baseData) {
         this.ClearAndTypePost(baseData.postTitle_emojis, baseData.postContent);
     }
 
-    PublishButtonUnavailable(){
+    PublishButtonUnavailable() {
         cy.get(publishPostButton).should('not.exist');
         screenshot.takeScreenshot('PublishButtonUnavailable');
     }
 
-    CreateAndPublishPostWithSymbols(baseData){
+    CreateAndPublishPostWithSymbols(baseData) {
         this.ClearAndTypePost(baseData.postTitle_symbols, baseData.postContent);
     }
-    
-    CreateAndPublishLongTitlePost(baseData){
+
+    CreateAndPublishLongTitlePost(baseData) {
         this.ClearAndTypeLongPost(baseData.postTitle_256, baseData.postContent);
         this.ClickPublishPage();
     }
 
-    ClickPublishPage(){
+    ClickPublishPage() {
         screenshot.takeScreenshot('BeforeClickingPublishPageButton')
         cy.get(publishPostButton).click();
         screenshot.takeScreenshot('BeforeClickingConfirmPublishPageButton')
@@ -166,7 +168,7 @@ class PostPage {
         screenshot.takeScreenshot('AfterFinalPublishPage')
     }
 
-    PostLongTitlePublishError(){
+    PostLongTitlePublishError() {
         screenshot.takeScreenshot('BeforeTitlePublishErrorMessage')
         cy.get(titlePublishErrorMessage).should('be.visible');
         screenshot.takeScreenshot('AfterTitlePublishErrorMessage')
@@ -175,33 +177,40 @@ class PostPage {
         screenshot.takeScreenshot('ValidationTitlePublishErrorMessage')
     }
 
-    ChangePostURL(postURL_){
+    ChangePostURL(postURL_) {
         screenshot.takeScreenshot('BeforeClickSideMenuButton')
         cy.get(pageSideMenuButton).click();
         cy.wait(delay);
         screenshot.takeScreenshot('AfterClickSideMenuButton')
         cy.get(postUrlField).clear();
-        cy.get(postUrlField).type(postURL_, {force: true});
+        cy.get(postUrlField).type(postURL_, { force: true });
         cy.wait(delay);
         screenshot.takeScreenshot('AfterChangePostURL')
         cy.get(pageSideMenuButton).click();
         screenshot.takeScreenshot('AfterCloseSideMenuButton')
     }
 
-    CreateAndPublishPostURL(baseData){
+    CreateAndPublishPostURL(baseData) {
         this.ClearAndTypePost(baseData.postTitle, baseData.postContent);
         this.ChangePostURL(baseData.postURL);
         this.PublishPost();
     }
+    
+    CreateAndPublishPostURLEmoji(baseData) {
+        this.ClearAndTypePost(baseData.postTitle, baseData.postContent);
+        this.ChangePostURL(baseData.postTitle_emojis);
+        this.ClickPublishPage();
+        this.PublishURLEmoji();
+    }
 
-    SeePostPublishedURL(baseData){
+    SeePostPublishedURL(baseData) {
         cy.visit(url + '/' + baseData.postURL);
         cy.wait(delay);
         screenshot.takeScreenshot('NavigateToThePost');
         cy.contains(baseData.postTitle);
     }
 
-    CreateEmptyPost(baseData){
+    CreateEmptyPost(baseData) {
         this.ClearAndTypePost(baseData.postTitle, baseData.postContent);
         cy.get(postTitleInput).clear();
         screenshot.takeScreenshot('DeletePostTitle')
@@ -211,19 +220,57 @@ class PostPage {
         cy.wait(delay);
     }
 
-    CantPublishExistingPost(baseData){
+    CantPublishExistingPost(baseData) {
         dashboardPage.NavigateToPostPage();
         this.ClearAndTypePost(baseData.postTitle, baseData.postContent);
         this.ClickPublishPage();
         this.PublishDupFail();
     }
 
-    PublishDupFail(){
+    PublishURLEmoji() {
+        screenshot.takeScreenshot('BeforeTitlePublishErrorMessage')
+        cy.get(titlePublishErrorMessage).should('be.visible');
+        screenshot.takeScreenshot('AfterTitlePublishErrorMessage')
+        cy.get(titleValidationError).should('to.contain', 'Validation failed: Url error')
+        cy.wait(delay);
+    }
+
+    PublishDupFail() {
         screenshot.takeScreenshot('BeforeTitlePublishErrorMessage')
         cy.get(titlePublishErrorMessage).should('be.visible');
         screenshot.takeScreenshot('AfterTitlePublishErrorMessage')
         cy.get(titleValidationError).should('to.contain', 'Validation failed: Post already exists')
         cy.wait(delay);
+    }
+
+    UpdatePostPublishedDate() {
+        dashboardPage.NavigateToDashboard();
+        cy.visit(url + '/ghost/#/posts');
+        cy.wait(delay);
+        cy.get(dropdownPostFilter).click();
+        screenshot.takeScreenshot('DropdownPostFilter');
+        cy.get(optionPublishedPost).click()
+        screenshot.takeScreenshot('OptionPublishedPost');
+        cy.wait(delay);
+        cy.get(publishedPost).then(($el) => {
+            const randomIndex = Math.floor(Math.random() * $el.length);
+            const randomPost = $el[randomIndex];
+            cy.wrap(randomPost).click({ force: true });
+            screenshot.takeScreenshot('SelectRandomPublishedPost', true);
+            cy.wait(delay);
+        });
+        screenshot.takeScreenshot('BeforeClickSideMenuButton')
+        cy.get(pageSideMenuButton).click();
+        cy.wait(delay);
+        screenshot.takeScreenshot('AfterClickSideMenuButton')
+        cy.get('.gh-date-time-picker-date ').clear();
+        cy.get('.gh-date-time-picker-date ').type('2021-01-01');
+        cy.wait(delay);
+    }
+
+    UpdatedButtonEnable() {
+        screenshot.takeScreenshot('UpdatingPost');
+        cy.get(updatePostButton).should('not.be.disabled');
     }
 }
 

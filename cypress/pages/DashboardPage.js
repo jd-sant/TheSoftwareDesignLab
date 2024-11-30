@@ -1,4 +1,5 @@
 const delay = Cypress.env('delay') || 300;
+const url = Cypress.config('baseUrl') || 'http://localhost:3001';
 const idNavigateNewPost = '.ember-view.gh-secondary-action.gh-nav-new-post';
 const idNavigateMember = 'a[data-test-nav="members"]';
 const dashboardHeading = '.gh-onboarding-header h2';
@@ -40,6 +41,11 @@ class DashboardPage {
 
     NavigateToMemberPage() {
         cy.get(idNavigateMember).click();
+        cy.wait(delay);
+    };
+
+    NavigateToDashboard() {
+        cy.visit(url + '/ghost/#/dashboard');
         cy.wait(delay);
     };
 

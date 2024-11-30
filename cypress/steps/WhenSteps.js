@@ -183,6 +183,14 @@ class WhenSteps {
     whenCreateEmptyPost(baseData) {
         postPage.CreateEmptyPost(baseData);
     }
+
+    whenUpdatePostPublishedDate() {
+        postPage.UpdatePostPublishedDate();
+    }
+
+    whenCreateAndPublishPostURLEmoji(baseData) {
+        postPage.CreateAndPublishPostURLEmoji(baseData);
+    }
     
     // Create Page
 
@@ -222,13 +230,38 @@ class WhenSteps {
         pagePage.CreateAndPublishPageURL(baseData);
     }
 
-    whenCreateAndPublishPageExcerpt(baseData) {
-        pagePage.CreateAndPublishPageExcerpt(baseData);
+
+    whenCreateEmptyPage() {
+        pagePage.CreateEmptyPage();
     }
 
+    whenCreateAndEditPageLongTitle(baseData){
+        pagePage.CreateAndEditPageLongTitle(baseData);
+    }
+
+    whenCreateAndEditEmptyPage(baseData){
+        pagePage.CreateAndEditEmptyPage(baseData);
+    }
+
+    whenCreateDuplicatedPages(baseData){
+        pagePage.CreateDuplicatedPages(baseData);
+    }
+
+    whenCreateAndPublishPageURLMultilanguage(baseData) {
+        pagePage.CreateAndPublishPageURLMultilanguage(baseData);
+    }
+
+    whenCreateAndPublishPageWithOlderDate(baseData){
+        pagePage.CreateAndPublishPageWithOlderDate(baseData);
+    }
     // Admin user
     whenCreateUser(){
         loginPage.CreateUser();
+    }
+
+    // Settings Page
+    whenPrivatizateSite(baseData){
+        settingsPage.PrivatizateSite(baseData);
     }
 }
 

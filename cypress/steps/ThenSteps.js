@@ -172,6 +172,10 @@ class ThenSteps {
         postPage.CantPublishExistingPost(baseData);
     }
 
+    thenUpdatedButtonEnable(){
+        postPage.UpdatedButtonEnable();
+    }
+
     // Create Page
 
     thenSeePagePublished(baseData){
@@ -190,8 +194,8 @@ class ThenSteps {
         pagePage.PublishButtonUnavailable();
     }
 
-    thenPageLongTitlePublishError(){
-        pagePage.PageLongTitlePublishError();
+    thenLongTitleUpdateError(){
+        pagePage.LongTitleUpdateError();
     }
 
     thenSeePagePublishedURL(baseData){
@@ -202,9 +206,18 @@ class ThenSteps {
         pagePage.PageLongExcerptPublishError();
     }
 
+    thenSeeEmptyPagePublished(){
+        pagePage.SeeEmptyPagePublished();
+    }
+
     // Admin User
     thenCanChangeSiteDescription(baseData){
         settingsPage.CanChangeSiteDescription(baseData);
+    }
+
+    // Setting page
+    thenAccessSiteWithPassword(baseData){
+        settingsPage.AccessSiteWithPassword(baseData);
     }
 
 }
