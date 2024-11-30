@@ -1,6 +1,10 @@
 {
   "devDependencies": {
     "cypress": "^13.16.0",
+    "cypress-file-upload": "^5.0.8",
     "resemblejs": "^5.0.0"
+  },
+  "dependencies": {
+    "cypress-real-events": "^1.13.0"
   }
 }

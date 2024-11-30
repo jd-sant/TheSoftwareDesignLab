@@ -88,6 +88,14 @@ class ThenSteps {
         tagPage.seeTagWithMetaData(baseData)
     }
 
+    thenSeeTagCreatedwithUnplashImageAndMetaData(baseData){
+        tagPage.seeImageUnplash(baseData);
+    }
+
+    thenSeeTagAlertErrorWithXData(baseData){
+        tagPage.seeAlertErrorX(baseData);
+    }
+
 
 // Posts
     thenSeePostPublished(baseData){

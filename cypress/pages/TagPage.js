@@ -1,5 +1,6 @@
 const delay = Cypress.env('delay') || 300;
 import { screenshot } from '../support/Screenshots';
+import { dashboardPage } from './DashboardPage';
 
 const newTagButton = '.ember-view.gh-btn.gh-btn-primary';
 const nameTag = '#tag-name';
@@ -13,6 +14,7 @@ const saveButtonTag = '[data-test-button="save"]';
 const deleteButtonTag = '[data-test-button="delete-tag"]';
 const backButtonTag = '[data-test-link="tags-back"]';
 const expandMetaData = ':nth-child(1) > .gh-expandable-header > .gh-btn > span'
+const expandXData = ':nth-child(2) > .gh-expandable-header > .gh-btn > span'
 const tableTags = '.view-container.content-list'
 const listNameTag = '.gh-tag-list-name'
 const leavePageButtonTag = '.modal-footer > .gh-btn-red > span'
@@ -22,6 +24,17 @@ const errorNameTag = 'span.error p.response:nth-child(1)';
 const errorColorTag = 'span.error p.response:nth-child(2)';
 const errorDescriptionTag = 'div.form-group.no-margin.error p.response';
 const errorSlugTag = 'div.form-group.error p.response';
+const unplashButtonImage = '.gh-image-uploader-unsplash';
+const gridUnplashImages = '.gh-unsplash-grid > div.gh-unsplash-grid-column:nth-child(1) > a:nth-child(1)';
+const imageUnplashHover = '.absolute > .gh-unsplash-photo > .gh-unsplash-photo-container > .gh-unsplash-photo-overlay'
+const unplashInsertImage = '.absolute > .gh-unsplash-photo > .gh-unsplash-photo-container > .gh-unsplash-photo-overlay > .gh-unsplash-photo-footer > .gh-unsplash-button';
+const imageUploadTag = '.gh-image-uploader.-with-image > div > img';
+const titleXCardTag = '#twitter-title';
+const descriptionXCardTag = '#twitter-description';
+const uploadFileXCard = '.gh-twitter-settings .x-file-input';
+const alertXCard = '.gh-alert-content';
+const gridPostPage = '.view-container.content-list div:nth-child(1)';
+const settingsPost = '.settings-menu-toggle.gh-btn.gh-btn-editor.gh-btn-icon.icon-only.gh-btn-action-icon'
 
 
 /**
@@ -37,6 +50,10 @@ class TagPage {
         cy.get(newTagButton).click();
         screenshot.takeScreenshot('AfterNavigateToNewTag')
         cy.wait(delay);
+    }
+
+    navigateToPost() {
+        dashboardPage.NavigateToPostPage();
     }
 
     /**
@@ -67,9 +84,31 @@ class TagPage {
         screenshot.takeScreenshot('tagAfterClearAndType')
     }
 
-    typeMetaData(tagMetaTitle_, tagMetaDescription_){
+    unplashImagetag() {
+        cy.get(unplashButtonImage).click(); // Clic en el botón para abrir Unsplash
+
+        // Selecciona la imagen y guarda su URL
+        cy.get(gridUnplashImages)
+            .find('img') // Encuentra el elemento img dentro del contenedor
+            .should('have.attr', 'src') // Asegúrate de que tenga un atributo src
+            .then((imageUrl) => {
+                // Guarda la URL en una variable alias
+                cy.wrap(imageUrl).as('savedImageUrl');
+            });
+
+        // Haz clic en el botón Insert Image
+        cy.get(gridUnplashImages)
+            .realHover() // Simula el mouse sobre el elemento
+            .then(() => {
+                // Esperar un tiempo para que el botón se haga visible
+                cy.wait(1000); // Ajusta el tiempo según sea necesario
+                cy.get(gridUnplashImages).find('.gh-unsplash-button').last().click();
+            })
+    }
+
+    typeMetaData(tagMetaTitle_, tagMetaDescription_) {
         cy.get(expandMetaData).click();
-        screenshot.takeScreenshot('AfterExpandMetadata')
+        screenshot.takeScreenshot('AfterexpandMetaData')
         cy.get(metaTitleTag).type(tagMetaTitle_);
         screenshot.takeScreenshot('fillMetaTitle');
         cy.get(metaDescriptionTag).type(tagMetaDescription_);
@@ -125,6 +164,23 @@ class TagPage {
         screenshot.takeScreenshot('tagAfterClear');
     }
 
+    typeXCard(tagXTitle_, tagXDescription_, tagImage_){
+        screenshot.takeScreenshot('tagBeforeTypeXCard')
+        cy.get(expandXData).click();
+        screenshot.takeScreenshot('AfterexpandXData')
+        cy.get(titleXCardTag).clear().type(tagXTitle_);
+        screenshot.takeScreenshot('fillTitleX')
+        cy.get(descriptionXCardTag).clear().type(tagXDescription_);
+        screenshot.takeScreenshot('fillDescriptionX')
+        cy.get(uploadFileXCard).attachFile({
+            fileContent: tagImage_.split(',')[1],
+            fileName: 'image.png',
+            mimeType: 'image/png',
+            encoding: 'base64'
+        });
+        screenshot.takeScreenshot('AttachFileXTag')
+    }
+
     /**
      * Guarda el tag actual haciendo click en el botón de guardado.
      */
@@ -156,12 +212,33 @@ class TagPage {
         this.saveButtonTag();
     }
 
+    createTagAndLinkWithPost(baseData) {
+        createTag(baseData.tagName, baseData.tagColor, baseData.tagDescription, baseData.tagImage, baseData.tagSlug)
+
+    }
+
     wrapCreateTag(baseData) {
         this.CreateTag(baseData.tagName, baseData.tagColor.substring(1), baseData.tagDescription, baseData.tagImage, baseData.tagName)
     }
 
+    createTagWithUnplashImageAndMetaData(baseData) {
+        this.NavigateToCreateNewTag();
+        this.ClearAndTypeTag(baseData.tagName, baseData.tagColor.substring(1), baseData.tagDescription, baseData.tagImage, baseData.tagName);
+        cy.get(imageFilledTag).click();
+        this.unplashImagetag();
+        this.typeMetaData(baseData.tagMetaTitle, baseData.tagMetaDescription);
+        this.saveButtonTag();
+    }
+    
+    createTagXData(baseData){
+        this.NavigateToCreateNewTag();
+        this.ClearAndTypeTag(baseData.tagName, baseData.tagColor.substring(1), baseData.tagDescription, baseData.tagImage, baseData.tagName);
+        this.typeMetaData(baseData.tagMetaTitle, baseData.tagMetaDescription);
+        this.typeXCard(baseData.tagXTitle, baseData.tagXDescription, baseData.tagImage);
+        this.saveButtonTag();
+    }
 
-    createTagWithMetaData(baseData){
+    createTagWithMetaData(baseData) {
         this.NavigateToCreateNewTag();
         this.ClearAndTypeTag(baseData.tagName, baseData.tagColor.substring(1), baseData.tagDescription, baseData.tagImage, baseData.tagName);
         this.typeMetaData(baseData.tagMetaTitle, baseData.tagMetaDescription);
@@ -348,7 +425,7 @@ class TagPage {
         cy.get(tableTags).should('not.contain.text', baseData.tagName);
     }
 
-    seeTagWithMetaData(baseData){
+    seeTagWithMetaData(baseData) {
         screenshot.takeScreenshot('BeforeSeeTagWithMetaData')
         cy.get(backButtonTag).click();
         cy.get(tableTags).contains(listNameTag, baseData.tagName).click();
@@ -356,7 +433,32 @@ class TagPage {
         cy.get(expandMetaData).click();
         cy.get(metaTitleTag).invoke('val').should('eq', baseData.tagMetaTitle);
         cy.get(metaDescriptionTag).invoke('val').should('eq', baseData.tagMetaDescription)
-        screenshot.takeScreenshot('AfterSeeTagWithMetaData')
+        screenshot.takeScreenshot('AfterSeeTagWithMetaData');
+    }
+
+    seeImageUnplash(baseData) {
+        screenshot.takeScreenshot('BeforeSeeImageUnplash')
+        cy.get(backButtonTag).click();
+        cy.get(tableTags).contains(listNameTag, baseData.tagName).click();
+        cy.get(titleTag).should('contain.text', baseData.tagName);
+        cy.get('@savedImageUrl').then((savedImageUrl) => {
+            // Realiza tu comparación con la URL esperada
+            cy.get(imageUploadTag).should('have.attr', 'src').then((uploadImageUrl) => {
+                const normalizeUrl = (url) => url.replace(/&w=\d+/, '');
+                expect(normalizeUrl(uploadImageUrl)).to.eq(normalizeUrl(savedImageUrl));
+            })
+        });
+        screenshot.takeScreenshot('AfterSeeImageUnplash')
+    }
+
+    seeAlertErrorX(baseData) {
+        screenshot.takeScreenshot('AfterAlertErrorX');
+        cy.get(alertXCard)
+            .invoke('text')
+            .then((actualText) => {
+                const normalizedText = actualText.trim().replace(/\s+/g, ' ');
+                expect(normalizedText).to.contain('Validation error, cannot save tag. Validation failed for twitter_title.');
+            });
     }
 }
 

@@ -88,6 +88,14 @@ class WhenSteps {
         tagPage.createTagWithMetaData(baseData);
     }
 
+    whenCreateTagWithUnplashImageAndMetaData(baseData){
+        tagPage.createTagWithUnplashImageAndMetaData(baseData);
+    }
+
+    whenCreateTagWithXcard(baseData) {
+        tagPage.createTagXData(baseData);
+    }
+
     // Post
     whenCreateAndPublishPost(baseData) {
         postPage.CreateAndPublishPost(baseData.postTitle, baseData.postContent);
