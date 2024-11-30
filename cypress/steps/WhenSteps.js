@@ -168,6 +168,10 @@ class WhenSteps {
     whenUpdatePostPublishedDate() {
         postPage.UpdatePostPublishedDate();
     }
+
+    whenCreateAndPublishPostURLEmoji(baseData) {
+        postPage.CreateAndPublishPostURLEmoji(baseData);
+    }
     
     // Create Page
 

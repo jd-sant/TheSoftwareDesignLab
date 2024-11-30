@@ -195,6 +195,13 @@ class PostPage {
         this.ChangePostURL(baseData.postURL);
         this.PublishPost();
     }
+    
+    CreateAndPublishPostURLEmoji(baseData) {
+        this.ClearAndTypePost(baseData.postTitle, baseData.postContent);
+        this.ChangePostURL(baseData.postTitle_emojis);
+        this.ClickPublishPage();
+        this.PublishURLEmoji();
+    }
 
     SeePostPublishedURL(baseData) {
         cy.visit(url + '/' + baseData.postURL);
@@ -218,6 +225,14 @@ class PostPage {
         this.ClearAndTypePost(baseData.postTitle, baseData.postContent);
         this.ClickPublishPage();
         this.PublishDupFail();
+    }
+
+    PublishURLEmoji() {
+        screenshot.takeScreenshot('BeforeTitlePublishErrorMessage')
+        cy.get(titlePublishErrorMessage).should('be.visible');
+        screenshot.takeScreenshot('AfterTitlePublishErrorMessage')
+        cy.get(titleValidationError).should('to.contain', 'Validation failed: Url error')
+        cy.wait(delay);
     }
 
     PublishDupFail() {
