@@ -12,6 +12,7 @@ describe('Member Creation (pseudo-aleatorio)', () => {
   let baseData5_1, baseData5_2, baseData5_3;
   let baseData6_1, baseData6_2, baseData6_3;
   let baseData7_1, baseData7_2, baseData7_3;
+  let baseData8_1, baseData9_1, baseData10_1;
 
   beforeEach(() => {
     // Realizar la petición a la API de Mockaroo para obtener 1000 registros
@@ -31,8 +32,9 @@ describe('Member Creation (pseudo-aleatorio)', () => {
       baseData4_1, baseData4_2, baseData4_3,
       baseData5_1, baseData5_2, baseData5_3,
       baseData6_1, baseData6_2, baseData6_3,
-      baseData7_1, baseData7_2, baseData7_3
-      ] = shuffledData.slice(0, 21);
+      baseData7_1, baseData7_2, baseData7_3,
+      baseData8_1, baseData9_1, baseData10_1
+      ] = shuffledData.slice(0, 24);
     });
     Cypress.Screenshot.defaults({
       disableTimersAndAnimations: false,
@@ -45,49 +47,49 @@ describe('Member Creation (pseudo-aleatorio)', () => {
     givenSteps.givenNavigateToMemberPage();
   });
 
-  it.skip('PA##-C - Create a member and find by Label (condition: is)', () => {
+  it('PA##-C - Create a member and find by Label (condition: is)', () => {
     // When the user creates and saves members and try to find it by label
     whenSteps.whenCreateMemberFindByLabelIs(baseData1_1, baseData1_2, baseData1_3);
     // Then the user should see the created member by the label
     thenSteps.thenSeeMembersCreatedByLabelIs(baseData1_1, baseData1_2, baseData1_3);
   });
 
-  it.skip('PA##-C - Create a member and find by Label (condition: is not)', () => {
+  it('PA##-C - Create a member and find by Label (condition: is not)', () => {
     // When the user creates and saves members and filter by some different label with a 'is not' condition
     whenSteps.whenCreateMemberFindByLabelIsNot(baseData2_1, baseData2_2, baseData2_3);
     // Then the user should see the created members by the diferent filter label with a 'is not' condition
     thenSteps.thenSeeMembersCreatedByLabelIsNot(baseData2_1, baseData2_2, baseData2_3);
   });
 
-  it.skip('PA##-C - Create a member and find by name (condition: is)', () => {
+  it('PA##-C - Create a member and find by name (condition: is)', () => {
     // When the user creates and saves members and try to find it by name
     whenSteps.whenCreateMemberFindByNameIs(baseData3_1, baseData3_2, baseData3_3);
     // Then the user should see the created member by the name
     thenSteps.thenSeeMembersCreatedByNameIs(baseData3_1, baseData3_2, baseData3_3);
   });
 
-  it.skip('PA##-C - Create a member and find by name (condition: contains)', () => {
+  it('PA##-C - Create a member and find by name (condition: contains)', () => {
     // When the user creates and saves members and try to find it by name with contains condition
     whenSteps.whenCreateMemberFindByNameContains(baseData4_1, baseData4_2, baseData4_3);
     // Then the user should see the created member by the name with contains condition
     thenSteps.thenSeeMembersCreatedByNameContains(baseData4_1, baseData4_2, baseData4_3);
   });
 
-  it.skip('PA##-C - Create a member and find by name (condition: does not contain)', () => {
+  it('PA##-C - Create a member and find by name (condition: does not contain)', () => {
     // When the user creates and saves members and try to find it by name with not contain condition
     whenSteps.whenCreateMemberFindByNameNotContains(baseData5_1, baseData5_2, baseData5_3);
     // Then the user should see the created member by the name with not contain condition
     thenSteps.thenSeeMembersCreatedByNameNotContains(baseData5_1, baseData5_2, baseData5_3);
   });
 
-  it.skip('PA##-C - Create a member and find by name (condition: starts with)', () => {
+  it('PA##-C - Create a member and find by name (condition: starts with)', () => {
     // When the user creates and saves members and try to find it by name with starts with condition
     whenSteps.whenCreateMemberFindByNameStartsWith(baseData6_1, baseData6_2, baseData6_3);
     // Then the user should see the created member by the name with starts with condition
     thenSteps.thenSeeMembersCreatedByNameStartsWith(baseData6_1, baseData6_2, baseData6_3);
   });
 
-  it.skip('PA##-C - Create a member and find by name (condition: ends with)', () => {
+  it('PA##-C - Create a member and find by name (condition: ends with)', () => {
     // When the user creates and saves members and try to find it by name with ends with condition
     whenSteps.whenCreateMemberFindByNameEndsWith(baseData7_1, baseData7_2, baseData7_3);
     // Then the user should see the created member by the name with ends with condition
@@ -96,21 +98,21 @@ describe('Member Creation (pseudo-aleatorio)', () => {
 
   it('PA##-C - Create a member with blank label', () => {
     // When the user tries to creates and saves member with blank label
-    whenSteps.whenCreateMemberWithBlankLabel(baseData1_1);
+    whenSteps.whenCreateMemberWithBlankLabel(baseData8_1);
     // Then the user should see an advise about the blank label error and system cancel the operation
     thenSteps.thenSeeBlankLabelError();
   });
 
   it('PA##-C - Create a member with name without letters', () => {
     // When the user tries to creates and saves member with name without letters
-    whenSteps.whenCreateMemberWithoutLettersName(baseData1_1);
+    whenSteps.whenCreateMemberWithoutLettersName(baseData9_1);
     // Then the user should see an advise about the name error and system cancel the operation
     thenSteps.thenSeeWithoutLettersNameError();
   });
 
   it('PA##-C - Create a member with email with accents', () => {
     // When the user tries to creates and saves member email with accents
-    whenSteps.whenCreateMemberWithAccentsInEmail(baseData1_1);
+    whenSteps.whenCreateMemberWithAccentsInEmail(baseData10_1);
     // Then the user should see an advise about the accent email error and the system cancel the operation
     thenSteps.thenSeeAccentsEmailError();
   });

@@ -353,10 +353,10 @@ class MemberPage {
     }
 
     SeeBlankLabelError() {
-        screenshot.takeScreenshot('InvalidNameError');
+        screenshot.takeScreenshot('InvalidLabelError');
         cy.wait(delay);
         cy.get(retrySaveMemberButton).should('be.visible');        
-        cy.get('body').should('contain', 'Validation failed for name');
+        cy.get('body').should('contain', 'Validation failed for label');
     }
     // ************************************************************
 
