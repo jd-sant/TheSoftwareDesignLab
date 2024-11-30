@@ -3,6 +3,7 @@ import { postPage } from "../pages/PostPage";
 import { loginPage } from "../pages/LoginPage";
 import { tagPage } from "../pages/TagPage";
 import { pagePage } from "../pages/PagePage";
+import { settingsPage } from "../pages/SettingsPage";
 
 class WhenSteps {
 
@@ -182,6 +183,10 @@ class WhenSteps {
     whenUpdatePostPublishedDate() {
         postPage.UpdatePostPublishedDate();
     }
+
+    whenCreateAndPublishPostURLEmoji(baseData) {
+        postPage.CreateAndPublishPostURLEmoji(baseData);
+    }
     
     // Create Page
 
@@ -248,6 +253,11 @@ class WhenSteps {
     // Admin user
     whenCreateUser(){
         loginPage.CreateUser();
+    }
+
+    // Settings Page
+    whenPrivatizateSite(baseData){
+        settingsPage.PrivatizateSite(baseData);
     }
 }
 

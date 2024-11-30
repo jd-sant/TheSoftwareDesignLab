@@ -35,7 +35,7 @@ describe('Post Feature Testing', () => {
     it('PA0##-C - Create an existing post', () => {
         // When the user creates a post
         whenSteps.whenCreateAndPublishPost(baseData); 
-        // Then the user shouldn't ve able to publish the same post again
+        // Then the user shouldn't be able to publish the same post again
         thenSteps.thenCantPublishExistingPost(baseData);
     });
 
@@ -45,4 +45,11 @@ describe('Post Feature Testing', () => {
         // Then the user should see the updated button enable
         thenSteps.thenUpdatedButtonEnable();
     });
+
+    it('PA0##-C - Creat a post with a emoji as url', () => {
+        // When the user creates a post with a emoji as url
+        whenSteps.whenCreateAndPublishPostURLEmoji(baseData);
+        // Then the user shouldn't be able to publish the post
+        thenSteps.thenCantPublishExistingPost(baseData);
+    })
 });

@@ -209,6 +209,11 @@ class ThenSteps {
         settingsPage.CanChangeSiteDescription(baseData);
     }
 
+    // Setting page
+    thenAccessSiteWithPassword(baseData){
+        settingsPage.AccessSiteWithPassword(baseData);
+    }
+
 }
 
 export const thenSteps = new ThenSteps();
