@@ -176,8 +176,8 @@ class ThenSteps {
         pagePage.PublishButtonUnavailable();
     }
 
-    thenPageLongTitlePublishError(){
-        pagePage.PageLongTitlePublishError();
+    thenLongTitleUpdateError(){
+        pagePage.LongTitleUpdateError();
     }
 
     thenSeePagePublishedURL(baseData){
@@ -186,6 +186,10 @@ class ThenSteps {
 
     thenPageLongExcerptPublishError(){
         pagePage.PageLongExcerptPublishError();
+    }
+
+    thenSeeEmptyPagePublished(){
+        pagePage.SeeEmptyPagePublished();
     }
 
     // Admin User

@@ -16,7 +16,13 @@ const excerptValidationError = 'div[class="gh-alert-content"]'
 const pageSideMenuButton = 'button[data-test-psm-trigger=""]';
 const pageUrlField = '.post-setting-slug';
 const pageAreaExcerpt = 'textarea[class="post-setting-custom-excerpt ember-text-area gh-input ember-view"]';
+const editbutton = 'span[class="gh-post-list-cta edit "]';
+const updatebutton = 'button[class="gh-btn gh-btn-editor gh-editor-save-trigger green ember-view"]'
+const titleupdateerrormessage = 'div[class="gh-alert-content"]'
 import { screenshot } from '../support/Screenshots';
+const PageBackMenu = 'a[class="ember-view gh-btn-editor gh-editor-back-button"]'
+const idNavigateCreatePage = 'a[data-test-new-page-button]';
+const pageDateField = 'div[class="gh-date-time-picker-date "]'
 
 
 class PagePage {
@@ -78,6 +84,15 @@ class PagePage {
         cy.get(pageTitleInput).type(pageTitle_,{ force: true });
         screenshot.takeScreenshot('FillPageTittle')
         cy.wait(delay);
+        cy.get(updatebutton).first().click();
+    }
+
+    TypeEmptyPage() {
+        cy.get(pageTitleInput).clear();
+        screenshot.takeScreenshot('BeforeTypePageTitle')
+        cy.get(pageContentInput).clear();
+        cy.wait(delay);
+        screenshot.takeScreenshot('AfterTypePageContent')
     }
 
     CreateAndPublishPage(pageTitle_, pageContent_) {
@@ -87,6 +102,10 @@ class PagePage {
 
     CreateAndPublishPageSpecial(baseData){
         this.CreateAndPublishPage(baseData.pageTitle_Special, baseData.pageContent_Special);
+    }
+
+    CreateEmptyPage(){
+        this.TypeEmptyPage();
     }
 
     SeePagePublished(pageTitle_ = this.pageTitle) {
@@ -101,37 +120,27 @@ class PagePage {
         screenshot.takeScreenshot('ValidationPublishedPageFilter')
     }
 
+    SeeEmptyPagePublished() {
+        screenshot.takeScreenshot('BeforeClickDropdownFilter')
+        cy.get(dropdownPageFilter).click();
+        screenshot.takeScreenshot('AfterClickDropdownFilter')
+        cy.get(optionPublishedPage).click()
+        screenshot.takeScreenshot('AfterPublishedPageFilter')
+        cy.wait(delay);
+        cy.get(classPublisdPageTitle).first().should('to.contain', '(Untitled)'.trim());
+        cy.wait(delay);
+        screenshot.takeScreenshot('ValidationPublishedPageFilter')
+    }
+
     SeeSpecialPagePublished(baseData) {
         this.SeePagePublished(baseData.pageTitle_Special);
     }
 
-    ClearAndTypePageInvalid(pageTitle_ = this.pageTitle, pageContent_ = this.pageContent, pageTitle__ = this.pageTitleInvalid) {
-        screenshot.takeScreenshot('BeforeClearPageTitleInvalid')
-        cy.get(pageTitleInput).clear();
-        screenshot.takeScreenshot('BeforeTypePageTitleNormal')
-        cy.get(pageTitleInput).type(pageTitle_);
-        screenshot.takeScreenshot('AfterTypePageTitleNormal')
-        cy.get(pageContentInput).clear();
-        screenshot.takeScreenshot('BeforeTypePageContentInvalid')
-        cy.get(pageContentInput).type(pageContent_);
-        cy.wait(delay);
-        screenshot.takeScreenshot('AfterTypePageContent')
-        cy.get(pageTitleInput).clear();
-        screenshot.takeScreenshot('BeforeTypePageTitleInvalid')
-        cy.get(pageTitleInput).type(pageTitle__);
-        screenshot.takeScreenshot('AfterTypePageTitleInvalid')
-    }
-
-    CreatePageInvalidTitle(pageTitle_ = this.pageTitle, pageContent_ = this.pageContent, pageTitle__ = this.pageTitleInvalid){
-        this.ClearAndTypePageInvalid(pageTitle_, pageContent_, pageTitle__);
-        this.ClickPublishPage();
-    }
-
-    LongTitlePublishError(){
+    LongTitleUpdateError(){
         screenshot.takeScreenshot('BeforeTitlePublishErrorMessage')
-        cy.get(titlePublishErrorMessage).should('be.visible');
+        cy.get(titleupdateerrormessage).should('be.visible');
         screenshot.takeScreenshot('AfterTitlePublishErrorMessage')
-        cy.get(titleValidationError).should('to.contain', 'Validation failed: Title cannot be longer than 255 characters.')
+        cy.get(titleupdateerrormessage).should('to.contain', 'Update failed: Title cannot be longer than 255 characters.')
         cy.wait(delay);
         screenshot.takeScreenshot('ValidationTitlePublishErrorMessage')
     }
@@ -170,15 +179,6 @@ class PagePage {
         this.ClickPublishPage();
     }
 
-    PageLongTitlePublishError(){
-        screenshot.takeScreenshot('BeforeTitlePublishErrorMessage')
-        cy.get(titlePublishErrorMessage).should('be.visible');
-        screenshot.takeScreenshot('AfterTitlePublishErrorMessage')
-        cy.get(titleValidationError).should('to.contain', 'Validation failed: Title cannot be longer than 255 characters.')
-        cy.wait(delay);
-        screenshot.takeScreenshot('ValidationTitlePublishErrorMessage')
-    }
-
     ChangePageURL(pageURL_){
         screenshot.takeScreenshot('BeforeClickSideMenuButton')
         cy.get(pageSideMenuButton).click();
@@ -192,10 +192,56 @@ class PagePage {
         screenshot.takeScreenshot('AfterCloseSideMenuButton')
     }
 
+    ChangePageURLMultilanguage(pageURL_){
+        screenshot.takeScreenshot('BeforeClickSideMenuButton')
+        cy.get(pageSideMenuButton).click();
+        cy.wait(delay);
+        screenshot.takeScreenshot('AfterClickSideMenuButton')
+        cy.get(pageUrlField).clear();
+        cy.get(pageUrlField).type(pageURL_, {force: true});
+        cy.wait(delay);
+        screenshot.takeScreenshot('AfterChangePostURL')
+        cy.get(pageSideMenuButton).click();
+        screenshot.takeScreenshot('AfterCloseSideMenuButton')
+    }
+
+    ChangePageDate(pageDate_){
+        screenshot.takeScreenshot('BeforeClickSideMenuButton')
+        cy.get(pageSideMenuButton).click();
+        cy.wait(delay);
+        screenshot.takeScreenshot('AfterClickSideMenuButton')
+        cy.get(pageDateField).clear();
+        cy.get(pageDateField).type(pageDate_, {force: true});
+        cy.wait(delay);
+        screenshot.takeScreenshot('AfterChangePageDate')
+        cy.get(pageSideMenuButton).click();
+        screenshot.takeScreenshot('AfterCloseSideMenuButton')
+    }
+
+
     CreateAndPublishPageURL(baseData){
         this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
         this.ChangePageURL(baseData.pageURL);
         this.PublishPage();
+    }
+
+    CreateAndPublishPageURLMultilanguage(baseData){
+        this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
+        this.ChangePageURL(baseData.pageURL_multilanguage);
+        this.PublishPage();
+    }
+
+    EditPage(){
+        cy.get(dropdownPageFilter).click();
+        cy.get(optionPublishedPage).click()
+        cy.get(editbutton).first().click();
+    }
+
+    CreateAndEditPageLongTitle(baseData){
+        this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
+        this.PublishPage();
+        this.EditPage();
+        this.ClearAndTypeLongPage(baseData.pageTitle_256, baseData.pageContent);
     }
 
     SeePagePublishedURL(baseData){
@@ -205,30 +251,35 @@ class PagePage {
         cy.contains(baseData.pageTitle);
     }
 
-    AddPageExcerpt(pageExcerpt_){
-        screenshot.takeScreenshot('BeforeClickSideMenuButton')
-        cy.get(pageSideMenuButton).click();
-        cy.wait(delay);
-        screenshot.takeScreenshot('AfterClickSideMenuButton')
-        cy.get(pageAreaExcerpt).clear();
-        cy.get(pageAreaExcerpt).type(pageExcerpt_, {force: true});
-        cy.wait(delay);
-        screenshot.takeScreenshot('AfterChangePostURL')
-        cy.get(pageSideMenuButton).click();
-        screenshot.takeScreenshot('AfterCloseSideMenuButton')
-    }
-
-    CreateAndPublishPageExcerpt(baseData){
-        this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
-        this.AddPageExcerpt(baseData.pageExcerpt);
-        this.ClickPublishPageValidation()
-    }
 
     PageLongExcerptPublishError(){
         screenshot.takeScreenshot('BeforeTitlePublishErrorMessage')
         cy.get(excerptValidationError).should('be.visible');
         screenshot.takeScreenshot('AfterTitlePublishErrorMessage')
         cy.wait(delay);
+    }
+
+    CreateAndEditEmptyPage(baseData){
+        this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
+        this.PublishPage();
+        this.EditPage();
+        this.CreateEmptyPage();
+        cy.get(updatebutton).first().click();
+        cy.get(PageBackMenu).click();
+    }
+
+    CreateDuplicatedPages(baseData){
+        this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
+        this.PublishPage();
+        cy.get(idNavigateCreatePage).click();
+        this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
+        this.PublishPage();
+    }
+
+    CreateAndPublishPageWithOlderDate(baseData){
+        this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
+        this.ChangePageDate(baseData.pageDate);
+        this.PublishPage();
     }
 
 }

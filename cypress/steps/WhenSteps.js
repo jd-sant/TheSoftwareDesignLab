@@ -207,10 +207,30 @@ class WhenSteps {
         pagePage.CreateAndPublishPageURL(baseData);
     }
 
-    whenCreateAndPublishPageExcerpt(baseData) {
-        pagePage.CreateAndPublishPageExcerpt(baseData);
+
+    whenCreateEmptyPage() {
+        pagePage.CreateEmptyPage();
     }
 
+    whenCreateAndEditPageLongTitle(baseData){
+        pagePage.CreateAndEditPageLongTitle(baseData);
+    }
+
+    whenCreateAndEditEmptyPage(baseData){
+        pagePage.CreateAndEditEmptyPage(baseData);
+    }
+
+    whenCreateDuplicatedPages(baseData){
+        pagePage.CreateDuplicatedPages(baseData);
+    }
+
+    whenCreateAndPublishPageURLMultilanguage(baseData) {
+        pagePage.CreateAndPublishPageURLMultilanguage(baseData);
+    }
+
+    whenCreateAndPublishPageWithOlderDate(baseData){
+        pagePage.CreateAndPublishPageWithOlderDate(baseData);
+    }
     // Admin user
     whenCreateUser(){
         loginPage.CreateUser();
