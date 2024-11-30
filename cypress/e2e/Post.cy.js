@@ -31,4 +31,11 @@ describe('Post Feature Testing', () => {
         // Then the user shouldn't see the publish button
         thenSteps.thenPublishButtonUnavailable();
     });
+
+    it('PA0##-C - Create an existing post', () => {
+        // When the user creates a post
+        whenSteps.whenCreateAndPublishPost(baseData); 
+        // Then the user shouldn't ve able to publish the same post again
+        thenSteps.thenCantPublishExistingPost(baseData);
+    });
 });
