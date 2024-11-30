@@ -124,6 +124,10 @@ class WhenSteps {
     whenCreateAndPublishPostURL(baseData) {
         postPage.CreateAndPublishPostURL(baseData);
     }
+
+    whenCreateEmptyPost(baseData) {
+        postPage.CreateEmptyPost(baseData);
+    }
     
     // Create Page
 

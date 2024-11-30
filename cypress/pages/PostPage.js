@@ -199,6 +199,16 @@ class PostPage {
         screenshot.takeScreenshot('NavigateToThePost');
         cy.contains(baseData.postTitle);
     }
+
+    CreateEmptyPost(baseData){
+        this.ClearAndTypePost(baseData.postTitle, baseData.postContent);
+        cy.get(postTitleInput).clear();
+        screenshot.takeScreenshot('DeletePostTitle')
+        cy.wait(delay);
+        cy.get(postContentInput).clear()
+        screenshot.takeScreenshot('DeletePostContent')
+        cy.wait(delay);
+    }
 }
 
 export const postPage = new PostPage();
