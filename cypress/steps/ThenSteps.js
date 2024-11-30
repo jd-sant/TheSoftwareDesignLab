@@ -142,6 +142,10 @@ class ThenSteps {
         postPage.SeePostPublishedURL(baseData);
     }
 
+    thenCantPublishExistingPost(baseData){
+        postPage.CantPublishExistingPost(baseData);
+    }
+
     // Create Page
 
     thenSeePagePublished(baseData){

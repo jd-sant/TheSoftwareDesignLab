@@ -21,6 +21,7 @@ const titleValidationError = 'p[data-test-confirm-error]';
 const pageSideMenuButton = 'button[data-test-psm-trigger=""]';
 const postUrlField = '.post-setting-slug';
 import { screenshot } from '../support/Screenshots';
+import { dashboardPage } from './DashboardPage';
 
 class PostPage {
 
@@ -198,6 +199,31 @@ class PostPage {
         cy.wait(delay);
         screenshot.takeScreenshot('NavigateToThePost');
         cy.contains(baseData.postTitle);
+    }
+
+    CreateEmptyPost(baseData){
+        this.ClearAndTypePost(baseData.postTitle, baseData.postContent);
+        cy.get(postTitleInput).clear();
+        screenshot.takeScreenshot('DeletePostTitle')
+        cy.wait(delay);
+        cy.get(postContentInput).clear()
+        screenshot.takeScreenshot('DeletePostContent')
+        cy.wait(delay);
+    }
+
+    CantPublishExistingPost(baseData){
+        dashboardPage.NavigateToPostPage();
+        this.ClearAndTypePost(baseData.postTitle, baseData.postContent);
+        this.ClickPublishPage();
+        this.PublishDupFail();
+    }
+
+    PublishDupFail(){
+        screenshot.takeScreenshot('BeforeTitlePublishErrorMessage')
+        cy.get(titlePublishErrorMessage).should('be.visible');
+        screenshot.takeScreenshot('AfterTitlePublishErrorMessage')
+        cy.get(titleValidationError).should('to.contain', 'Validation failed: Post already exists')
+        cy.wait(delay);
     }
 }
 
