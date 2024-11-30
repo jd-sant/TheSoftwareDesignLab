@@ -26,6 +26,10 @@ class GivenSteps {
     givenNavigateToPagePage(){
         dashboardPage.NavigateToPagePage();
     }
+
+    givenNavigateToSettingsPage() {
+        dashboardPage.NavigateToSettingsPage();
+    }
 }
 
 export const givenSteps = new GivenSteps();

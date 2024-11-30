@@ -3,6 +3,7 @@ const idNavigateNewPost = '.ember-view.gh-secondary-action.gh-nav-new-post';
 const idNavigateMember = 'a[data-test-nav="members"]';
 const dashboardHeading = '.gh-onboarding-header h2';
 const idNavigateTags = 'a[data-test-nav="tags"]';
+const idNavigateSettings = 'a[data-test-nav="settings"]';
 const idNavigateNewPage = '#ember28';
 const idNavigateCreatePage = 'a[data-test-new-page-button]';
 import { screenshot } from '../support/Screenshots';
@@ -19,6 +20,11 @@ class DashboardPage {
         cy.get(idNavigateTags).click();
         cy.wait(delay);
     };
+
+    NavigateToSettingsPage() {
+        cy.get(idNavigateSettings).click();
+        cy.wait(delay)
+    }
     
     SeeDashboard() {
         cy.get(dashboardHeading).should('have.text', 'Let’s get started!');

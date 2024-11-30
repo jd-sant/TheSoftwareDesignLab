@@ -26,15 +26,22 @@ const errorDescriptionTag = 'div.form-group.no-margin.error p.response';
 const errorSlugTag = 'div.form-group.error p.response';
 const unplashButtonImage = '.gh-image-uploader-unsplash';
 const gridUnplashImages = '.gh-unsplash-grid > div.gh-unsplash-grid-column:nth-child(1) > a:nth-child(1)';
-const imageUnplashHover = '.absolute > .gh-unsplash-photo > .gh-unsplash-photo-container > .gh-unsplash-photo-overlay'
-const unplashInsertImage = '.absolute > .gh-unsplash-photo > .gh-unsplash-photo-container > .gh-unsplash-photo-overlay > .gh-unsplash-photo-footer > .gh-unsplash-button';
 const imageUploadTag = '.gh-image-uploader.-with-image > div > img';
 const titleXCardTag = '#twitter-title';
 const descriptionXCardTag = '#twitter-description';
 const uploadFileXCard = '.gh-twitter-settings .x-file-input';
 const alertXCard = '.gh-alert-content';
-const gridPostPage = '.view-container.content-list div:nth-child(1)';
-const settingsPost = '.settings-menu-toggle.gh-btn.gh-btn-editor.gh-btn-icon.icon-only.gh-btn-action-icon'
+const gridPostPage = '.view-container.content-list div:nth-child(1) div li:first';
+const dropDownMenuPost = '.gh-posts-context-menu.dropdown-menu.dropdown-triangle-top-left';
+const navigateToPost = 'a[data-test-nav="posts"]'
+const addTagPost = 'ul[data-test-post-context-menu] li button[data-test-button="add-tag"]';
+const settingsPost = '.settings-menu-toggle.gh-btn.gh-btn-editor.gh-btn-icon.icon-only.gh-btn-action-icon';
+const inputLinkTag = '.ember-power-select-trigger-multiple-input';
+const selectTagLinkPost = 'ul.ember-power-select-options li:first';
+const confirmButtonLinkTag = '[data-test-button="confirm"]';
+const alertConfirmTagLinkPost = '.gh-notification-title';
+const linkViewTag = 'a.gh-view-tag-link';
+const viewTagPageTitle = '.gh-article-title.is-title'
 
 
 /**
@@ -53,7 +60,7 @@ class TagPage {
     }
 
     navigateToPost() {
-        dashboardPage.NavigateToPostPage();
+        cy.get(navigateToPost).click();
     }
 
     /**
@@ -212,10 +219,6 @@ class TagPage {
         this.saveButtonTag();
     }
 
-    createTagAndLinkWithPost(baseData) {
-        createTag(baseData.tagName, baseData.tagColor, baseData.tagDescription, baseData.tagImage, baseData.tagSlug)
-
-    }
 
     wrapCreateTag(baseData) {
         this.CreateTag(baseData.tagName, baseData.tagColor.substring(1), baseData.tagDescription, baseData.tagImage, baseData.tagName)
@@ -230,12 +233,43 @@ class TagPage {
         this.saveButtonTag();
     }
     
-    createTagXData(baseData){
+    createInvalidTagXData(baseData){
         this.NavigateToCreateNewTag();
-        this.ClearAndTypeTag(baseData.tagName, baseData.tagColor.substring(1), baseData.tagDescription, baseData.tagImage, baseData.tagName);
+        this.ClearAndTypeTag(baseData.tagNameEmojis, baseData.tagColor.substring(1), baseData.tagDescription, baseData.tagImage, baseData.tagName);
         this.typeMetaData(baseData.tagMetaTitle, baseData.tagMetaDescription);
         this.typeXCard(baseData.tagXTitle, baseData.tagXDescription, baseData.tagImage);
         this.saveButtonTag();
+    }
+
+    createTagXData(baseData){
+        this.NavigateToCreateNewTag();
+        this.ClearAndTypeTag(baseData.tagNameEmojis, baseData.tagColor.substring(1), baseData.tagDescription, baseData.tagImage, baseData.tagName);
+        this.typeMetaData(baseData.tagMetaTitle, baseData.tagMetaDescription);
+        this.typeXCard(baseData.tagMetaTitle, baseData.tagMetaDescription, baseData.tagImage);
+        this.saveButtonTag();
+    }
+
+    linkTagToPost(baseData) {
+        screenshot.takeScreenshot('tagBeforeLinkTagPost');
+        this.navigateToPost();
+        screenshot.takeScreenshot('navigateToPostToLinkTagPost');
+        cy.get(gridPostPage).rightclick();
+        screenshot.takeScreenshot('RightClickToLinkTagPost');
+        cy.get(addTagPost).click();
+        screenshot.takeScreenshot('addTagToLinkTagPost');
+        cy.get(inputLinkTag).type(baseData.tagNameEmojis);
+        screenshot.takeScreenshot('typeTagToLinkTagPost');
+        cy.get(selectTagLinkPost).click();
+        screenshot.takeScreenshot('selectTagToLinkTagPost');
+        cy.get(inputLinkTag).click();
+        cy.get(confirmButtonLinkTag).click();
+        cy.get(alertConfirmTagLinkPost).should('contain.text', 'Tag added')
+        screenshot.takeScreenshot('tagAfterLinkTagPost');
+    }
+
+    createTagAndLinkPost(baseData) {
+        this.createTagXData(baseData);
+        this.linkTagToPost(baseData);
     }
 
     createTagWithMetaData(baseData) {
@@ -459,6 +493,21 @@ class TagPage {
                 const normalizedText = actualText.trim().replace(/\s+/g, ' ');
                 expect(normalizedText).to.contain('Validation error, cannot save tag. Validation failed for twitter_title.');
             });
+    }
+
+    seeTagLinkToPost(baseData) {
+        screenshot.takeScreenshot('BeforeSeeTagLinkToPost');
+        dashboardPage.NavigateToTagsPage();
+        cy.get(tableTags).contains(listNameTag, baseData.tagNameEmojis).click();
+        screenshot.takeScreenshot('SeeTag');
+        cy.get(titleTag).should('contain.text', baseData.tagNameEmojis);
+        cy.get(linkViewTag)
+            .invoke('attr', 'href')
+            .then((url) => {
+                cy.visit(url);
+                screenshot.takeScreenshot('SeeTagLinkToPost');
+                cy.get(viewTagPageTitle).should('contain.text', baseData.tagNameEmojis)
+            })
     }
 }
 

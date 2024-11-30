@@ -33,6 +33,11 @@ describe('Tag Creation', () => {
         thenSteps.thenSeeTagAlertErrorWithXData(baseData);
     });
     
-    
+    it('PA0#-C - Create a tag and link with post', () => {
+        // When the user creates a Tag with x data and meta data
+        whenSteps.whenLinkTagToPost(baseData); 
+        // Then the user should see an tag link with post
+        thenSteps.thenSeeTagLinkToPost(baseData);
+    });
 
 });

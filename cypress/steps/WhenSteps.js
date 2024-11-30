@@ -3,6 +3,7 @@ import { postPage } from "../pages/PostPage";
 import { loginPage } from "../pages/LoginPage";
 import { tagPage } from "../pages/TagPage";
 import { pagePage } from "../pages/PagePage";
+import { settingsPage } from "../pages/SettingsPage";
 
 class WhenSteps {
 
@@ -121,7 +122,25 @@ class WhenSteps {
     }
 
     whenCreateTagWithXcard(baseData) {
-        tagPage.createTagXData(baseData);
+        tagPage.createInvalidTagXData(baseData);
+    }
+
+    whenLinkTagToPost(baseData) {
+        tagPage.createTagAndLinkPost(baseData)
+    }
+
+    // General Settings
+
+    whenChangeSiteTimezone(baseData){
+        settingsPage.changeSiteTimezone(baseData)
+    }
+
+    whenChangePublicationLanguage() {
+        settingsPage.changePublicationLanguage()
+    }
+
+    whenChangeMetaData(baseData){
+        settingsPage.changeMetaData(baseData);
     }
 
     // Post
