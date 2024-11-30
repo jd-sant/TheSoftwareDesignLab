@@ -11,6 +11,34 @@ class WhenSteps {
         memberPage.CreateAndSaveMember(baseData);
     }    
 
+    whenCreateMemberFindByLabelIs(baseData, baseData2, baseData3) {
+        memberPage.CreateMemberFindByLabelIs(baseData, baseData2, baseData3);
+    }
+
+    whenCreateMemberFindByLabelIsNot(baseData, baseData2, baseData3) {
+        memberPage.CreateMemberFindByLabelIsNot(baseData, baseData2, baseData3);
+    }
+
+    whenCreateMemberFindByNameIs(baseData, baseData2, baseData3) {
+        memberPage.CreateMemberFindByNameIs(baseData, baseData2, baseData3);
+    }
+
+    whenCreateMemberFindByNameContains(baseData, baseData2, baseData3) {
+        memberPage.CreateMemberFindByNameContains(baseData, baseData2, baseData3);
+    }
+
+    whenCreateMemberFindByNameNotContains(baseData, baseData2, baseData3) {
+        memberPage.CreateMemberFindByNameNotContains(baseData, baseData2, baseData3);
+    }
+
+    whenCreateMemberFindByNameStartsWith(baseData, baseData2, baseData3) {
+        memberPage.CreateMemberFindByNameStartsWith(baseData, baseData2, baseData3);
+    }
+
+    whenCreateMemberFindByNameEndsWith(baseData, baseData2, baseData3) {
+        memberPage.CreateMemberFindByNameEndsWith(baseData, baseData2, baseData3);
+    }
+    
     whenCreateEmptyNameMember(baseData) {
         memberPage.CreateEmptyNameMember(baseData);
     }

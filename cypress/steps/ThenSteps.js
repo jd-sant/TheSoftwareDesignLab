@@ -11,6 +11,34 @@ class ThenSteps {
         memberPage.SeeMemberCreated(baseData);
     }
 
+    thenSeeMembersCreatedByLabelIs(baseData, baseData2, baseData3){
+        memberPage.SeeMembersCreatedByLabelIs(baseData, baseData2, baseData3);
+    }
+
+    thenSeeMembersCreatedByLabelIsNot(baseData, baseData2, baseData3){
+        memberPage.SeeMembersCreatedByLabelIsNot(baseData, baseData2, baseData3);
+    }
+
+    thenSeeMembersCreatedByNameIs(baseData, baseData2, baseData3){
+        memberPage.SeeMembersCreatedByNameIs(baseData, baseData2, baseData3);
+    }
+
+    thenSeeMembersCreatedByNameContains(baseData, baseData2, baseData3){
+        memberPage.SeeMembersCreatedByNameContains(baseData, baseData2, baseData3);
+    }
+
+    thenSeeMembersCreatedByNameNotContains(baseData, baseData2, baseData3){
+        memberPage.SeeMembersCreatedByNameNotContains(baseData, baseData2, baseData3);
+    }
+
+    thenSeeMembersCreatedByNameStartsWith(baseData, baseData2, baseData3){
+        memberPage.SeeMembersCreatedByNameStartsWith(baseData, baseData2, baseData3);
+    }
+
+    thenSeeMembersCreatedByNameEndsWith(baseData, baseData2, baseData3){
+        memberPage.SeeMembersCreatedByNameEndsWith(baseData, baseData2, baseData3);
+    }
+
     thenSeeMemberCreatedWithEmptyName(baseData){
         memberPage.SeeMemberCreatedWithEmptyName(baseData);
     }
