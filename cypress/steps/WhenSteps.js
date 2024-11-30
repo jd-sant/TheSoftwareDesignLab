@@ -136,7 +136,25 @@ class WhenSteps {
     }
 
     whenCreateTagWithXcard(baseData) {
-        tagPage.createTagXData(baseData);
+        tagPage.createInvalidTagXData(baseData);
+    }
+
+    whenLinkTagToPost(baseData) {
+        tagPage.createTagAndLinkPost(baseData)
+    }
+
+    // General Settings
+
+    whenChangeSiteTimezone(baseData){
+        settingsPage.changeSiteTimezone(baseData)
+    }
+
+    whenChangePublicationLanguage() {
+        settingsPage.changePublicationLanguage()
+    }
+
+    whenChangeMetaData(baseData){
+        settingsPage.changeMetaData(baseData);
     }
 
     // Post

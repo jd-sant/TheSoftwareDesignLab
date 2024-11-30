@@ -136,6 +136,24 @@ class ThenSteps {
         tagPage.seeAlertErrorX(baseData);
     }
 
+    thenSeeTagLinkToPost(baseData) {
+        tagPage.seeTagLinkToPost(baseData);
+    }
+
+    // General Settings
+
+    thenSeeSiteTimezoneChanged(baseData){
+        settingsPage.seeChangeTimezone(baseData)
+    }
+
+    thenChangePublicationLanguage () {
+        settingsPage.seeChangePublicationLanguage()
+    }
+
+    thenSeeChangeMetaDataWithwithoutlastCharacter(baseData){
+        settingsPage.seeChangeMetaDataWithwithoutlastCharacter(baseData)
+    }
+
 
 // Posts
     thenSeePostPublished(baseData){
