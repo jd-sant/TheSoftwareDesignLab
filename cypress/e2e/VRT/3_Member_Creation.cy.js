@@ -12,7 +12,7 @@ describe('Member Creation (pseudo-aleatorio)', () => {
   let baseData5_1, baseData5_2, baseData5_3;
   let baseData6_1, baseData6_2, baseData6_3;
   let baseData7_1, baseData7_2, baseData7_3;
-  let baseData8_1, baseData9_1, baseData10_1;
+  let baseData8_1, baseData9_1, baseData10_1, baseData11_1;
 
   beforeEach(() => {
     // Realizar la petición a la API de Mockaroo para obtener 1000 registros
@@ -33,8 +33,8 @@ describe('Member Creation (pseudo-aleatorio)', () => {
       baseData5_1, baseData5_2, baseData5_3,
       baseData6_1, baseData6_2, baseData6_3,
       baseData7_1, baseData7_2, baseData7_3,
-      baseData8_1, baseData9_1, baseData10_1
-      ] = shuffledData.slice(0, 24);
+      baseData8_1, baseData9_1, baseData10_1, baseData11_1
+      ] = shuffledData.slice(0, 25);
     });
     Cypress.Screenshot.defaults({
       disableTimersAndAnimations: false,
@@ -115,6 +115,13 @@ describe('Member Creation (pseudo-aleatorio)', () => {
     whenSteps.whenCreateMemberWithAccentsInEmail(baseData10_1);
     // Then the user should see an advise about the accent email error and the system cancel the operation
     thenSteps.thenSeeAccentsEmailError();
+  });
+
+  it('PA##-C - Create a member with em dash on the email domain', () => {
+    // When the user tries to creates and saves member with em dash on the email domain
+    whenSteps.whenCreateMemberWithEmDashOnEmailDomain(baseData11_1);
+    // Then the user should see an advise about the special character error on the email domain and the system cancel the operation
+    thenSteps.thenSeeEmDashErrorOnEmailDomain();
   });
 
   

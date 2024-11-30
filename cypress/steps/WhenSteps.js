@@ -52,6 +52,10 @@ class WhenSteps {
         memberPage.CreateMemberWithAccentsInEmail(baseData);
     }
 
+    whenCreateMemberWithEmDashOnEmailDomain(baseData) {
+        memberPage.CreateMemberWithEmDashOnEmailDomain(baseData);
+    }
+
     
     
     whenCreateEmptyNameMember(baseData) {

@@ -396,6 +396,25 @@ class MemberPage {
         cy.get(retrySaveMemberButton).should('be.visible');        
         cy.get('body').should('contain', 'Validation failed for email');
     }
+    // ************************************************************ 
+        
+    CreateMemberWithEmDashOnEmailDomain(baseData) {
+        screenshot.takeScreenshot('navigatedToMemberPage');
+        this.NavigateToCreateMemberPage();
+        screenshot.takeScreenshot('navigatedToCreateMemberPage');
+        screenshot.takeScreenshot('memberBeforeFill');
+        this.ClearAndTypeMember(baseData.memberName, baseData.memberEmail+"—b.co—m.co—n", baseData.memberLabel, baseData.memberNote);
+        screenshot.takeScreenshot('memberAfterFill');
+        this.SaveMember();
+        screenshot.takeScreenshot('memberSaveAction');
+    }
+
+    SeeEmDashErrorOnEmailDomain() {
+        screenshot.takeScreenshot('InvalidEmDashEmailError');
+        cy.wait(delay);
+        cy.get(retrySaveMemberButton).should('be.visible');        
+        cy.get('body').should('contain', 'Validation failed for email');
+    }
     // ************************************************************  
 }
 

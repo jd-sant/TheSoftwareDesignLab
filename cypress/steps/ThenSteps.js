@@ -51,6 +51,10 @@ class ThenSteps {
         memberPage.SeeAccentsEmailError(baseData);
     }
 
+    thenSeeEmDashErrorOnEmailDomain(baseData){
+        memberPage.SeeEmDashErrorOnEmailDomain(baseData);
+    }
+
     thenSeeMemberCreatedWithEmptyName(baseData){
         memberPage.SeeMemberCreatedWithEmptyName(baseData);
     }
