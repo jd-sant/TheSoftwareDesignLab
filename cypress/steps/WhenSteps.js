@@ -284,6 +284,10 @@ class WhenSteps {
     whenCreateAndPublishPageExcerpt(baseData) {
         pagePage.CreateAndPublishPageExcerpt(baseData);
     }
+
+    whenCreateAndEditPageURL(baseData) {
+        pagePage.CreateAndEditPageURL(baseData);
+    }
     
     // Admin user
     whenCreateUser(){

@@ -149,7 +149,7 @@ describe('Page Creation & Edit Tests', () => {
 
     it('PA0##-C - Create a page and change the url to a normal string', () => {
         // When the user creates and publishes the page, go to edit and changes the URL to a normal string
-        whenSteps.whenCreateAndPublishPageURL(baseData); 
+        whenSteps.whenCreateAndEditPageURL(baseData); 
         // Then the user can't click button update
         thenSteps.thenUpdateButtonNotActive(baseData);
     });

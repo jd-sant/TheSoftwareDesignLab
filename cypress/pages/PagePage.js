@@ -252,12 +252,17 @@ class PagePage {
     }
 
 
-    CreateAndPublishPageURL(baseData){
+    CreateAndEditPageURL(baseData){
         this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
         this.PublishPage();
         this.EditPage();
         this.ChangePageURL(baseData.pageURL)
-        
+    }
+
+    CreateAndPublishPageURL(baseData){
+        this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
+        this.ChangePageURL(baseData.pageURL);
+        this.PublishPage();
     }
 
     CreateAndPublishPageURLMultilanguage(baseData){
