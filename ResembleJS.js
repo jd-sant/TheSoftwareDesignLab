@@ -31,52 +31,54 @@ async function ResembleJS(browser1, browser2) {
 
     for (const testName of testNames) {
         if (testName != 'compare_version') {
-            const baseImagesPath1 = path.join(baseDir, testName, browser1);
-            const baseImagesPath2 = path.join(baseDir, testName, browser2);
-            const diffSubDir = path.join(diffDir, testName, `${browser1}_vs_${browser2}`);
+            const testDir = path.join(baseDir, testName);
+            const subTestNames = fs.readdirSync(testDir).filter(file => fs.lstatSync(path.join(testDir, file)).isDirectory());
 
-            if (!fs.existsSync(baseImagesPath1) || !fs.existsSync(baseImagesPath2)) {
-                console.warn(`Skipping ${testName} as it does not exist in both browsers`);
-                continue;
-            }
+            for (const subTestName of subTestNames) {
+                const baseImagesPath1 = path.join(testDir, subTestName, browser1);
+                const baseImagesPath2 = path.join(testDir, subTestName, browser2);
+                const diffSubDir = path.join(diffDir, testName, subTestName, `${browser1}_vs_${browser2}`);
 
-            if (!fs.existsSync(diffSubDir)) {
-                fs.mkdirSync(diffSubDir, { recursive: true });
-            }
-
-            const baseImages1 = fs.readdirSync(baseImagesPath1).filter(file => path.extname(file) === '.png');
-
-
-            const reports = [];
-
-            for (const image of baseImages1) {
-                const baseImagePath1 = path.join(baseImagesPath1, image);
-                const baseImagePath2 = path.join(baseImagesPath2, image);
-                const diffImagePath = path.join(diffSubDir, `diff-${image}`);
-
-                if (fs.existsSync(baseImagePath2)) {
-                    const data = await compareImages(
-                        fs.readFileSync(baseImagePath1),
-                        fs.readFileSync(baseImagePath2),
-                        options
-                    );
-
-                    const baseImage1 = fs.readFileSync(baseImagePath1).toString('base64');
-                    const baseImage2 = fs.readFileSync(baseImagePath2).toString('base64');
-
-                    const diffImageBuffer = Buffer.from(data.getBuffer());
-                    fs.writeFileSync(diffImagePath, diffImageBuffer);
-
-                    const diffImageB64 = diffImageBuffer.toString('base64');
-                    reports.push(createReportSection(baseImage1, baseImage2, diffImageB64, data.misMatchPercentage, image));
+                if (!fs.existsSync(baseImagesPath1) || !fs.existsSync(baseImagesPath2)) {
+                    console.warn(`Skipping ${testName}/${subTestName} as it does not exist in both browsers`);
+                    continue;
                 }
-            }
 
-            fs.writeFileSync(path.join(diffSubDir, 'report.html'), createReport(reports));
+                if (!fs.existsSync(diffSubDir)) {
+                    fs.mkdirSync(diffSubDir, { recursive: true });
+                }
+
+                const baseImages1 = fs.readdirSync(baseImagesPath1).filter(file => path.extname(file) === '.png');
+                const reports = [];
+
+                for (const image of baseImages1) {
+                    const baseImagePath1 = path.join(baseImagesPath1, image);
+                    const baseImagePath2 = path.join(baseImagesPath2, image);
+                    const diffImagePath = path.join(diffSubDir, `diff-${image}`);
+
+                    if (fs.existsSync(baseImagePath2)) {
+                        const data = await compareImages(
+                            fs.readFileSync(baseImagePath1),
+                            fs.readFileSync(baseImagePath2),
+                            options
+                        );
+
+                        const baseImage1 = fs.readFileSync(baseImagePath1).toString('base64');
+                        const baseImage2 = fs.readFileSync(baseImagePath2).toString('base64');
+
+                        const diffImageBuffer = Buffer.from(data.getBuffer());
+                        fs.writeFileSync(diffImagePath, diffImageBuffer);
+
+                        const diffImageB64 = diffImageBuffer.toString('base64');
+                        reports.push(createReportSection(baseImage1, baseImage2, diffImageB64, data.misMatchPercentage, image, browser1, browser2));
+                    }
+                }
+                fs.writeFileSync(path.join(diffSubDir, 'report.html'), createReport(reports));
+            }
         }
     }
-    console.log(`Comparison ${browser1}_vs_${browser2} completed`);
 }
+
 
 function createReport(reports) {
     return `
@@ -94,16 +96,16 @@ function createReport(reports) {
     </html>`;
 }
 
-function createReportSection(baseImage1, baseImage2, diffImageB64, diffPercent, step) {
+function createReportSection(baseImage1, baseImage2, diffImageB64, diffPercent, step, browser1, browser2) {
     return `
     <h2>Step: ${step}</h2>
     <div class="row">
         <div class="col-md-6">
-            <h3>Browser 1</h3>
+            <h3>${browser1}</h3>
             <img src="data:image/png;base64, ${baseImage1}" class="img-fluid" alt="Browser 1 Image">
         </div>
         <div class="col-md-6">
-            <h3>Browser 2</h3>
+            <h3>${browser2}</h3>
             <img src="data:image/png;base64, ${baseImage2}" class="img-fluid" alt="Browser 2 Image">
         </div>
     </div>
