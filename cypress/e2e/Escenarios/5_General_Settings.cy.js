@@ -18,21 +18,21 @@ describe('Tag Creation', () => {
         givenSteps.givenNavigateToSettingsPage();
     });
 
-    it('PA0#-C - Change site timezone', () => {
+    it('PA148-C - Change site timezone', () => {
         // When the user change site timezone
         whenSteps.whenChangeSiteTimezone(baseData); 
         // Then the user should see that timezone change
         thenSteps.thenSeeSiteTimezoneChanged(baseData);
     });
 
-    it('PA0#-C - Change languaje to spanish', () => {
+    it('PA149-C - Change languaje to spanish', () => {
         // When the user change site timezone
         whenSteps.whenChangePublicationLanguage(); 
         // Then the user should see that timezone change
         thenSteps.thenChangePublicationLanguage();
     });
     
-    it('PA0#-C - Change languaje to spanish', () => {
+    it('PA150-C - Change languaje to spanish', () => {
         // When the user change site timezone
         whenSteps.whenChangeMetaData(baseData); 
         // Then the user should see that timezone change

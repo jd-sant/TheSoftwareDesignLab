@@ -91,7 +91,7 @@ describe('Tag Creation', () => {
         thenSteps.thenSeeTagWithMetaData(baseData);
     });
 
-    it('PA0#-C - Create a tag with meta data and unplash image', () => {
+    it('PA125-C - Create a tag with meta data and unplash image', () => {
         // When the user creates a Tag
         whenSteps.whenCreateTagWithUnplashImageAndMetaData(baseData); 
         // Then the user should see the tag created
@@ -99,14 +99,14 @@ describe('Tag Creation', () => {
     });
     
 
-    it('PA0#-C - Create a tag with x data and title emojis', () => {
+    it('PA126-C - Create a tag with x data and title emojis', () => {
         // When the user creates a Tag with x data
         whenSteps.whenCreateTagWithXcard(baseData); 
         // Then the user should see an alert with error twitter
         thenSteps.thenSeeTagAlertErrorWithXData(baseData);
     });
     
-    it('PA0#-C - Create a tag and link with post', () => {
+    it('PA127-C - Create a tag and link with post', () => {
         // When the user creates a Tag with x data and meta data
         whenSteps.whenLinkTagToPost(baseData); 
         // Then the user should see an tag link with post

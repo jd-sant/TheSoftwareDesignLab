@@ -91,63 +91,63 @@ describe('Page Creation & Edit Tests', () => {
     });
 
 
-    it('PA0##-C - Create an empty page', () => {
+    it('PA139-C - Create an empty page', () => {
         // When the user creates an empty page
         whenSteps.whenCreateEmptyPage(baseData); 
         // Then the user should not see the page publish button
         thenSteps.thenPublishButtonUnavailable(baseData);
     });
 
-    it('PA0##-C - Create a normal page and change the title to 256 characters', () => {
+    it('PA140-C - Create a normal page and change the title to 256 characters', () => {
         // When the user creates and publishes the page and edits the title to 256 characters
         whenSteps.whenCreateAndEditPageLongTitle(baseData); 
         // Then the user should see the error and not page published
         thenSteps.thenLongTitleUpdateError(baseData);
     });
 
-    it('PA0##-C - Create a normal page and erase the content to publish an empty page', () => {
+    it('PA141-C - Create a normal page and erase the content to publish an empty page', () => {
         // When the user creates a normal page and erases the content to publish an empty page
         whenSteps.whenCreateAndEditEmptyPage(baseData); 
         // Then the user should see the empty page published
         thenSteps.thenSeeEmptyPagePublished(baseData);
     });
     
-    it('PA0##-C - Create duplicated pages', () => {
+    it('PA142-C - Create duplicated pages', () => {
         // When the user creates a duplicated page
         whenSteps.whenCreateDuplicatedPages(baseData); 
         // Then the user should see the page published
         thenSteps.thenSeePagePublished(baseData);
     });
 
-    it('PA0##-C - Create a page and change the url to another alphabet', () => {
+    it('PA143-C - Create a page and change the url to another alphabet', () => {
         // When the user creates and publishes the page with a URL in another language
         whenSteps.whenCreateAndPublishPageURLMultilanguage(baseData); 
         // Then the user should see the published page with a translated URL
         thenSteps.thenSeePagePublished(baseData);
     });
 
-    it('PA0##-C - Create a page with an older date', () => {
+    it('PA144-C - Create a page with an older date', () => {
         // When the user creates and publishes the page with an older date
         whenSteps.whenCreateAndPublishPageWithOlderDate(baseData); 
         // Then the user should see the page published
         thenSteps.thenSeeOlderPagePublished(baseData);
     });
 
-    it('PA0##-C - Create a normal page with special characters in the URL', () => {
+    it('PA145-C - Create a normal page with special characters in the URL', () => {
         // When the user creates a normal page with special characters in the URL
         whenSteps.whenCreateAndPublishPageURLSpecial(baseData); 
         // Then the user should not see the publish button
         thenSteps.thenSeePagePublished(baseData);
     });
 
-    it('PA0##-C - Create a normal page with emojis in the URL', () => {
+    it('PA146-C - Create a normal page with emojis in the URL', () => {
         // When the user creates a normal page with emojis in the URL
         whenSteps.whenCreateAndPublishPageURLSEmojis(baseData); 
         // Then the user should see the page published
         thenSteps.thenSeePagePublished(baseData);
     });
 
-    it('PA0##-C - Create a page and change the url to a normal string', () => {
+    it('PA147-C - Create a page and change the url to a normal string', () => {
         // When the user creates and publishes the page, go to edit and changes the URL to a normal string
         whenSteps.whenCreateAndEditPageURL(baseData); 
         // Then the user can't click button update

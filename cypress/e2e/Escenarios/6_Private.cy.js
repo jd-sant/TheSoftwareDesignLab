@@ -23,7 +23,7 @@ describe('Private site Feature Testing', () => {
         givenSteps.givenUserIsLogin();
     });
 
-    it('PA0##-C - Privatizate the site', () => {
+    it('PA151-C - Privatizate the site', () => {
         // When the user privatizate the site
         whenSteps.whenPrivatizateSite(baseData);
         // Then the user should see the site privatizated

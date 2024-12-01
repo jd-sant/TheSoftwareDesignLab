@@ -88,28 +88,28 @@ describe('Post Creation', () => {
         thenSteps.thenSeePostPublishedURL(baseData);
     });
 
-    it('PA0##-C - Create a empty post', () => {
+    it('PA121-C - Create a empty post', () => {
         // When the user creates a empty post
         whenSteps.whenCreateEmptyPost(baseData);
         // Then the user shouldn't see the publish button
         thenSteps.thenPublishButtonUnavailable();
     });
 
-    it('PA0##-C - Create an existing post', () => {
+    it('PA122-C - Create an existing post', () => {
         // When the user creates a post
         whenSteps.whenCreateAndPublishPost(baseData); 
         // Then the user shouldn't be able to publish the same post again
         thenSteps.thenCantPublishExistingPost(baseData);
     });
 
-    it('PA0##-C - Update post published date', () => {
+    it('PA123-C - Update post published date', () => {
         // When a user edit a post and update the published date
         whenSteps.whenUpdatePostPublishedDate();
         // Then the user should see the updated button enable
         thenSteps.thenUpdatedButtonEnable();
     });
 
-    it('PA0##-C - Creat a post with a emoji as url', () => {
+    it('PA124-C - Creat a post with a emoji as url', () => {
         // When the user creates a post with a emoji as url
         whenSteps.whenCreateAndPublishPostURLEmoji(baseData);
         // Then the user shouldn't be able to publish the post
