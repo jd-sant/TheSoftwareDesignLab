@@ -25,13 +25,12 @@ Diego Santamaria | jd.santamariab1@uniandes.edu.co
 
 ### Ejecución pruebas VRT
   1. En la raiz del projecto ejecute el comando `sudo docker compose up -d` para el caso de sistemas Linux o `docker-compose up -d` en sistemas windows para crear el contenedor.
-  2. Ejecute el comando `./node_modules/cypress/bin/cypress run -b <browser> -s cypress/e2e/Escenarios/<escenario>` donde <browser> corresponde al navegador a usar y <escenario> al escenario a ejecutar. Se debe iniciar con el escenario 0_User_Creation.cy.js y los navegadores a ejecutar deben encontrarse instalados en su sistema operativo, la lista de navegadores es chromium, chrome, edge, firefox, electron.
-    * Cuando ejecute el escenario 0_User_Creation.cy.js siga las siguientes instrucciones:
+  2. Ejecute el comando `./node_modules/cypress/bin/cypress run -b <browser> -s cypress/e2e/Escenarios/<escenario>` donde <browser> corresponde al navegador a usar y <escenario> al escenario a ejecutar. Se debe iniciar con el escenario 0_User_Creation.cy.js y los navegadores a ejecutar deben encontrarse instalados en su sistema operativo, la lista de navegadores es chromium, chrome, edge, firefox, electron. Cuando ejecute el escenario 0_User_Creation.cy.js siga las siguientes instrucciones solo para este escenario:
       * Ejecute el comando `./node_modules/cypress/bin/cypress run -b electron -s cypress/e2e/Escenarios/0_User_Creation.cy.js`
       * En la raiz del projecto ejecute el comando `sudo docker compose down` para el caso de sistemas Linux o `docker-compose down` en sistemas windows para eliminar el contenedor
       * En la raiz del projecto ejecute el comando `sudo docker compose up -d` para el caso de sistemas Linux o `docker-compose up -d` en sistemas windows para crear el contenedor.
       * Ejecute el comando `./node_modules/cypress/bin/cypress run -b <browser> -s cypress/e2e/Escenarios/0_User_Creation.cy.js`, en este caso, cambie el browser por algun otro de la lista diferente a electron.
-  3. Al finalizar las pruebas con distintos navegadores deberia observar una estructura de carpetas como la siguiente
-  4. En la raiz del proyecto ejecute el comando `node ResembleJS.js <browser1> <browser2>` donde <browser1> y <browser2> corresponden a los navegadores a comparar
+  3. Al finalizar las pruebas con distintos navegadores deberia observar una estructura de carpetas como la siguiente: ![image](https://github.com/user-attachments/assets/488b6b78-96d3-42a9-b91e-9e36b2585754)
+  4. En la raiz del proyecto ejecute el comando `node ResembleJS.js <browser1> <browser2>` donde <browser1> y <browser2> corresponden a los navegadores a comparar ejemplo: node ResembleJS.js electron firefox
   5. Debera observar en la carpeta cypress/screenshots una carpeta llamada compare_version en donde encontrara las imágenes de diferencias para cada uno de los escenarios junto con su respectivo reporte
   6. En la raiz del projecto ejecute el comando `sudo docker compose down` para el caso de sistemas Linux o `docker-compose down` en sistemas windows para eliminar el contenedor
