@@ -87,6 +87,18 @@ class PagePage {
         cy.get(pageTitleInput).type(pageTitle_,{ force: true });
         screenshot.takeScreenshot('FillPageTittle')
         cy.wait(delay);
+    }
+
+    ClearAndTypeLongPageUpdate(pageTitle_, pageContent_) {
+        cy.get(pageTitleInput).clear();
+        cy.get(pageTitleInput).type(' ',{ force: true });
+        cy.get(pageContentInput).clear()
+        cy.get(pageContentInput).type(pageContent_,{ force: true });
+        screenshot.takeScreenshot('FillPageContent')
+        cy.get(pageTitleInput).clear();
+        cy.get(pageTitleInput).type(pageTitle_,{ force: true });
+        screenshot.takeScreenshot('FillPageTittle')
+        cy.wait(delay);
         cy.get(updatebutton).first().click();
     }
 
@@ -148,6 +160,15 @@ class PagePage {
         screenshot.takeScreenshot('ValidationTitlePublishErrorMessage')
     }
 
+    LongTitlePublishError(){
+        screenshot.takeScreenshot('BeforeTitlePublishErrorMessage')
+        cy.get(titlePublishErrorMessage).should('be.visible');
+        screenshot.takeScreenshot('AfterTitlePublishErrorMessage')
+        cy.get(titleValidationError).should('to.contain', 'Validation failed: Title cannot be longer than 255 characters.')
+        cy.wait(delay);
+        screenshot.takeScreenshot('ValidationTitlePublishErrorMessage')
+    }
+
     CreateAndPublishPageWithTitleOnly(baseData){
         this.CreateAndPublishPage(baseData.pageTitle, ' ');
     }
@@ -180,6 +201,15 @@ class PagePage {
     CreateAndPublishLongTitlePage(baseData){
         this.ClearAndTypeLongPage(baseData.pageTitle_256, baseData.pageContent);
         this.ClickPublishPage();
+    }
+
+    PageLongTitlePublishError(){
+        screenshot.takeScreenshot('BeforeTitlePublishErrorMessage')
+        cy.get(titlePublishErrorMessage).should('be.visible');
+        screenshot.takeScreenshot('AfterTitlePublishErrorMessage')
+        cy.get(titleValidationError).should('to.contain', 'Validation failed: Title cannot be longer than 255 characters.')
+        cy.wait(delay);
+        screenshot.takeScreenshot('ValidationTitlePublishErrorMessage')
     }
 
     ChangePageURL(pageURL_){
@@ -260,7 +290,7 @@ class PagePage {
         this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
         this.PublishPage();
         this.EditPage();
-        this.ClearAndTypeLongPage(baseData.pageTitle_256, baseData.pageContent);
+        this.ClearAndTypeLongPageUpdate(baseData.pageTitle_256, baseData.pageContent);
     }
 
     SeePagePublishedURL(baseData){
@@ -268,6 +298,25 @@ class PagePage {
         cy.wait(delay);
         screenshot.takeScreenshot('NavigateToThePage');
         cy.contains(baseData.pageTitle);
+    }
+
+    AddPageExcerpt(pageExcerpt_){
+        screenshot.takeScreenshot('BeforeClickSideMenuButton')
+        cy.get(pageSideMenuButton).click();
+        cy.wait(delay);
+        screenshot.takeScreenshot('AfterClickSideMenuButton')
+        cy.get(pageAreaExcerpt).clear();
+        cy.get(pageAreaExcerpt).type(pageExcerpt_, {force: true});
+        cy.wait(delay);
+        screenshot.takeScreenshot('AfterChangePostURL')
+        cy.get(pageSideMenuButton).click();
+        screenshot.takeScreenshot('AfterCloseSideMenuButton')
+    }
+
+    CreateAndPublishPageExcerpt(baseData){
+        this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
+        this.AddPageExcerpt(baseData.pageExcerpt);
+        this.ClickPublishPageValidation()
     }
 
     PageLongExcerptPublishError(){

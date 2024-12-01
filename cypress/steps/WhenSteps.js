@@ -280,6 +280,11 @@ class WhenSteps {
     whenCreateAndPublishPageURLSEmojis(baseData){
         pagePage.CreateAndPublishPageURLSEmojis(baseData);
     }
+
+    whenCreateAndPublishPageExcerpt(baseData) {
+        pagePage.CreateAndPublishPageExcerpt(baseData);
+    }
+    
     // Admin user
     whenCreateUser(){
         loginPage.CreateUser();

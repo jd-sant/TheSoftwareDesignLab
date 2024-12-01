@@ -234,6 +234,10 @@ class ThenSteps {
         pagePage.UpdateButtonNotActive();
     }
 
+    thenPageLongTitlePublishError(){
+        pagePage.PageLongTitlePublishError();
+    }
+
     // Admin User
     thenCanChangeSiteDescription(baseData){
         settingsPage.CanChangeSiteDescription(baseData);
