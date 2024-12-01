@@ -226,6 +226,14 @@ class ThenSteps {
         pagePage.SeeEmptyPagePublished();
     }
 
+    thenSeeOlderPagePublished(baseData){
+        pagePage.SeeOlderPagePublished(baseData.pageTitle);
+    }
+
+    thenUpdateButtonNotActive(){
+        pagePage.UpdateButtonNotActive();
+    }
+
     // Admin User
     thenCanChangeSiteDescription(baseData){
         settingsPage.CanChangeSiteDescription(baseData);

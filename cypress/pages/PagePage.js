@@ -8,7 +8,9 @@ const finalPublishButton = '[data-test-button="confirm-publish"]';
 const modalClass = '.modal-content';
 const closeModalButton = '[data-test-button="close-publish-flow"]';
 const dropdownPageFilter = '.gh-contentfilter-type > .ember-view > svg';
+const dropdownDateFilter = 'div[class="gh-contentfilter-menu gh-contentfilter-sort"]'
 const optionPublishedPage = '.ember-power-select-option[data-option-index="2"]';
+const optionOldestPage = '.ember-power-select-option[data-option-index="2"]'
 const classPublisdPageTitle = '.gh-content-entry-title';
 const titlePublishErrorMessage = 'span[data-test-task-button-state="failure"]';
 const titleValidationError = 'p[data-test-confirm-error]';
@@ -22,7 +24,8 @@ const titleupdateerrormessage = 'div[class="gh-alert-content"]'
 import { screenshot } from '../support/Screenshots';
 const PageBackMenu = 'a[class="ember-view gh-btn-editor gh-editor-back-button"]'
 const idNavigateCreatePage = 'a[data-test-new-page-button]';
-const pageDateField = 'div[class="gh-date-time-picker-date "]'
+const pageDateField = 'input[data-test-date-time-picker-date-input]';
+const updateButtonStatus = 'button[class="gh-btn gh-btn-editor gh-editor-save-trigger green ember-view"]'
 
 
 class PagePage {
@@ -89,10 +92,10 @@ class PagePage {
 
     TypeEmptyPage() {
         cy.get(pageTitleInput).clear();
-        screenshot.takeScreenshot('BeforeTypePageTitle')
+        screenshot.takeScreenshot('BeforeEmptyPageTitle')
         cy.get(pageContentInput).clear();
         cy.wait(delay);
-        screenshot.takeScreenshot('AfterTypePageContent')
+        screenshot.takeScreenshot('AfterEmptyPageContent')
     }
 
     CreateAndPublishPage(pageTitle_, pageContent_) {
@@ -187,7 +190,7 @@ class PagePage {
         cy.get(pageUrlField).clear();
         cy.get(pageUrlField).type(pageURL_, {force: true});
         cy.wait(delay);
-        screenshot.takeScreenshot('AfterChangePostURL')
+        screenshot.takeScreenshot('AfterChangePageURL')
         cy.get(pageSideMenuButton).click();
         screenshot.takeScreenshot('AfterCloseSideMenuButton')
     }
@@ -200,7 +203,7 @@ class PagePage {
         cy.get(pageUrlField).clear();
         cy.get(pageUrlField).type(pageURL_, {force: true});
         cy.wait(delay);
-        screenshot.takeScreenshot('AfterChangePostURL')
+        screenshot.takeScreenshot('AfterChangePageURL')
         cy.get(pageSideMenuButton).click();
         screenshot.takeScreenshot('AfterCloseSideMenuButton')
     }
@@ -221,8 +224,10 @@ class PagePage {
 
     CreateAndPublishPageURL(baseData){
         this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
-        this.ChangePageURL(baseData.pageURL);
         this.PublishPage();
+        this.EditPage();
+        this.ChangePageURL(baseData.pageURL)
+        
     }
 
     CreateAndPublishPageURLMultilanguage(baseData){
@@ -231,10 +236,24 @@ class PagePage {
         this.PublishPage();
     }
 
+    CreateAndPublishPageURLSpecial(baseData){
+        this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
+        this.ChangePageURL(baseData.pageURL_symbols);
+        this.PublishPage();
+    }
+
+    CreateAndPublishPageURLSEmojis(baseData){
+        this.ClearAndTypePage(baseData.pageTitle, baseData.pageContent);
+        this.ChangePageURL(baseData.pageURL_emojis);
+        this.PublishPage();
+    }
+
     EditPage(){
         cy.get(dropdownPageFilter).click();
-        cy.get(optionPublishedPage).click()
+        cy.get(optionPublishedPage).click();
+        screenshot.takeScreenshot('BeforeClickEditButton')
         cy.get(editbutton).first().click();
+        screenshot.takeScreenshot('AfterClickEditButton')
     }
 
     CreateAndEditPageLongTitle(baseData){
@@ -250,7 +269,6 @@ class PagePage {
         screenshot.takeScreenshot('NavigateToThePage');
         cy.contains(baseData.pageTitle);
     }
-
 
     PageLongExcerptPublishError(){
         screenshot.takeScreenshot('BeforeTitlePublishErrorMessage')
@@ -282,6 +300,25 @@ class PagePage {
         this.PublishPage();
     }
 
+    SeeOlderPagePublished(pageTitle_ = this.pageTitle){
+        screenshot.takeScreenshot('BeforeClickDropdownFilter')
+        cy.get(dropdownPageFilter).click();
+        screenshot.takeScreenshot('AfterClickDropdownFilter')
+        cy.get(optionPublishedPage).click()
+        screenshot.takeScreenshot('AfterPublishedPageFilter')
+        cy.get(dropdownDateFilter).click();
+        cy.get(optionOldestPage).click()
+        screenshot.takeScreenshot('AfterDatePageFilter')
+        cy.wait(delay);
+        cy.get(classPublisdPageTitle).first().should('to.contain', pageTitle_.trim());
+        cy.wait(delay);
+        screenshot.takeScreenshot('ValidationPublishedPageFilter')
+    }
+
+    UpdateButtonNotActive(){
+        screenshot.takeScreenshot('UpdateButtonDisabled')
+        cy.get(updateButtonStatus).should('be.disabled');
+    }
 }
 
 export const pagePage = new PagePage();

@@ -272,6 +272,14 @@ class WhenSteps {
     whenCreateAndPublishPageWithOlderDate(baseData){
         pagePage.CreateAndPublishPageWithOlderDate(baseData);
     }
+
+    whenCreateAndPublishPageURLSpecial(baseData){
+        pagePage.CreateAndPublishPageURLSpecial(baseData);
+    }
+
+    whenCreateAndPublishPageURLSEmojis(baseData){
+        pagePage.CreateAndPublishPageURLSEmojis(baseData);
+    }
     // Admin user
     whenCreateUser(){
         loginPage.CreateUser();
